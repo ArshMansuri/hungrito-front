@@ -1,0 +1,21 @@
+.filter-com .filter{
+    font-size: 15px;
+    border-radius: 10px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.filter-com .selected-filter{
+    background-color: #ff6600; 
+    color: white;
+    border: 1px solid white;
+}
+
+.filter-com .filter .no-of-filter{
+    width: 20px;
+    height: 20px;   
+    border: 1px solid #ff6600;
+}
+.filter-com .filter .filter-icon{
+    margin-top: 1px;
+}

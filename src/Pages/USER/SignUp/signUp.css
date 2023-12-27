@@ -1,0 +1,29 @@
+.img-controle{
+    width: 290px;
+}
+
+.img-controle img{
+    border-radius: 50%;
+    padding: 4px;
+    border: 2px solid white;
+    /* border: 2px solid #ff6600; */
+}
+
+.img-controle .img-add-icon{
+    top: 66%;
+    left: 55%;
+}
+
+.crop-btn{
+    background-color: #ff6600;
+    bottom: 12%;
+    right: 8%;
+    padding: 9px 15px;
+}
+
+.user-otp-modal{
+    /* background-color: red; */
+    background-color: rgba(0, 0, 0, 0.92);
+    top: 0;
+    overflow-y: hidden;
+}

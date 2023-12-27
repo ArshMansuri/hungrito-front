@@ -1,0 +1,48 @@
+.res-signup-footer-com{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.res-signup-footer-com button{
+    width: 20%;
+    padding: 8px;
+    border-radius: 5px; 
+}
+.res-signup-footer-com .btn-1{
+    background-color: white;
+    border: 2px solid #ff6600;
+    color: #ff6600;
+    font-family: 'Roboto', sans-serif;
+}
+
+.res-signup-footer-com .btn-2{
+    background-color: #ff6600;
+    border: 0;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+@media (max-width: 1200px){
+    .res-signup-footer-com button{
+        width: 25% !important;
+    }
+}
+@media (max-width: 1000px){
+    .res-signup-footer-com button{
+        width: 30% !important;
+    }
+}
+@media (max-width: 800px){
+    .res-signup-footer-com button{
+        width: 40% !important;
+    }
+}
+@media (max-width: 600px){
+    .res-signup-footer-com button{
+        width: 60% !important;
+    }
+}
+@media (max-width: 400px){
+    .res-signup-footer-com button{
+        width: 80% !important;
+    }
+}

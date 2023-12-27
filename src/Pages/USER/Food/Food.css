@@ -1,0 +1,8 @@
+.food-page{
+    background-color: white;
+    min-height: 200vh;
+}
+
+.food-page .food-page-filters::-webkit-scrollbar {
+    display: none;
+}

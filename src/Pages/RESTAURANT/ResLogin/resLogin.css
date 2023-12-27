@@ -1,0 +1,154 @@
+.login-page{
+    background-image: url(img/login.png); /* Replace 'your-image.jpg' with your actual image file */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* max-height: 100vh;  */
+    min-height: 100vh; 
+}
+
+.login-page .set-bg-color{
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgba(0, 0, 0, 0.92);
+}
+
+.login-page .logo{
+    top: 2%;
+    left: 2%;
+}
+
+.login-center{
+    border: 2px solid #ff6600;
+    border-radius: 18px;
+}
+
+.login-controls{
+    background-color: #191919;
+    padding: 34px 20px;
+    border-radius: 12px;
+    margin: 40px 0;
+    width: 80%;
+}
+
+form input{
+    width: 290px;
+    border: 0;
+    outline: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    letter-spacing: 1px;
+}
+
+form label{
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.pass-icon{
+    margin-bottom: 9px;
+    margin-right: 12px;
+    color: #ff6600;
+}
+
+.forgate-pass span{
+    font-size: 14px;
+    padding-top: 4px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.login-page form button{
+    background-color: #ff6600;
+    border: 0;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px; 
+}
+
+.login-page form button:hover{
+    background-color: #ff4300;
+}
+
+.login-page .other-login-text{
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.login-page .social-logins{
+    gap: 20px;
+}
+
+.login-page .s-icon{
+    background-color: white;
+    font-size: 28px;
+    padding: 10px;
+    border-radius: 25px;
+}
+
+.login-page .s-icon:hover{
+    background-color: #ff6600;
+}
+
+.login-page .dont-have-account-text{
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+
+
+
+@media (max-width: 1200px){
+    .login-center{
+        width: 90% !important;
+    }
+    .login-controls{
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px){
+    /* .login-page{
+        height: 100vh !important;
+        min-height: 100vh !important;
+    } */
+    .login-page .set-bg-color{
+        background-color: rgba(0, 0, 0, 0.7) !important;
+    }
+    .login-page .login-controls{
+        background-color: transparent;
+    }
+}
+
+@media (max-width: 390px){
+    .login-page .dont-have-account-text{
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 335px){
+  .login-center{
+    border: none;
+  }
+  input,button{
+    width: 80vw !important;
+  }
+  .pass-icon{
+    display: none;
+  }
+}
+
+@media (max-height: 750px){
+
+    .login-center{
+        padding: 0 !important;
+        height: 100% !important;
+        margin: 30px 0;
+    }
+
+    .login-controls{
+        padding: 0px 20px !important;
+    }
+}

@@ -1,0 +1,9 @@
+.res-signup-page .img-div{
+    min-height: 200px !important;
+    width: 200px;
+}
+
+.res-signup-page .cancel-btn{
+    top: -7%;
+    right: -5%;
+}

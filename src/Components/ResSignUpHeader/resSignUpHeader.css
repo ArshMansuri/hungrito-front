@@ -1,0 +1,14 @@
+.res-signup-page .res-signup-header figure h2 {
+    /* line-height: 10px; */
+}
+  
+  .res-signup-page .res-detail-box .heading h4,
+  .res-signup-page .res-contact-box .heading h4 {
+    font-weight: 400;
+  }
+  
+  .res-signup-page .res-detail-box .heading p,
+  .res-signup-page .res-contact-box .heading p {
+    line-height: 12px;
+    font-size: 15px;
+  }

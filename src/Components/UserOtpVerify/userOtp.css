@@ -1,0 +1,28 @@
+.user-otp-verify{
+    min-height: 100vh;
+    /* background-color: red; */
+    /* background-color: rgba(0, 0, 0, 0.92); */
+
+}
+
+.user-otp-verify .main{
+    width: 430px;
+    padding: 30px 0;
+    margin:  0 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+}
+
+.user-otp-verify p{
+    line-height: 0;
+}
+
+.user-otp-verify .otp-btn{
+    background-color: #ff6600;
+    border: 0;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    width: 80%;
+    padding: 8px;
+    border-radius: 5px; 
+}

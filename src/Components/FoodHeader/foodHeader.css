@@ -1,0 +1,66 @@
+.food-header-com .address{
+    border-radius: 10px;
+    padding: 0 8px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    margin: 0 30px !important;
+}
+
+.food-header-com .address .location-input {
+    border: none;
+    /* border: 1px solid red; */
+    outline: none;
+    width: 100%;
+    padding: 8px 12px;
+    /* width: 80%; */
+    font-size: 18px;
+}
+
+.food-header-com .address .location-popup {
+    top: 50px;
+    /* left: 95px; */
+    border-radius: 10px;
+    min-height: 35vh;
+    max-height: 30vh;
+    overflow-y: scroll;
+}
+
+.food-header-com .address .location-popup::-webkit-scrollbar {
+    display: none;
+}
+
+.food-header-com .for-log-user{
+    font-size: 18px;
+}
+.food-header-com .for-log-user a:hover{
+    color: #ff6600 !important;
+}
+
+.food-header-com .for-not-log-user a{
+    min-width: 13%;
+}
+
+.food-header-com .for-not-log-user button{
+    background-color: #ff6600;
+    border: 2px solid #ff6600;
+    color: white;
+    font-family: "Roboto", sans-serif;
+    width: 100%;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+@media (max-width: 1270px) {
+    .food-header-com .for-not-log-user a{
+        min-width: 16%;
+    }
+}
+@media (max-width: 950px) {
+    .food-header-com .for-not-log-user a{
+        min-width: 20%;
+    }
+}
+@media (max-width: 450px) {
+    .food-header-com .address{
+        width: 68% !important;
+    }
+}

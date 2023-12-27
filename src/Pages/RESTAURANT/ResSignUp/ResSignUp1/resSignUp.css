@@ -1,0 +1,114 @@
+.res-signup-page {
+  font-family: "Roboto", sans-serif;
+}
+
+.res-signup-page .res-detail-width,
+.res-signup-page .res-contact-width,
+.res-signup-page .res-contact-width,
+.contact-box-main {
+  border-radius: 5px;
+}
+
+.res-signup-page .res-detail-box .input,
+.res-signup-page .res-contact-box .input {
+  /* width: 290px; */
+  border: 0;
+  outline: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  letter-spacing: 1px;
+}
+
+.res-signup-page .input-filds {
+  margin-top: 36px;
+}
+
+.res-signup-page .res-address .res-address-info h5 {
+  font-weight: 400;
+}
+
+.res-signup-page .res-address .res-address-info p {
+  line-height: 12px;
+  font-size: 15px;
+  /* padding: 0; */
+}
+
+.res-address .address-input-box {
+  /* width: 290px; */
+  border-radius: 5px;
+}
+
+.res-signup-page .address-input-box input {
+  border: 0;
+  outline: none;
+  padding: 8px 11px;
+  letter-spacing: 1px;
+  font-size: 20px;
+  width: 85%;
+}
+
+.res-address .address-input-box .gps-icon-btn {
+  cursor: pointer;
+}
+
+.res-address .res-address-map {
+  height: 300px;
+}
+
+.res-address .lati-long-box {
+  outline: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  letter-spacing: 1px;
+}
+
+.res-address .suggetion-pop-up {
+  top: 104%;
+  z-index: 10;
+  border-radius: 5px;
+  font-family: "Roboto", sans-serif;
+  max-height: 200px;
+  overflow-y: scroll;
+}
+
+.res-address .suggetion-pop-up::-webkit-scrollbar {
+  display: none;
+}
+
+.res-signup-page .res-open-days-box {
+  margin-bottom: 70px !important;
+}
+
+.res-signup-page .res-contact-box button {
+  background-color: #ff6600;
+  /* background-color: #a65926;
+    border: 2px solid #924715; */
+  border: 2px solid #ff6600;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  padding: 8px;
+  border-radius: 5px;
+  width: 75%;
+}
+
+@media (max-width: 768px) {
+  .res-signup-page .res-detail-box .res-detail-width,
+  .res-signup-page .res-contact-box .res-contact-width {
+    width: 95vw !important;
+  }
+
+  .res-signup-page .res-detail-box .res-detail-width-2,
+  .res-signup-page .res-contact-box .res-contact-width-2 {
+    width: 90% !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .res-signup-page .res-contact-box button {
+    width: 100% !important;
+  }
+  .res-signup-page .res-detail-box .res-detail-width-2,
+  .res-signup-page .res-contact-box .res-contact-width-2 {
+    width: 100% !important;
+  }
+}
