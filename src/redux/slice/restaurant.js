@@ -32,13 +32,11 @@ export const restuReduser = createSlice({
             state.restu.resName = ""
         },
         removeResType(state){
-            console.log("calll")
             state.restu.resType = []
         }
     },
     extraReducers: (builder) =>{
-
-
+        // ================ Restaurant first email register  ================
         builder.addCase(restuSignUpVerify.pending, (state)=>{
             state.isLoading = true
         })
@@ -53,6 +51,7 @@ export const restuReduser = createSlice({
             state.success = false
         })
 
+        // ================ Restaurant first email verify  ================
         builder.addCase(resEmailVerify.pending, (state)=>{
             state.isLoading = true
         })
@@ -68,6 +67,7 @@ export const restuReduser = createSlice({
             state.success = false
         })
 
+        // ================ Restaurant make Phone Otp   ================
         builder.addCase(resMakePhoneOtp.pending, (state)=>{
             state.isLoading = true
         })
@@ -84,6 +84,7 @@ export const restuReduser = createSlice({
             state.success = false
         })
 
+        // ================ Restaurant Phone Otp verify   ================
         builder.addCase(resVerifyPhoneOtp.pending, (state)=>{
             state.isLoading = true
         })
@@ -99,6 +100,7 @@ export const restuReduser = createSlice({
             state.success = false
         })
 
+        // ================ Restaurant make owner Phone Otp   ================
         builder.addCase(resOwnerMakePhoneOtp.pending, (state)=>{
             state.isLoading = true
         })
@@ -115,6 +117,7 @@ export const restuReduser = createSlice({
             state.success = false
         })
 
+        // ================ Restaurant owner Phone Otp verify   ================
         builder.addCase(resOwnerVerifyPhoneOtp.pending, (state)=>{
             state.isLoading = true
         })
@@ -130,6 +133,7 @@ export const restuReduser = createSlice({
             state.success = false
         })
 
+        // ================ Restaurant First SignUp Page   ================
         builder.addCase(resSignUpFirstPage.pending, (state)=>{
             state.isLoading = true
         })
@@ -149,6 +153,7 @@ export const restuReduser = createSlice({
             state.success = false
         })
 
+        // ================ Restaurant Second SignUp Page   ================
         builder.addCase(resSignUpSecPage.pending, (state)=>{
             state.isLoading = true
         })
@@ -167,6 +172,7 @@ export const restuReduser = createSlice({
             state.success = false
         })
 
+        // ================ Restaurant Third SignUp Page   ================
         builder.addCase(resSignUpThirdPage.pending, (state)=>{
             state.isLoading = true
         })
@@ -183,6 +189,7 @@ export const restuReduser = createSlice({
             state.success = false
         })
 
+        // ================ Restaurant Load   ================
         builder.addCase(resLoad.pending, (state)=>{
             state.isLoading = true
         })
@@ -197,6 +204,7 @@ export const restuReduser = createSlice({
             state.success = false
         })
 
+        // ================ Restaurant Login   ================
         builder.addCase(resLogin.pending, (state)=>{
             state.isLoading = true
         })

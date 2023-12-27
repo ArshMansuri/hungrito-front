@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./resLogin.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
@@ -18,12 +18,6 @@ const ResLogin = ({ isRestuAuther, isResLoading }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
-
-  useEffect(() => {
-    if (isRestuAuther && isResLoading) {
-      navigator("/food");
-    }
-  }, [isRestuAuther, isResLoading, navigator]);
 
   const passShowHideHandler = (e) => {
     setShowPass(!showPass);

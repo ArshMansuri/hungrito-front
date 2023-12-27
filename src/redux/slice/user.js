@@ -31,7 +31,6 @@ export const userReduser = createSlice({
     });
     builder.addCase(userSignUp.fulfilled, (state, action) => {
       state.user = action.payload.user;
-      // state.token = action.payload.token;
       state.isLoading = false;
       state.success = true
     });

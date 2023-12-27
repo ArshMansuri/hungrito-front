@@ -63,7 +63,7 @@ export const userPhoneOtpVerify = createAsyncThunk("userPhoneOtpVerify", async({
             },
             withCredentials:true
         })
-        localStorage.setItem("isUSer", "true")
+        localStorage.setItem("isUser", "true")
         return data
     } catch (error) {
         console.log("catch error", error)
