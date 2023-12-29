@@ -13,14 +13,14 @@ const AuthResProtected = ({isRestuAuther=undefined, isResLoading=true}) => {
     }
 
     if(!isResLoading && isRestuAuther){
-        return <Navigate to={"/"} />
+        return <Navigate to={"/res/dashboard"} />
     }
 
-    if(!isResLoading && window.location.pathname === '/res/login'){
+    if(!isResLoading && !isRestuAuther && window.location.pathname === '/res/login'){
         return <Outlet />
     }
 
-    if(!isResLoading && (resEmail === undefined || resEmail !== params?.email) && (resEmailVerify === false || resEmailVerify === undefined)){
+    if(!isResLoading && !isRestuAuther && (resEmail === undefined || resEmail !== params?.email) && (resEmailVerify === false || resEmailVerify === undefined)){
         return <Navigate to={"/res/verify"} />
     }
 

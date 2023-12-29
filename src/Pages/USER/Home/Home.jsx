@@ -80,7 +80,7 @@ const Home = ({ isAuther, isLoading = true }) => {
                   </div>
                   <div className="right-nav-home col-xl-8 col-lg-8 col-sm-9 col-9">
                     <div className="d-xl-flex d-lg-flex d-md-flex d-sm-flex d-none justify-content-end align-items-center pe-xl-5 pe-lg-5 pe-md-5 pe-sm-2 pe-0 h-100">
-                      <NavLink to="#"> Delivery Boy </NavLink>
+                      <NavLink to="#"> Delivery Boyy </NavLink>
                       <NavLink to="/res/login"> Restaurant </NavLink>
                       {isAuther ? (
                         <></>

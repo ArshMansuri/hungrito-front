@@ -16,6 +16,8 @@ import AuthProtected from "./Components/ProtectedRoute/AuthProtected";
 import { resLoad } from "./redux/actions/restaurant";
 import Food from "./Pages/USER/Food/Food";
 import AuthResProtected from "./Components/ProtectedRoute/AuthResProtected";
+import ResDashboard from "./Pages/RESTAURANT/Dashboard/ResDashboard";
+import ResOnly from "./Components/ProtectedRoute/ResOnly";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,10 +35,11 @@ function App() {
     }
   }, [dispatch]);
 
+  // console.log(isRestuAuther);
+
   return (
     <Router>
       <Routes>
-
         {/* ================= User Auth Routes ==================*/}
         <Route
           path="/"
@@ -53,6 +56,22 @@ function App() {
             path="/signup"
             element={<SignUp isAuther={isAuther} isLoading={isLoading} />}
           />
+        </Route>
+
+        {/* ================= Restaurant Routes ==================*/}
+        <Route
+          element={
+            <ResOnly
+              isRestuAuther={isRestuAuther}
+              isResLoading={isResLoading}
+            />
+          }
+        >
+          <Route
+            path="/res/dashboard"
+            element={<ResDashboard isRestuAuther={isRestuAuther} isResLoading={isResLoading} />}
+          />
+          <Route path="/temp" element={<Temp />} />
         </Route>
 
         {/* ================= Restaurant Auth Routes ==================*/}
@@ -111,10 +130,10 @@ function App() {
           />
         </Route>
 
-        {/* ================= Restaurant Routes ==================*/}
-
-        <Route path="/food" element={<Food isAuther={isAuther} isLoading={isLoading} />} />
-        <Route path="/temp" element={<Temp />} />
+        <Route
+          path="/food"
+          element={<Food isAuther={isAuther} isLoading={isLoading} />}
+        />
       </Routes>
     </Router>
   );

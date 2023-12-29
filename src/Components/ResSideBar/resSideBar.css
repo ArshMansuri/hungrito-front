@@ -1,0 +1,36 @@
+.res-sidebar-com{
+    background-color: #FFFFFF;
+    min-height: 100vh;
+}
+
+.res-sidebar-com .app-name{
+    color: #ff6600;
+    padding: 0;
+    margin: 0;
+    margin-top: 4px;
+}
+
+.res-sidebar-com .navs{
+}
+
+.res-sidebar-com .navs .nav-btn{
+    border-radius: 4px;
+    color: #464255;
+    background-color: transparent;
+}
+
+.res-sidebar-com .navs .nav-btn-active, .res-sidebar-com .cancel-btn{
+    border-radius: 4px;
+    color: #FF5B5B;
+    background-color: rgba(255, 91, 91, 0.15);
+}
+
+.res-sidebar-com .navs .nav-btn:hover{
+    border-radius: 4px;
+    color: #FF5B5B;
+    background-color: rgba(255, 91, 91, 0.15);
+}
+
+.res-sidebar-com .navs span{
+    font-size: 15px;
+}

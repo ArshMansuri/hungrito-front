@@ -3,6 +3,12 @@
     min-height: 200vh;
 }
 
-.food-page .food-page-filters::-webkit-scrollbar {
+.food-page .food-page-filters .filter-scroll::-webkit-scrollbar {
     display: none;
+}
+
+.food-page .search-box-food{
+    background-color: #f5f5f575;
+    border-radius: 10px;
+    font-family: 'Roboto', sans-serif;
 }

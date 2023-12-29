@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import { resLogin } from "../../../redux/actions/restaurant";
 import Loader from "../../../Components/Loaders/Loader";
 
-const ResLogin = ({ isRestuAuther, isResLoading }) => {
+const ResLogin = ({ isRestuAuther, isResLoading=true}) => {
   const navigator = useNavigate();
   const dispatch = useDispatch();
 

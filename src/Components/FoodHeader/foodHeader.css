@@ -64,3 +64,14 @@
         width: 68% !important;
     }
 }
+
+@media (max-width: 338px) {
+    .food-header-com .sm-width{
+        width: 100vw !important;
+        margin-left: 0 !important;
+    }
+
+    .food-header-com .location-input{
+        width: 75% !important;
+    }
+}

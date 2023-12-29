@@ -4,6 +4,8 @@ import FoodCart from "../../../Components/FoodCart/FoodCart";
 import FoodHeader from "../../../Components/FoodHeader/FoodHeader";
 import FoodFooterNav from "../../../Components/FoodFooterNav/FoodFooterNav";
 import Filters from "../../../Components/Filters/Filters";
+import { BiSearch } from "react-icons/bi";
+import { NavLink } from "react-router-dom";
 
 const Food = ({ isAuther, isLoading = true }) => {
   useEffect(() => {
@@ -13,10 +15,14 @@ const Food = ({ isAuther, isLoading = true }) => {
           document
             .getElementById("offsetHeight")
             .classList.add("position-fixed");
+          document.getElementById("searchBox").classList.remove('d-none')
+          document.getElementById("searchBox").classList.add('d-flex')
         } else {
           document
             .getElementById("offsetHeight")
             .classList.remove("position-fixed");
+            document.getElementById("searchBox").classList.remove('d-flex')
+            document.getElementById("searchBox").classList.add('d-none')
         }
       }
     });
@@ -29,9 +35,21 @@ const Food = ({ isAuther, isLoading = true }) => {
       </div>
       <div
         id="offsetHeight"
-        className="bg-white py-2 food-page-filters overflow-auto top-0 shadow-sm w-100"
+        className="bg-white py-2 food-page-filters overflow-hidden top-0 shadow-sm w-100"
       >
-        <Filters />
+        <div className="row">
+          <div className="filter-scroll col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12 overflow-scroll">
+            <Filters />
+          </div>
+          <div className="filter-scroll col-xl-4 col-lg-4 col-md-4 col-sm-0 col-0 d-xl-block d-lg-block d-md-block d-sm-none d-none">
+            <div id="searchBox" className="d-none align-items-center h-100 w-100 justify-content-end pe-4">
+            <NavLink to={'/search'} className="search-box-food d-flex align-items-center w-75 py-3 px-2 text-secondary">
+              <BiSearch size={20} />
+              <span className="ms-1">Search food</span>
+            </NavLink>
+            </div>
+          </div>
+        </div>
       </div>
       <div className="container d-flex justify-content-xl-start justify-content-lg-start justify-content-md-start justify-content-sm-center justify-content-center flex-wrap">
         <FoodCart

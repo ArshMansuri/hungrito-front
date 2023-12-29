@@ -31,8 +31,8 @@ const Filters = () => {
   };
 
   return (
-    <div className="filter-com ms-xl-5 ms-lg-5 ms-md-5 ms-sm-1 ms-1 w-100">
-      <div className="d-flex align-items-center food-scroll">
+    <div className="filter-com h-100 d-flex align-items-center ms-xl-5 ms-lg-5 ms-md-5 ms-sm-1 ms-1 w-100">
+      <div className="d-flex align-items-center">
         <div className="main-filter filter d-flex align-items-center justify-content-start border border-secondary py-2 px-2 mx-1">
             {
                 selectedFilter.length > 0 ?

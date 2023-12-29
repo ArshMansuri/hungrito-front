@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./foodHeader.css";
 import { FaLocationDot } from "react-icons/fa6";
-import { BiSolidUpArrow, BiSolidDownArrow } from "react-icons/bi";
+import { BiSolidUpArrow, BiSolidDownArrow, BiSearch } from "react-icons/bi";
 import axios from "axios";
 import { MdGpsFixed } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { IoCartOutline, IoBagHandle } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
+
 
 const MAP_API = "Hah9iiWdUd7fEtqmHB2sgS64Io0qoSmW";
 
@@ -64,7 +65,7 @@ const FoodHeader = ({ isAuther, isLoading = true }) => {
     <header className="bg-white food-header-com">
       <div className="row w-100">
         <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 ">
-          <div className="d-flex align-items-center">
+          <div className="d-flex align-items-center sm-width">
             <div className="logo ms-xl-5 ms-lg-5 ms-md-5 ms-sm-1 ms-1">
               <img
                 src="../img/logo2.png"
@@ -157,7 +158,16 @@ const FoodHeader = ({ isAuther, isLoading = true }) => {
             {isAuther === true ? (
               <div className="h-100">
                 <div className="d-flex align-items-center justify-content-end h-100 me-xl-5 me-lg-5 me-md-1 m-0 for-log-user">
-                  <div className="mx-4">
+                  <div className="mx-xl-4 mx-lg-4 mx-md-3 mx-4">
+                    <NavLink
+                      to={"/search"}
+                      className="text-dark d-flex align-items-center"
+                    >
+                      <BiSearch size={20} className="mt-1" />
+                      <span className="ms-1 mt-1">Search</span>
+                    </NavLink>
+                  </div>
+                  <div className="mx-xl-4 mx-lg-4 mx-md-3 mx-4">
                     <NavLink
                       to={"/save"}
                       className="text-dark d-flex align-items-center"
@@ -166,7 +176,7 @@ const FoodHeader = ({ isAuther, isLoading = true }) => {
                       <span className="ms-1 mt-1">Save</span>
                     </NavLink>
                   </div>
-                  <div className="mx-4 mt-1">
+                  <div className="mx-xl-4 mx-lg-4 mx-md-3 mx-4 mt-1">
                     <NavLink
                       to={"/save"}
                       className="text-dark d-flex align-items-center"
@@ -175,7 +185,7 @@ const FoodHeader = ({ isAuther, isLoading = true }) => {
                       <span className="ms-1 mt-1"> Cart </span>
                     </NavLink>
                   </div>
-                  <div className="mx-4 mt-1">
+                  <div className="mx-xl-4 mx-lg-4 mx-md-3 mx-4 mt-1">
                     <NavLink
                       to={"/save"}
                       className="text-dark d-flex align-items-center"
@@ -190,6 +200,15 @@ const FoodHeader = ({ isAuther, isLoading = true }) => {
               <>
                 <div className="h-100">
                   <div className="d-flex align-items-center justify-content-end for-not-log-user h-100">
+                  <div className="mx-xl-4 mx-lg-4 mx-md-3 mx-4">
+                    <NavLink
+                      to={"/search"}
+                      className="text-dark d-flex align-items-center"
+                    >
+                      <BiSearch size={20} className="mt-1" />
+                      <span className="ms-1 mt-1">Search</span>
+                    </NavLink>
+                  </div>
                     <NavLink to="/login" className="mx-2">
                       <button>Login</button>
                     </NavLink>
