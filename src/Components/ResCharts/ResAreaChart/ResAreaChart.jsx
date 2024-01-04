@@ -23,30 +23,20 @@ ChartJS.register(
   Legend
 );
 
-const ResAreaChart = ({value=[100, 150, 350, 200, 60, 230, 120, 200, 350, 400, 300, 250], borCol="rgb(53, 162, 235)", bg="rgba(53, 162, 235, 0.5)"}) => {
+const ResAreaChart = ({
+  value = [100, 150, 350, 200, 60, 230, 120, 200, 350, 400, 300, 250],
+  borCol = "rgb(53, 162, 235)",
+  bg = "rgba(53, 162, 235, 0.5)",
+  labels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+}) => {
   const options = {
     responsive: true,
     plugins: {
       legend: {
         position: "top",
       },
-      
-      //   title: {
-      //     display: true,
-      //     text: 'Chart.js Line Chart',
-      //   },
     },
   };
-
-  const labels = [
-    "Sun",
-    "Mon",
-    "Tue",
-    "Wed",
-    "Thu",
-    "Fri",
-    "Sat",
-  ];
 
   const data = {
     labels,
@@ -64,11 +54,7 @@ const ResAreaChart = ({value=[100, 150, 350, 200, 60, 230, 120, 200, 350, 400, 3
     ],
   };
 
-  return (
-    // <div>
-      <Line options={options} data={data} />
-    // </div>
-  );
+  return <Line options={options} data={data} />;
 };
 
 export default ResAreaChart;

@@ -13,6 +13,10 @@
   height: 233px;
 }
 
+.res-dashboard-main .dash-revenue-chart .revenue-chart{
+  height: 335px;
+}
+
 .res-dashboard-main .dash-revenue-chart, .res-dashboard-main .dash-customer-chart{
   width: 95%;
   height: 380px;
@@ -32,7 +36,7 @@
 }
 
 @media (max-width: 1200px) {
-  .res-dashboard-main .dash-pie-chart, .dash-order-chart, .dash-order-chart .order-chart{
+  .res-dashboard-main .dash-pie-chart, .dash-order-chart, .dash-order-chart .order-chart, .dash-revenue-chart, .dash-revenue-chart .revenue-chart, .dash-customer-chart, .dash-customer-chart .customer-chart{
     height: fit-content !important;
   }
 }
