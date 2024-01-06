@@ -19,7 +19,7 @@ import {
     Legend
   );
 
-const ResVerticalChart = () => {
+const ResVerticalChart = ({labels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], value=[100, 150, 350, 200, 60, 230, 120]}) => {
     const options = {
         responsive: true,
         plugins: {
@@ -29,14 +29,13 @@ const ResVerticalChart = () => {
         },
       };
 
-      const labels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
       const data = {
         labels,
         datasets: [
           {
             label: '',
-            data: [100, 150, 350, 200, 60, 230, 120],
+            data: value,
             backgroundColor: 'rgb(255, 91, 91)',
           },
         ],

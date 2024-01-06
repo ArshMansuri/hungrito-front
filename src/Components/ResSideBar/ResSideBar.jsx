@@ -14,7 +14,7 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
 
   return (
     <div className="res-sidebar-com ">
-      <div className="d-xl-none d-lg-none d-md-none d-md-block d-block text-end p-3">
+      <div className="d-xl-none d-lg-none d-md-none d-sm-block d-block text-end p-3" style={{backgroundColor: 'rgb(248, 247, 246)'}}>
         <IoMdClose size={22} color="#FF5B5B" onClick={()=>closeSideBar(false)}/>
       </div>
       <div className="d-flex flex-column align-items-center">
@@ -28,7 +28,7 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
         </div>
         <div className="navs w-100">
             <div className="w-100 d-flex justify-content-center w-100 my-3">
-            <NavLink className='w-75'>
+            <NavLink to={'/res/dashboard'} className='w-75'>
                 <button className={`${tab === '/res/dashboard' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
                     <span className="nav-icon">
                         <AiOutlineHome size={18} />
@@ -40,7 +40,7 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
             </NavLink>
             </div>
             <div className="w-100 d-flex justify-content-center w-100 my-3">
-            <NavLink className='w-75'>
+            <NavLink to={'/res/order/list'} className='w-75' onClick={()=>setTab('/res/order/list')}>
                 <button className={`${tab === '/res/order/list' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
                     <span className="nav-icon">
                         <CiCircleList size={18} />

@@ -1,23 +1,27 @@
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./Pages/USER/Home/Home";
-import Login from "./Pages/USER/Login/Login";
-import SignUp from "./Pages/USER/SignUp/SignUp";
-import ResLogin from "./Pages/RESTAURANT/ResLogin/ResLogin";
-import ResSignUp from "./Pages/RESTAURANT/ResSignUp/ResSignUp1/ResSignUp";
-import Temp from "./temp/Temp";
-import ResSignUp2 from "./Pages/RESTAURANT/ResSignUp/ResSignUp2/ResSignUp2";
-import ResSignUp3 from "./Pages/RESTAURANT/ResSignUp/ResSignUp3/ResSignUp3";
-import ResFirstVerify from "./Pages/RESTAURANT/ResSignUp/ResFirstVerify/ResFirstVerify";
+import { useEffect, lazy , Suspense} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { userLoad } from "./redux/actions/user";
-import AuthProtected from "./Components/ProtectedRoute/AuthProtected";
 import { resLoad } from "./redux/actions/restaurant";
-import Food from "./Pages/USER/Food/Food";
-import AuthResProtected from "./Components/ProtectedRoute/AuthResProtected";
-import ResDashboard from "./Pages/RESTAURANT/Dashboard/ResDashboard";
-import ResOnly from "./Components/ProtectedRoute/ResOnly";
+import Loader from "./Components/Loaders/Loader";
+
+const Home = lazy(()=> import('./Pages/USER/Home/Home'))
+const Login = lazy(()=> import('./Pages/USER/Login/Login'))
+const SignUp = lazy(()=> import('./Pages/USER/SignUp/SignUp'))
+const ResLogin = lazy(()=> import('./Pages/RESTAURANT/ResLogin/ResLogin'))
+const ResSignUp = lazy(()=> import('./Pages/RESTAURANT/ResSignUp/ResSignUp1/ResSignUp'))
+const ResSignUp2 = lazy(()=> import('./Pages/RESTAURANT/ResSignUp/ResSignUp2/ResSignUp2'))
+const ResSignUp3 = lazy(()=> import('./Pages/RESTAURANT/ResSignUp/ResSignUp3/ResSignUp3'))
+const ResFirstVerify = lazy(()=> import('./Pages/RESTAURANT/ResSignUp/ResFirstVerify/ResFirstVerify'))
+const AuthProtected = lazy(()=> import('./Components/ProtectedRoute/AuthProtected'))
+const Food = lazy(()=> import('./Pages/USER/Food/Food'))
+const AuthResProtected = lazy(()=> import('./Components/ProtectedRoute/AuthResProtected'))
+const ResDashboard = lazy(()=> import('./Pages/RESTAURANT/Dashboard/ResDashboard'))
+const ResOnly = lazy(()=> import('./Components/ProtectedRoute/ResOnly'))
+const OrderList = lazy(()=> import('./Pages/RESTAURANT/OrderList/OrderList'))
+const Temp = lazy(()=> import('./temp/Temp'))
+
 
 function App() {
   const dispatch = useDispatch();
@@ -39,6 +43,7 @@ function App() {
 
   return (
     <Router>
+      <Suspense fallback={<Loader />}>
       <Routes>
         {/* ================= User Auth Routes ==================*/}
         <Route
@@ -70,6 +75,10 @@ function App() {
           <Route
             path="/res/dashboard"
             element={<ResDashboard isRestuAuther={isRestuAuther} isResLoading={isResLoading} />}
+          />
+          <Route
+            path="/res/order/list"
+            element={<OrderList isRestuAuther={isRestuAuther} isResLoading={isResLoading} />}
           />
           <Route path="/temp" element={<Temp />} />
         </Route>
@@ -135,6 +144,7 @@ function App() {
           element={<Food isAuther={isAuther} isLoading={isLoading} />}
         />
       </Routes>
+      </Suspense>
     </Router>
   );
 }

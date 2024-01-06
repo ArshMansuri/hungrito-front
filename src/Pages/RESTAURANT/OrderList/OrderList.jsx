@@ -1,26 +1,28 @@
-import React from "react";
+import React from 'react'
+import './orderList.css'
+import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 
-const Temp = () => {
+const OrderList = () => {
   return (
-    <div style={{fontFamily: "'Roboto', sans-serif"}}>
+    <div className='order-list-table'>
       <div class="card shadow mb-4">
         <div class="card-header py-3">
           <div className="d-flex align-items-center justify-content-end">
             <div>
               <span>Search: </span>
-              <input type="text" className="table-input border-0"/>
+              <input type="text" className="table-input px-2"/>
             </div>
           </div>
         </div>
-        <div class="card-body">
-          <div class="table-responsive">
+        <div class="card-body w-100 overflow-scroll">
+          <div class="table-responsive" style={{width: 'max-content'}}>
             <table
               class="table table-bordered"
               id="dataTable"
               width="100%"
               cellspacing="0"
             >
-              <thead>
+              <thead className='text-secondary'>
                 <tr>
                   <th>Name</th>
                   <th>Position</th>
@@ -28,13 +30,9 @@ const Temp = () => {
                   <th>Age</th>
                   <th>Start date</th>
                   <th>Salary</th>
-                  <th>Salary</th>
-                  <th>Salary</th>
-                  <th>Salary</th>
-                  <th>Salary</th>
                 </tr>
               </thead>
-              <tfoot>
+              <tfoot className='text-secondary'>
                 <tr>
                   <th>Name</th>
                   <th>Position</th>
@@ -44,10 +42,10 @@ const Temp = () => {
                   <th>Salary</th>
                 </tr>
               </tfoot>
-              <tbody>
+              <tbody className='order-list-table-body'>
                 <tr>
                   <td>Tiger Nixon</td>
-                  <td>System Architect</td>
+                  <td>System Architec</td>
                   <td>Edinburgh</td>
                   <td>61</td>
                   <td>2011/04/25</td>
@@ -145,9 +143,32 @@ const Temp = () => {
             </table>
           </div>
         </div>
+        <div class="card-footer bg-white py-3">
+          <div className="d-flex align-items-center justify-content-center">
+            <div className='mx-2'>
+                <button className='first-btn all-btn border-0'>First</button>
+            </div>
+            <div className='mx-2'>
+                <button className='all-btn border-0 d-flex justify-content-center align-items-center'>
+                  <GrFormPrevious size={20} />
+                </button>
+            </div>
+            <div className='mx-2'>
+              <button className='all-btn border-0'>1</button>
+            </div>
+            <div className='mx-2'> 
+                <button className='all-btn border-0 d-flex justify-content-center align-items-center'>
+                  <GrFormNext color='#FF5B5B'size={20} />
+                </button>
+            </div>
+            <div className='mx-2'>
+                <button  className='last-btn all-btn border-0'>Last</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Temp;
+export default OrderList

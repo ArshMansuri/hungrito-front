@@ -59,7 +59,7 @@ const TopFourCard = () => {
               </div>
               <div className="das-card-percentage d-flex align-items-center">
                 <div className="up-down-icon d-flex align-items-center mt-1">
-                  {true ? (
+                  {false ? (
                     <div className="up-down p-0 d-flex justify-content-center align-items-center rounded-circle">
                       <FaArrowUp size={10} color="rgb(255, 91, 91)" />
                     </div>
