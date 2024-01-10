@@ -8,7 +8,7 @@ import ResLineChart from "../../../Components/ResCharts/ResLineChart/ResLineChar
 import ResVerticalChart from "../../../Components/ResCharts/ResVerticalChart/ResVerticalChart";
 
 const ResDashboard = ({ isRestuAuther, isResLoading = true }) => {
-  console.log();
+  console.log(isResLoading);
   return (
     <>
       {isResLoading ? (

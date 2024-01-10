@@ -18,6 +18,7 @@ const ResLogin = ({ isRestuAuther, isResLoading=true}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
+  
 
   const passShowHideHandler = (e) => {
     setShowPass(!showPass);
@@ -104,7 +105,7 @@ const ResLogin = ({ isRestuAuther, isResLoading=true}) => {
                             Password
                           </label>
                           <input
-                            type="password"
+                            type={`${showPass === true ? "text" : "password"}`}
                             id="password"
                             placeholder="Password"
                             className="text-secondary"

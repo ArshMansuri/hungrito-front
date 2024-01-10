@@ -47,7 +47,7 @@ const ResOnly = ({ isRestuAuther = undefined, isResLoading = true }) => {
     );
   }
 
-  if (!isResLoading && !isRestuAuther && isRestuAuther !== undefined) {
+  if (!isRestuAuther && isRestuAuther !== undefined) {
     // return <Loader />
     return (
       <ResLogin isRestuAuther={isRestuAuther} isResLoading={isResLoading} />

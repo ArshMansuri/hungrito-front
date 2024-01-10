@@ -28,7 +28,7 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
         </div>
         <div className="navs w-100">
             <div className="w-100 d-flex justify-content-center w-100 my-3">
-            <NavLink to={'/res/dashboard'} className='w-75'>
+            <NavLink to={'/res/dashboard'} className='w-75' onClick={()=>setTab('/res/dashboard')}>
                 <button className={`${tab === '/res/dashboard' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
                     <span className="nav-icon">
                         <AiOutlineHome size={18} />
@@ -53,7 +53,7 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
             </div>
             <div className="w-100 d-flex justify-content-center w-100 my-3">
             <NavLink className='w-75'>
-                <button className={`${tab === '/res/order/list' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
+                <button className={`${tab === '/res/order/lis' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
                     <span className="nav-icon">
                         <CiFileOn size={18} />
                     </span>
@@ -65,7 +65,7 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
             </div>
             <div className="w-100 d-flex justify-content-center w-100 my-3">
             <NavLink className='w-75'>
-                <button className={`${tab === '/res/order/list' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
+                <button className={`${tab === '/res/order/lis' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
                     <span className="nav-icon">
                         <HiOutlineUsers size={18} />
                     </span>
@@ -77,7 +77,7 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
             </div>
             <div className="w-100 d-flex justify-content-center w-100 my-3">
             <NavLink className='w-75'>
-                <button className={`${tab === '/res/order/list' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
+                <button className={`${tab === '/res/order/lis' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
                     <span className="nav-icon">
                         <TbDeviceAnalytics size={18} />
                     </span>
@@ -90,7 +90,7 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
             </div>
             <div className="w-100 d-flex justify-content-center w-100 my-3">
             <NavLink className='w-75'>
-                <button className={`${tab === '/res/order/list' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
+                <button className={`${tab === '/res/order/lis' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
                     <span className="nav-icon">
                         <IoFastFoodOutline size={18} />
                     </span>
@@ -102,7 +102,7 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
             </div>
             <div className="w-100 d-flex justify-content-center w-100 my-3">
             <NavLink className='w-75'>
-                <button className={`${tab === '/res/order/list' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
+                <button className={`${tab === '/res/order/lis' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
                     <span className="nav-icon">
                         <HiOutlinePencilSquare size={18} />
                     </span>
@@ -114,7 +114,7 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
             </div>
             <div className="w-100 d-flex justify-content-center w-100 my-3">
             <NavLink className='w-75'>
-                <button className={`${tab === '/res/order/list' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
+                <button className={`${tab === '/res/order/lis' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
                     <span className="nav-icon">
                         <CiWallet size={18} />
                     </span>

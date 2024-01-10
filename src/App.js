@@ -28,8 +28,8 @@ function App() {
 
   const { isAuther, isLoading } = useSelector((state) => state.user);
   const isRestuAuther = useSelector((state) => state.restu?.isRestuAuther);
-  const isResLoading = useSelector((state) => state.restu?.isLoading);
-
+  const {isLoading:isResLoading} = useSelector((state) => state.restu);
+  
   useEffect(() => {
     if (localStorage.getItem("isUser") === "true") {
       dispatch(userLoad());
