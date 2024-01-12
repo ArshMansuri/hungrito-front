@@ -89,8 +89,8 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
             </NavLink>
             </div>
             <div className="w-100 d-flex justify-content-center w-100 my-3">
-            <NavLink className='w-75'>
-                <button className={`${tab === '/res/order/lis' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
+            <NavLink to={'/res/food/list'} className='w-75' onClick={()=>setTab('/res/food/list')}>
+                <button className={`${tab === '/res/food/list' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
                     <span className="nav-icon">
                         <IoFastFoodOutline size={18} />
                     </span>

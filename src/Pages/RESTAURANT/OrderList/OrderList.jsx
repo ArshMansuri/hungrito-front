@@ -13,7 +13,7 @@ const data = [
     Salary: "$320,800",
   },
   {
-    Name: "Tiger Nixon",
+    Name: "Xyz Nixon",
     Position: "System Architec",
     Office: "Edinburgh",
     Age: "61",
@@ -29,7 +29,7 @@ const data = [
     Salary: "$120,800",
   },
   {
-    Name: "Tiger Nixon",
+    Name: "Pqr Nixon",
     Position: "Kuchbhi Architec",
     Office: "Edinburgh",
     Age: "98",
@@ -109,7 +109,7 @@ const data = [
     Salary: "$120,800",
   },
   {
-    Name: "Tiger Nixon",
+    Name: "AA Nixon",
     Position: "System Architec",
     Office: "Edinburgh",
     Age: "98",

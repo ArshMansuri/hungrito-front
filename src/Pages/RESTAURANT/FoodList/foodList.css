@@ -1,0 +1,14 @@
+.food-list-table{
+    font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
+}
+
+.food-list-table .action-nav button{
+    background-color: #FF5B5B;;
+    border: 2px solid #FF5B5B;;
+    color: white;
+    font-family: "Roboto", sans-serif;
+    /* width: 100%; */
+    padding: 2px 8px;
+    border-radius: 6px;
+}

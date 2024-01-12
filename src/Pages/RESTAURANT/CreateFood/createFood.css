@@ -1,0 +1,38 @@
+.create-food-page{
+    font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
+}
+
+.create-food-page input, .create-food-page select{
+    outline: none;
+    border-radius: 5px;
+    padding: 2px 0;
+    border: 1px solid #FF5B5B;
+    background-color: transparent;
+}
+
+.form-check-input:checked {
+    background-color: #FF5B5B;
+    border-color: #FF5B5B;
+    outline: none !important;
+}
+
+.create-food-page button{
+    background-color: #ff6600;
+    border: 0;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    width: 50%;
+    padding: 8px;
+    border-radius: 5px; 
+}
+
+.create-food-page button:hover{
+    background-color: #ff4300;
+}
+
+@media (max-width: 576px) {
+    .create-food-page .input, .create-food-page select, .create-food-page button{
+        width: 95% !important;
+    }
+}

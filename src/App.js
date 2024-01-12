@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { userLoad } from "./redux/actions/user";
 import { resLoad } from "./redux/actions/restaurant";
 import Loader from "./Components/Loaders/Loader";
+import FoodList from "./Pages/RESTAURANT/FoodList/FoodList";
+import CreateFood from "./Pages/RESTAURANT/CreateFood/CreateFood";
 
 const Home = lazy(()=> import('./Pages/USER/Home/Home'))
 const Login = lazy(()=> import('./Pages/USER/Login/Login'))
@@ -79,6 +81,14 @@ function App() {
           <Route
             path="/res/order/list"
             element={<OrderList isRestuAuther={isRestuAuther} isResLoading={isResLoading} />}
+          />
+          <Route
+            path="/res/food/list"
+            element={<FoodList isRestuAuther={isRestuAuther} isResLoading={isResLoading} />}
+          />
+          <Route
+            path="/res/food/create"
+            element={<CreateFood isRestuAuther={isRestuAuther} isResLoading={isResLoading} />}
           />
           <Route path="/temp" element={<Temp />} />
         </Route>

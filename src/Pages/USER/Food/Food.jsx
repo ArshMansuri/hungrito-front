@@ -58,7 +58,7 @@ const Food = ({ isAuther, isLoading = true }) => {
           unit="km"
           img="../tempimg/burger-png.png"
           name="Burger"
-          text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis dolor neque voluptatum"
+          text="Lorem ipsum dolor sit amet consectetur Debitis dolor neque voluptatum"
           price="80"
         />
         <FoodCart
