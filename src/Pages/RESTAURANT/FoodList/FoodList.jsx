@@ -9,6 +9,10 @@ import { NavLink } from "react-router-dom";
 
 const columns = [
   {
+    Headers: "Image",
+    accessor: "foodImage",
+  },
+  {
     Headers: "Name",
     accessor: "foodName",
   },
@@ -25,7 +29,7 @@ const columns = [
     accessor: "foodType",
   },
   {
-    Headers: "isAvilable",
+    Headers: "Avilable",
     accessor: "isAvilable",
   },
   {
@@ -60,6 +64,7 @@ const FoodList = ({ isRestuAuther, isResLoading }) => {
                 value={f.isAvilable}
                 id="flexCheckChecked"
                 checked={f.isAvilable}
+                onChange={()=>{}}
               />
             </div>
           ),
@@ -71,6 +76,7 @@ const FoodList = ({ isRestuAuther, isResLoading }) => {
               <button>Manage</button>
             </NavLink>
           ),
+          foodImage: <img  style={{maxHeight: "100%", maxWidth: '100%', height: 'auto', width: "auto"}} alt="" src={f.foodImage.publicUrl} />
         }))
       );
     }

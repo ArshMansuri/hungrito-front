@@ -2,8 +2,8 @@ import {createAsyncThunk} from '@reduxjs/toolkit'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
-// const BASE_URL = "https://hungritobackend.onrender.com"
-const BASE_URL = "http://localhost:6010"
+const BASE_URL = "https://hungritobackend.onrender.com"
+// const BASE_URL = "http://localhost:6010"
 
 export const restuSignUpVerify = createAsyncThunk("restuSignUpVerify", async({email},{ rejectWithValue })=>{
     try {

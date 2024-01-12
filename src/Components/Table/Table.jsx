@@ -65,13 +65,13 @@ const Table = ({ data, columns, isAdd = false, url = "/" }) => {
         <div className="card-body w-100 overflow-scroll">
           <div className="table-responsive" style={{ width: "max-content" }}>
             <table
-              className="table table-bordered"
+              className="table table-bordered align-middle text-center table-striped table-hover"
               id="dataTable"
               width="100%"
               cellSpacing="0"
               {...getTableProps()}
             >
-              <thead className="text-secondary">
+              <thead className="text-secondary" >
                 {headerGroups.map((h) => (
                   <tr {...h.getHeaderGroupProps()}>
                     {h.headers.map((header) => (
@@ -79,6 +79,7 @@ const Table = ({ data, columns, isAdd = false, url = "/" }) => {
                         {...header.getHeaderProps(
                           header.getSortByToggleProps()
                         )}
+                        style={{fontWeight: "500", width: '140px', cursor: 'pointer'}}
                       >
                         {header.render("Headers")}
                         {header.isSorted ? (
@@ -106,6 +107,7 @@ const Table = ({ data, columns, isAdd = false, url = "/" }) => {
                         {...header.getHeaderProps(
                           header.getSortByToggleProps()
                         )}
+                        style={{fontWeight: "500"}}
                       >
                         {header.render("Headers")}
                         {header.isSorted ? (
@@ -129,9 +131,13 @@ const Table = ({ data, columns, isAdd = false, url = "/" }) => {
                 {page.map((row) => {
                   prepareRow(row);
                   return (
-                    <tr {...row.getRowProps()}>
+                    <tr {...row.getRowProps() }>
                       {row.cells.map((cell) => (
-                        <td  className="text-center" {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                        <td className="align-center" {...cell.getCellProps()} style={{height: '70px'}} >{
+                          // cell.value.length < 20 ? (cell.render("Cell")) : cell.render("Cell")
+                          // console.log(cell.value.length, cell.value)
+                          cell.value.length === undefined  ? cell.render("Cell") :cell.value.length < 20 ? (cell.render("Cell")) : (cell.value.slice(0, 20) + '...')
+                        }</td>
                       ))}
                     </tr>
                   );

@@ -7,8 +7,8 @@ import axios from "axios";
 import Loader from "../../../Components/Loaders/Loader";
 import { useNavigate } from "react-router-dom";
 
-// const BASE_URL = "https://hungritobackend.onrender.com";
-const BASE_URL = "http://localhost:6010";
+const BASE_URL = "https://hungritobackend.onrender.com";
+// const BASE_URL = "http://localhost:6010";
 
 const CreateFood = ({ isRestuAuther, isResLoading }) => {
   const dispatch = useDispatch();
