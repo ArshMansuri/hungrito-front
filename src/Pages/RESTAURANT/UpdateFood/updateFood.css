@@ -1,0 +1,38 @@
+.food-manage-page{
+    font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
+}
+
+.food-manage-page input, .food-manage-page select{
+    outline: none;
+    border-radius: 5px;
+    padding: 2px 0;
+    border: 1px solid #FF5B5B;
+    background-color: transparent;
+}
+
+.form-check-input:checked {
+    background-color: #FF5B5B;
+    border-color: #FF5B5B;
+    outline: none !important;
+}
+
+.food-manage-page button{
+    background-color: #ff6600;
+    border: 0;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    width: 50%;
+    padding: 8px;
+    border-radius: 5px; 
+}
+
+.food-manage-page button:hover{
+    background-color: #ff4300;
+}
+
+@media (max-width: 576px) {
+    .food-manage-page .input, .food-manage-page select, .food-manage-page button{
+        width: 95% !important;
+    }
+}

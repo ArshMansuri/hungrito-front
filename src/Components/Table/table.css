@@ -11,6 +11,16 @@
     background-color: transparent;
 }
 
+.table-check-input{
+    border: 1px solid #FF5B5B;
+}
+.table-check-input:checked{
+    background-color:  #FF5B5B;
+    border: 1px solid #FF5B5B;
+}
+
+
+
 .order-list-table-body{
     font-weight: 300;
 }

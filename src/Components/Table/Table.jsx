@@ -135,8 +135,8 @@ const Table = ({ data, columns, isAdd = false, url = "/" }) => {
                       {row.cells.map((cell) => (
                         <td className="align-center" {...cell.getCellProps()} style={{height: '70px'}} >{
                           // cell.value.length < 20 ? (cell.render("Cell")) : cell.render("Cell")
-                          // console.log(cell.value.length, cell.value)
-                          cell.value.length === undefined  ? cell.render("Cell") :cell.value.length < 20 ? (cell.render("Cell")) : (cell.value.slice(0, 20) + '...')
+                          // console.log(cell.value?.length)
+                          cell.value?.length === undefined  ? cell.render("Cell") :cell.value.length < 20 ? (cell.render("Cell")) : (cell.value.slice(0, 20) + '...')
                         }</td>
                       ))}
                     </tr>

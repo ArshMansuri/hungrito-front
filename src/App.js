@@ -5,8 +5,6 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { userLoad } from "./redux/actions/user";
 import { resLoad } from "./redux/actions/restaurant";
 import Loader from "./Components/Loaders/Loader";
-import FoodList from "./Pages/RESTAURANT/FoodList/FoodList";
-import CreateFood from "./Pages/RESTAURANT/CreateFood/CreateFood";
 
 const Home = lazy(()=> import('./Pages/USER/Home/Home'))
 const Login = lazy(()=> import('./Pages/USER/Login/Login'))
@@ -22,6 +20,9 @@ const AuthResProtected = lazy(()=> import('./Components/ProtectedRoute/AuthResPr
 const ResDashboard = lazy(()=> import('./Pages/RESTAURANT/Dashboard/ResDashboard'))
 const ResOnly = lazy(()=> import('./Components/ProtectedRoute/ResOnly'))
 const OrderList = lazy(()=> import('./Pages/RESTAURANT/OrderList/OrderList'))
+const FoodList = lazy(()=> import('./Pages/RESTAURANT/FoodList/FoodList'))
+const CreateFood = lazy(()=> import('./Pages/RESTAURANT/CreateFood/CreateFood'))
+const UpdateFood = lazy(()=> import('./Pages/RESTAURANT/UpdateFood/UpdateFood'))
 const Temp = lazy(()=> import('./temp/Temp'))
 
 
@@ -89,6 +90,10 @@ function App() {
           <Route
             path="/res/food/create"
             element={<CreateFood isRestuAuther={isRestuAuther} isResLoading={isResLoading} />}
+          />
+          <Route
+            path="/res/food/manage/:id"
+            element={<UpdateFood isRestuAuther={isRestuAuther} isResLoading={isResLoading} />}
           />
           <Route path="/temp" element={<Temp />} />
         </Route>

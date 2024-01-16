@@ -22,6 +22,7 @@
 
 .food-card .img-div{
     height: 180px;
+    margin-top: 10px;
 }
 .food-card .img-div img{
     height: 160px;
@@ -47,6 +48,8 @@
     line-height: 15px;
     min-width: 250px !important;
     min-height: 44px !important;
+    padding: 0 9px;
+    word-break: break-all;
 }
 
 .food-card .food-card-btns .left{

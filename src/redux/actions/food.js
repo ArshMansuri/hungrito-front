@@ -64,3 +64,71 @@ export const getResFoodList = createAsyncThunk(
     }
   }
 );
+
+export const getResSingleFood = createAsyncThunk(
+  "getResSingleFood",
+  async ({foodId}, { rejectWithValue }) => {
+    try {
+        const {data} = await axios.get( `${BASE_URL}/api/v1/restaurant/food/${foodId}`, {withCredentials: true})
+        return data
+    } catch (error) {
+      toast.error(
+        `${error?.response?.status !== 500 ? error?.response?.data?.message : "fail to get food detail"}`,
+        tostOpstion
+      );
+      console.log("catch error", error);
+      return rejectWithValue(error.response?.data || "fail to get food list");
+    }
+  }
+);
+
+export const updateResFood = createAsyncThunk(
+  "updateResFood",
+  async ({food}, { rejectWithValue }) => {
+    try {
+        const {data} = await axios.put( `${BASE_URL}/api/v1/restaurant/food/update/${food.foodId}`, 
+        {
+          foodName: food?.foodName,
+          img: food?.img,
+          foodPrice: food?.foodPrice,
+          foodType: food?.foodType,
+          foodCategory: food?.foodCategory,
+          foodDescription: food?.foodDescription,
+          foodWeight: food?.foodWeight,
+          foodOffer: food?.foodOffer,
+        },
+        {withCredentials: true})
+        toast.success(data.message, tostOpstion)
+        return data
+    } catch (error) {
+      toast.error(
+        `${error?.response?.status !== 500 ? error?.response?.data?.message : "fail to get food detail"}`,
+        tostOpstion
+      );
+      console.log("catch error", error);
+      return rejectWithValue(error.response?.data || "fail to get food list");
+    }
+  }
+);
+
+export const updateResFoodIsAvailable = createAsyncThunk(
+  "updateResFoodIsAvailable",
+  async ({food}, { rejectWithValue }) => {
+    try {
+        const {data} = await axios.put( `${BASE_URL}/api/v1/restaurant/food/update/isAvalilable/${food.foodId}`, 
+        {
+          isAvailable: food?.isAvailable
+        },
+        {withCredentials: true})
+        toast.success(data.message, tostOpstion)
+        return data
+    } catch (error) {
+      toast.error(
+        `${error?.response?.status !== 500 ? error?.response?.data?.message : "fail to get food detail"}`,
+        tostOpstion
+      );
+      console.log("catch error", error);
+      return rejectWithValue(error.response?.data || "fail to get food list");
+    }
+  }
+);

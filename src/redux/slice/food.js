@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createFood, getResFoodList } from "../actions/food";
+import { createFood, getResFoodList, getResSingleFood, updateResFood, updateResFoodIsAvailable } from "../actions/food";
 
 const initialState = {
     isLoading: false,
@@ -28,6 +28,12 @@ export const createFoodReduser = createSlice({
 export const getResFoodListReduser = createSlice({
     name: 'resFoodList',
     initialState: initialState,
+    reducers:{
+        foodListIsAvailableUpdate(state,action){
+            const index = state.foodList.findIndex(obj=> obj._id === action.payload.foodId)
+            state.foodList[index].isAvailable = action.payload.value
+        }
+    },
     extraReducers: (builder)=>{
         builder.addCase(getResFoodList.pending, (state)=>{
             state.isLoading = true
@@ -44,3 +50,68 @@ export const getResFoodListReduser = createSlice({
         })
     }
 })
+export const getResSingleFoodReduser = createSlice({
+    name: 'resSingleFood',
+    initialState: initialState,
+    extraReducers: (builder)=>{
+        builder.addCase(getResSingleFood.pending, (state)=>{
+            state.isLoading = true
+        })
+        builder.addCase(getResSingleFood.fulfilled, (state, action)=>{
+            state.isLoading = false
+            state.food = action.payload?.food
+            state.success = true
+        })
+        builder.addCase(getResSingleFood.rejected, (state, action)=>{
+            state.isLoading = false
+            state.message = action.payload?.message || action.payload
+            state.success = false
+        })
+    }
+})
+export const updateResFoodReduser = createSlice({
+    name: 'resFoodUpdate',
+    initialState: initialState,
+    reducers:{
+        makeSuccessFalse(state){
+            state.success = false
+        }
+    },
+    extraReducers: (builder)=>{
+        builder.addCase(updateResFood.pending, (state)=>{
+            state.isLoading = true
+        })
+        builder.addCase(updateResFood.fulfilled, (state, action)=>{
+            state.isLoading = false
+            state.success = true
+            state.message = action?.payload?.message
+        })
+        builder.addCase(updateResFood.rejected, (state, action)=>{
+            state.isLoading = false
+            state.message = action.payload?.message || action.payload
+            state.success = false
+        })
+    }
+})
+export const updateResFoodisAvailableReduser = createSlice({
+    name: 'resFoodUpdateisAvailable',
+    initialState: initialState,
+    extraReducers: (builder)=>{
+        builder.addCase(updateResFoodIsAvailable.pending, (state)=>{
+            state.isLoading = true
+        })
+        builder.addCase(updateResFoodIsAvailable.fulfilled, (state, action)=>{
+            state.isLoading = false
+            state.success = true
+            state.message = action?.payload?.message
+        })
+        builder.addCase(updateResFoodIsAvailable.rejected, (state, action)=>{
+            state.isLoading = false
+            state.message = action.payload?.message || action.payload
+            state.success = false
+        })
+    }
+})
+
+export const {makeSuccessFalse} = updateResFoodReduser.actions
+export const {foodListIsAvailableUpdate} = getResFoodListReduser.actions

@@ -26,15 +26,21 @@ const FoodCart = ({
           <img src={img} alt="" />
         </div>
         <div className="food-card-text">
-          <div className="food-name text-center fs-4">{name}</div>
+          <div className="food-name text-center fs-4">
+            {
+               name.split("").length > 15
+               ? name.split("").slice(0, 15).join("") + "..."
+               : name
+            }
+            </div>
           <div className="food-discrtption text-center">
-            {text.split(" ").length > 10
-              ? text.split(" ").slice(0, 10).join(" ") + "..."
+            {text.split("").length > 50
+              ? text.split("").slice(0, 50).join("") + "..."
               : text}
           </div>
         </div>
       </div>
-      <div className="food-card-btns d-flex justify-content-between align-items-center mt-2">
+      <div className="food-card-btns d-flex justify-content-between align-items-center">
         <div className="left d-flex p-1 justify-content-between">
           <div className="add-icon">
             <IoMdRemove />
