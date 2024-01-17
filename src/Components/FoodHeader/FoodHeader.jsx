@@ -11,7 +11,7 @@ import { CgProfile } from "react-icons/cg";
 
 const MAP_API = "Hah9iiWdUd7fEtqmHB2sgS64Io0qoSmW";
 
-const FoodHeader = ({ isAuther, isLoading = true }) => {
+const FoodHeader = ({ isAuther, isLoading = true, setFun = ()=> {} }) => {
   const [locatioShow, setLoactionShow] = useState(false);
   const [locInput, setLocInput] = useState("");
   const [citys, setCitys] = useState([]);
@@ -59,6 +59,7 @@ const FoodHeader = ({ isAuther, isLoading = true }) => {
     setLoactionShow(false);
     if (citys[index].lat !== 0 && citys[index].lan !== undefined)
       localStorage.setItem("city", JSON.stringify(citys[index]));
+      setFun(citys[index])
   };
 
   return (

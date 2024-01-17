@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { userLoad, userLogin, userPhoneOtpVerify, userSignUp } from "../actions/user";
+import { getNearestRestus, userLoad, userLogin, userPhoneOtpVerify, userSignUp } from "../actions/user";
 
 const initialState = {
   isAuther: false,
@@ -69,3 +69,22 @@ export const userReduser = createSlice({
     });
   },
 });
+
+export const nearestRestuReduser = createSlice({
+  name: "user",
+  initialState: {isLoading: false},
+  extraReducers: (builder) => {
+    // ==================user Login ===============
+    builder.addCase(getNearestRestus.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getNearestRestus.fulfilled, (state, action) => {
+      state.restus = action.payload?.restus || [];
+      state.isLoading = false;
+    });
+    builder.addCase(getNearestRestus.rejected, (state, action) => {
+      state.message = action.payload?.message || action.payload;
+      state.isLoading = false;
+    });
+  }
+})

@@ -72,6 +72,13 @@ const ResSignUp = ({isRestuAuther, isResLoading=true}) => {
   const MAP_API = "Hah9iiWdUd7fEtqmHB2sgS64Io0qoSmW";
 
   useEffect(() => {
+
+    if(map.current){
+      map.current.off();
+      map.current.remove();  
+      map.current = null; 
+    }
+
     if (mapContainer.current && !map.current) {
       map.current = L.map(mapContainer.current).setView(
         [23.03108310471535, 72.5736169583829],
@@ -114,7 +121,15 @@ const ResSignUp = ({isRestuAuther, isResLoading=true}) => {
         }
       });
     }
-  }, [mapContainer, map, marker]);
+    return () => {
+      // Remove the map instance and event listeners when the component is unmounted
+      if (map.current) {
+        map.current.off();
+        map.current.remove();
+        map.current = null;
+      }
+    };
+  }, [mapContainer, map, marker, mapContainer.current]);
 
   useEffect(()=>{
 
@@ -190,7 +205,6 @@ const ResSignUp = ({isRestuAuther, isResLoading=true}) => {
     setInpAdress(citys[index].address || "");
     setLoactionShow(false);
     if (citys[index].lat !== 0 && citys[index].lan !== undefined) {
-      console.log(citys[index]?.lat);
       // Remove old marker if exists
       if (marker.current) {
         map.current.removeLayer(marker.current);
@@ -598,8 +612,8 @@ const ResSignUp = ({isRestuAuther, isResLoading=true}) => {
                     </div>
                     <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                       <input
-                        type="text"
-                        placeholder="Restaurant owner full name"
+                        type="email"
+                        placeholder="Restaurant owner email"
                         className="border w-100 input"
                         value={resOwnerEmail}
                         onChange={(e) => setResOwnerEmail(e.target.value)}

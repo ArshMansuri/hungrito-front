@@ -45,7 +45,6 @@ const ResFirstVerify = ({isRestuAuther, isResLoading=true}) => {
   }
 
   const onOtpSubmit = (otp) =>{
-    console.log(otp)
     otp = Number.parseInt(otp)
     dispatch(resEmailVerify({otp}))
   }

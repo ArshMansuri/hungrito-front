@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import FoodCart from "../../../Components/FoodCart/FoodCart";
-import { getResSingleFood, updateResFood } from "../../../redux/actions/food";
+import { deleteResFood, getResSingleFood, updateResFood } from "../../../redux/actions/food";
 import Loader from "../../../Components/Loaders/Loader";
 import Skeleton from "../../../Components/Loaders/Skeleton";
-import { makeSuccessFalse } from "../../../redux/slice/food";
+import {makeDeleteSuccessFalse, makeSuccessFalse } from "../../../redux/slice/food";
 
 const BASE_URL = "https://hungritobackend.onrender.com";
 // const BASE_URL = "http://localhost:6010";
@@ -19,6 +19,7 @@ const UpdateFood = ({ isRestuAuther, isResLoading }) => {
 
   const { isLoading, food } = useSelector((state) => state.resSingleFood);
   const { isLoading: isSubmitLoading, success } = useSelector((state) => state.resFoodUpdate);
+  const { isLoading: isDeleteLoading, success: isDeleteSuccess } = useSelector((state) => state.resFoodDelete);
 
   const [categories, setCategories] = useState([]);
   const [foodDetail, setFooDetail] = useState({
@@ -62,7 +63,7 @@ const UpdateFood = ({ isRestuAuther, isResLoading }) => {
     }
     dispatch(getResSingleFood({ foodId: params.id }));
     fetchData();
-  }, [dispatch, params.id]);
+  }, [dispatch,params.id]);
 
   useEffect(() => {
     if (food) {
@@ -94,6 +95,15 @@ const UpdateFood = ({ isRestuAuther, isResLoading }) => {
     }
   }, [success, navigator, dispatch])
 
+  useEffect(()=>{
+    if(isDeleteSuccess){
+      dispatch(makeDeleteSuccessFalse())
+      return navigator('/res/food/list')
+    }
+  }, [isDeleteSuccess, navigator, dispatch])
+
+  
+
   const imgChangeHendlar = (e) => {
     const file = e.target.files[0];
     const Reader = new FileReader();
@@ -112,13 +122,17 @@ const UpdateFood = ({ isRestuAuther, isResLoading }) => {
     dispatch(updateResFood({food:foodChangeDetail}));
   };
 
+  const deleteFoodhendlar = ()=>{
+    dispatch(deleteResFood({foodId: params.id}))
+  }
+
   return (
     <>
       {isResLoading ? (
         <Loader />
       ) : (
         <div className="food-manage-page">
-          {isLoading || isSubmitLoading ? (
+          {isLoading || isSubmitLoading || isDeleteLoading ? (
             <Skeleton />
           ) : (
             <div className="row">
@@ -341,7 +355,10 @@ const UpdateFood = ({ isRestuAuther, isResLoading }) => {
                     />
                   )}
                   <button type="submit" className="my-2">
-                    Submit
+                    Update
+                  </button>
+                  <button type="button" className="my-2 delet-btn" onClick={deleteFoodhendlar}>
+                    Delete
                   </button>
                 </form>
               </div>

@@ -82,3 +82,18 @@ export const userLoad = createAsyncThunk("userLoad", async(_,{rejectWithValue})=
         return rejectWithValue(error.response?.data || 'fail to login')
     }
 })
+
+export const getNearestRestus = createAsyncThunk("getNearestRestus", async({location},{ rejectWithValue })=>{
+    try {
+        const {data} = await axios.post(`${BASE_URL}/api/v1/user/nearestrestu`, {longitude: location.longitude,latitude: location.latitude}, {
+            headers:{
+                "Content-Type": "application/json"
+            },
+            withCredentials:true
+        })  
+        return data
+    } catch (error) {
+        console.log("catch error", error)
+        return rejectWithValue(error.response?.data || 'fail to get data')
+    }
+})

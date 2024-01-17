@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createFood, getResFoodList, getResSingleFood, updateResFood, updateResFoodIsAvailable } from "../actions/food";
+import { createFood, deleteResFood, getResFoodList, getResSingleFood, updateResFood, updateResFoodIsAvailable } from "../actions/food";
 
 const initialState = {
     isLoading: false,
@@ -113,5 +113,31 @@ export const updateResFoodisAvailableReduser = createSlice({
     }
 })
 
+export const deleteResFoodReduser = createSlice({
+    name: 'deleteResFoodReduser',
+    initialState: initialState,
+    reducers:{
+        makeDeleteSuccessFalse(state){
+            state.success = false
+        }
+    },
+    extraReducers: (builder)=>{
+        builder.addCase(deleteResFood.pending, (state)=>{
+            state.isLoading = true
+        })
+        builder.addCase(deleteResFood.fulfilled, (state, action)=>{
+            state.isLoading = false
+            state.success = true
+            state.message = action?.payload?.message
+        })
+        builder.addCase(deleteResFood.rejected, (state, action)=>{
+            state.isLoading = false
+            state.message = action.payload?.message || action.payload
+            state.success = false
+        })
+    }
+})
+
 export const {makeSuccessFalse} = updateResFoodReduser.actions
 export const {foodListIsAvailableUpdate} = getResFoodListReduser.actions
+export const {makeDeleteSuccessFalse} = deleteResFoodReduser.actions

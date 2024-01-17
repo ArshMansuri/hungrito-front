@@ -3,6 +3,10 @@
     min-height: 200vh;
 }
 
+.food-page .food-page-filters{
+    z-index: 200;
+}
+
 .food-page .food-page-filters .filter-scroll::-webkit-scrollbar {
     display: none;
 }

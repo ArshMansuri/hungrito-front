@@ -15,6 +15,7 @@ const columns = [
   {
     Headers: "Image",
     accessor: "foodImage",
+    disableSortBy: true,
   },
   {
     Headers: "Name",
@@ -27,10 +28,12 @@ const columns = [
   {
     Headers: "Available",
     accessor: "isAvailable",
+    disableSortBy: true,
   },
   {
     Headers: "Weight",
     accessor: "foodWeight",
+    disableSortBy: true,
   },
   {
     Headers: "Category",
@@ -43,6 +46,7 @@ const columns = [
   {
     Headers: "Action",
     accessor: "manage",
+    disableSortBy: true,
   },
 ];
 

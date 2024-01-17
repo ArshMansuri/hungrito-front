@@ -132,3 +132,22 @@ export const updateResFoodIsAvailable = createAsyncThunk(
     }
   }
 );
+export const deleteResFood = createAsyncThunk(
+  "deleteResFood",
+  async ({foodId}, { rejectWithValue }) => {
+    try {
+        const {data} = await axios.delete( `${BASE_URL}/api/v1/restaurant/food/delete/${foodId}`,
+        {withCredentials: true})
+        console.log(data)
+        toast.success(data.message, tostOpstion)
+        return data
+    } catch (error) {
+      toast.error(
+        `${error?.response?.status !== 500 ? error?.response?.data?.message : "fail to get food detail"}`,
+        tostOpstion
+      );
+      console.log("catch error", error);
+      return rejectWithValue(error.response?.data || "fail to get food list");
+    }
+  }
+);

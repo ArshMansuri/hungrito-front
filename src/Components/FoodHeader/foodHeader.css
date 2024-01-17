@@ -22,6 +22,7 @@
     min-height: 35vh;
     max-height: 30vh;
     overflow-y: scroll;
+    z-index: 20;
 }
 
 .food-header-com .address .location-popup::-webkit-scrollbar {

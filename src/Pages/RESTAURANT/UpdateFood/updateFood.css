@@ -31,6 +31,13 @@
     background-color: #ff4300;
 }
 
+.food-manage-page .delet-btn{
+    background-color: red;
+}
+.food-manage-page .delet-btn:hover{
+    background-color: rgb(246, 57, 57);
+}
+
 @media (max-width: 576px) {
     .food-manage-page .input, .food-manage-page select, .food-manage-page button{
         width: 95% !important;
