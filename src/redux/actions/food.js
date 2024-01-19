@@ -2,8 +2,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const BASE_URL = "https://hungritobackend.onrender.com"
+// const BASE_URL = "https://hungritobackend.onrender.com"
 // const BASE_URL = "http://localhost:6010";
+const BASE_URL = process.env.REACT_APP_BASE_URL
 
 const tostOpstion = {
   position: "bottom-center",

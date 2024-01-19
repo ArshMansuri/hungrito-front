@@ -8,6 +8,11 @@ const initialState = {
 export const createFoodReduser = createSlice({
     name: 'createFood',
     initialState: initialState,
+    reducers:{
+        makeCreateFoodSuccessFalse(state){
+            state.success = false
+        }
+    },
     extraReducers: (builder)=>{
         builder.addCase(createFood.pending, (state)=>{
             state.isLoading = true
@@ -138,6 +143,7 @@ export const deleteResFoodReduser = createSlice({
     }
 })
 
+export const {makeCreateFoodSuccessFalse} = createFoodReduser.actions
 export const {makeSuccessFalse} = updateResFoodReduser.actions
 export const {foodListIsAvailableUpdate} = getResFoodListReduser.actions
 export const {makeDeleteSuccessFalse} = deleteResFoodReduser.actions

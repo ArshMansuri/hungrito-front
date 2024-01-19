@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getNearestRestus, userLoad, userLogin, userPhoneOtpVerify, userSignUp } from "../actions/user";
+import { getNearestRestus, getUserResFoods, userLoad, userLogin, userPhoneOtpVerify, userSignUp } from "../actions/user";
 
 const initialState = {
   isAuther: false,
@@ -74,7 +74,6 @@ export const nearestRestuReduser = createSlice({
   name: "user",
   initialState: {isLoading: false},
   extraReducers: (builder) => {
-    // ==================user Login ===============
     builder.addCase(getNearestRestus.pending, (state) => {
       state.isLoading = true;
     });
@@ -83,6 +82,24 @@ export const nearestRestuReduser = createSlice({
       state.isLoading = false;
     });
     builder.addCase(getNearestRestus.rejected, (state, action) => {
+      state.message = action.payload?.message || action.payload;
+      state.isLoading = false;
+    });
+  }
+})
+
+export const userResFoodsReduser = createSlice({
+  name: "user",
+  initialState: {isLoading: false},
+  extraReducers: (builder) => {
+    builder.addCase(getUserResFoods.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getUserResFoods.fulfilled, (state, action) => {
+      state.foods = action.payload?.foods || [];
+      state.isLoading = false;
+    });
+    builder.addCase(getUserResFoods.rejected, (state, action) => {
       state.message = action.payload?.message || action.payload;
       state.isLoading = false;
     });

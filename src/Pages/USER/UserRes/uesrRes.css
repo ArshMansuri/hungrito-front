@@ -1,0 +1,75 @@
+.user-res-page{
+    background-color: white;
+    min-height: 200vh;
+}
+
+
+.big-food-card .food-card{
+    background-color: #fff;
+    min-width: 80%;
+    min-height: 610px;
+    border-radius: 40px;
+    font-family: 'Roboto', sans-serif;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.big-food-card .food-card .food-card-top .right {
+    /* border: 1px solid rgb(166 164 163); */
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgb(231 229 228);
+}
+.big-food-card .food-card  .food-card-top div{
+    font-size: 13px;
+    line-height: 15px;
+}
+
+.big-food-card .food-card .img-div{
+    height: 425px;
+    margin-top: 22px;
+}
+.big-food-card .food-card .img-div img{
+    height: 410px;
+    width: 100%;
+}
+
+.big-food-card .food-card .food-detail{
+    margin-top: -10px;
+
+}
+
+.big-food-card .food-card  .food-card-text{
+    margin-top: -20px;
+}
+
+.big-food-card .food-card .food-card-text .food-name{
+    font-weight: 500;
+}
+
+.big-food-card .food-card .food-card-text .food-discrtption{
+    font-size: 12px;
+    color: #434040;
+    line-height: 15px;
+    min-width: 250px !important;
+    min-height: 44px !important;
+    padding: 0 9px;
+    word-break: break-all;
+}
+
+.big-food-card .food-card .food-card-btns .left{
+    width: 70px;
+    background-color: #ffbb8e7d;
+    border-radius: 8px;
+    height: 33px;
+}
+
+.big-food-card .food-card .food-card-btns .add-icon, .big-food-card .food-card .food-card-btns .remove-icon{
+    color: #ff6600;
+}
+
+.big-food-card .food-card .food-card-btns .right .cart-icon{
+    height: 33px;
+    background-color: #ffbb8e7d;
+    border-radius: 8px;
+    color: #ff6600;
+}

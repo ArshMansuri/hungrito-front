@@ -17,7 +17,7 @@ const FoodFooterNav = ({ isAuther, isLoading = true }) => {
       className="food-footer-com d-flex align-items-center justify-content-around"
       style={{ height: "66px" }}
     >
-      <NavLink className="d-flex flex-column justify-content-center align-items-center" onClick={()=>setTab("/food")}>
+      <NavLink to={'/food'} className="d-flex flex-column justify-content-center align-items-center" onClick={()=>setTab("/food")}>
         <div className="foot-nav-icon">
           {tab === "/food" ? (
             <AiFillHome color="#ff6600" size={28} />

@@ -7,6 +7,7 @@ import { resLoad } from "./redux/actions/restaurant";
 import Loader from "./Components/Loaders/Loader";
 
 const Home = lazy(()=> import('./Pages/USER/Home/Home'))
+const UserRes = lazy(()=> import('./Pages/USER/UserRes/UserRes'))
 const Login = lazy(()=> import('./Pages/USER/Login/Login'))
 const SignUp = lazy(()=> import('./Pages/USER/SignUp/SignUp'))
 const ResLogin = lazy(()=> import('./Pages/RESTAURANT/ResLogin/ResLogin'))
@@ -48,11 +49,17 @@ function App() {
     <Router>
       <Suspense fallback={<Loader />}>
       <Routes>
-        {/* ================= User Auth Routes ==================*/}
+        {/* ================= User Without Auth Routes ==================*/}
         <Route
           path="/"
           element={<Home isAuther={isAuther} isLoading={isLoading} />}
         />
+        <Route
+          path="/user/res/:resId"
+          element={<UserRes isAuther={isAuther} isLoading={isLoading} />}
+        />
+
+        {/* ================= User Auth Routes ==================*/}
         <Route
           element={<AuthProtected isAuther={isAuther} isLoading={isLoading} />}
         >

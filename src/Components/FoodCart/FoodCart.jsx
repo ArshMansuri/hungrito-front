@@ -9,11 +9,12 @@ const FoodCart = ({
   unit = "km",
   img = "../../tempimg/burger-png.png",
   name = "Food Name",
-  text="",
+  text="",  
   price = "000",
+  isAvailable = false
 }) => {
   return (
-    <div className="food-card py-3 px-4 m-3">
+    <div className="food-card py-3 px-4 m-3" style={{opacity: `${isAvailable ?1 :0.5}`}}>
       <div className="food-card-top d-flex align-items-center justify-content-between">
         <div className="left">{weight}</div>
         <div className="right p-2 d-flex flex-column justify-content-center align-items-center rounded-circle g-0">

@@ -1,5 +1,6 @@
 import React from "react";
 import "./resCard.css";
+import { useNavigate } from "react-router-dom";
 
 const ResCart = ({
   foodImg,
@@ -7,10 +8,14 @@ const ResCart = ({
   resName,
   resCategory,
   resCity,
+  resId
 }) => {
+
+  const navigator = useNavigate();
+
   return (
     <>
-      <div className="cart-main mt-3 mx-4">
+      <div className="cart-main mt-3 mx-4" style={{cursor: 'pointer'}} onClick={()=>navigator(`/user/res/${resId}`)}>
         <div className="cart-img ">
           <img className="shadow-sm" src={foodImg} alt="" srcSet="" />
           <div className="cart-offer">

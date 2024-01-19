@@ -2,8 +2,10 @@ import {createAsyncThunk} from '@reduxjs/toolkit'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
-const BASE_URL = "https://hungritobackend.onrender.com"
+// const BASE_URL = "https://hungritobackend.onrender.com"
 // const BASE_URL = "http://localhost:6010"
+
+const BASE_URL = process.env.REACT_APP_BASE_URL
 
 export const userLogin = createAsyncThunk("userLogin", async({phone,pass},{ rejectWithValue })=>{
     try {
@@ -89,6 +91,18 @@ export const getNearestRestus = createAsyncThunk("getNearestRestus", async({loca
             headers:{
                 "Content-Type": "application/json"
             },
+            withCredentials:true
+        })  
+        return data
+    } catch (error) {
+        console.log("catch error", error)
+        return rejectWithValue(error.response?.data || 'fail to get data')
+    }
+})
+
+export const getUserResFoods = createAsyncThunk("getNearestRestus", async({resId},{ rejectWithValue })=>{
+    try {
+        const {data} = await axios.get(`${BASE_URL}/api/v1/user/rest/foods/${resId}`,{
             withCredentials:true
         })  
         return data

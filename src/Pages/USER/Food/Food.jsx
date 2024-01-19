@@ -89,6 +89,7 @@ const Food = ({ isAuther, isLoading = true }) => {
                   resName={data?.resName || ""}
                   resCategory={data.resCategory[0]?.type || ""}
                   resCity={data?.resAddress}
+                  resId={data?._id}
                 />
               );
             })

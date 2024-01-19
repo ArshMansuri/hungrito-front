@@ -6,6 +6,7 @@ import { createFood } from "../../../redux/actions/food";
 import axios from "axios";
 import Loader from "../../../Components/Loaders/Loader";
 import { useNavigate } from "react-router-dom";
+import { makeCreateFoodSuccessFalse } from "../../../redux/slice/food";
 
 // const BASE_URL = "https://hungritobackend.onrender.com";
 const BASE_URL = "http://localhost:6010";
@@ -47,9 +48,10 @@ const CreateFood = ({ isRestuAuther, isResLoading }) => {
 
   useEffect(()=>{
     if(success){
+      dispatch(makeCreateFoodSuccessFalse())
       return navigator('/res/food/list')
     }
-  }, [success, navigator])
+  }, [success, navigator, dispatch])
 
   const imgChangeHendlar = (e) => {
     const file = e.target.files[0];
