@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getNearestRestus, getUserResFoods, userLoad, userLogin, userPhoneOtpVerify, userSignUp } from "../actions/user";
+import { addToCart, getNearestRestus, getUserResFoods, removeFromCart, userLoad, userLogin, userPhoneOtpVerify, userSignUp } from "../actions/user";
 
 const initialState = {
   isAuther: false,
@@ -97,9 +97,46 @@ export const userResFoodsReduser = createSlice({
     });
     builder.addCase(getUserResFoods.fulfilled, (state, action) => {
       state.foods = action.payload?.foods || [];
+      state.resName = action?.payload?.resName || ""
       state.isLoading = false;
     });
     builder.addCase(getUserResFoods.rejected, (state, action) => {
+      state.message = action.payload?.message || action.payload;
+      state.isLoading = false;
+    });
+  }
+})
+
+export const addToCartReduser = createSlice({
+  name: "user",
+  initialState: {isLoading: false},
+  extraReducers: (builder) => {
+    builder.addCase(addToCart.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(addToCart.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.message = action?.payload?.message
+    });
+    builder.addCase(addToCart.rejected, (state, action) => {
+      state.message = action.payload?.message || action.payload;
+      state.isLoading = false;
+    });
+  }
+})
+
+export const removeFromCartReduser = createSlice({
+  name: "user",
+  initialState: {isLoading: false},
+  extraReducers: (builder) => {
+    builder.addCase(removeFromCart.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(removeFromCart.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.message = action?.payload?.message
+    });
+    builder.addCase(removeFromCart.rejected, (state, action) => {
       state.message = action.payload?.message || action.payload;
       state.isLoading = false;
     });

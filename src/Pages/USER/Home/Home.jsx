@@ -15,7 +15,7 @@ const Home = ({ isAuther, isLoading = true }) => {
   const [citys, setCitys] = useState([]);
   const [mobileNavShow, setMobileNavShow] = useState(false);
 
-  const MAP_API = "Hah9iiWdUd7fEtqmHB2sgS64Io0qoSmW";
+  const MAP_API = process.env.REACT_APP_TOM_TOM_API_KEY;
 
   // {/* =============== Suggest Location in popup =============== */}
   const userLaoctionHendler = async (e) => {

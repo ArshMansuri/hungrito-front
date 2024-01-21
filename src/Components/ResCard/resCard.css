@@ -6,6 +6,7 @@
     /* border: 1px solid red; */
     position: relative;
     /* z-index: -20; */
+    font-family: 'Roboto', sans-serif;
 }
 
 .cart-img{
@@ -13,15 +14,6 @@
     width: 100%;
     position: relative;
 }
-
-.cart-img .cart-offer{
-    position: absolute;
-    left: 5%;
-    right: 0;
-    top: 89%;
-
-}
-
 .cart-img img{
     width: 100%;
     height: 180px;
@@ -29,14 +21,15 @@
     object-fit: cover;
 }
 
-.cart-offer p{
-    line-height: 0;
-}
-
-.card-text .food-rateing p{
-    margin: 0;
+.cart-main .card-text{
+    text-transform: capitalize;
 }
 
 .card-text .res-name{
-    font-size: 18px;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.cart-main .card-text .food-category, .cart-main .card-text .ras-city{
+    font-size: 15px;
 }

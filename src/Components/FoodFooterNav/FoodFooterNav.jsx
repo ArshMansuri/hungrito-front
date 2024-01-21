@@ -12,6 +12,7 @@ import {
 
 const FoodFooterNav = ({ isAuther, isLoading = true }) => {
   const [tab, setTab] = useState(window.location.pathname);
+  console.log(tab)
   return (
     <div
       className="food-footer-com d-flex align-items-center justify-content-around"
@@ -73,9 +74,9 @@ const FoodFooterNav = ({ isAuther, isLoading = true }) => {
               Save
             </div>
           </NavLink>
-          <NavLink className="d-flex flex-column justify-content-center align-items-center" onClick={()=>setTab("/cart")}>
+          <NavLink to={'/my/cart'} className="d-flex flex-column justify-content-center align-items-center" onClick={()=>setTab("/my/cart")}>
             <div className="foot-nav-icon">
-              {tab === "/cart" ? (
+              {tab === "/my/cart" ? (
                 <IoCartSharp color="#ff6600" size={28} />
               ) : (
                 <IoCartOutline color="black" size={28} />
@@ -84,7 +85,7 @@ const FoodFooterNav = ({ isAuther, isLoading = true }) => {
             <div
               className="foot-nav-text"
               style={{
-                color: `${tab === "/cart" ? "#ff6600" : "black"}`,
+                color: `${tab === "/my/cart" ? "#ff6600" : "black"}`,
                 fontSize: "13px",
               }}
             >

@@ -8,13 +8,18 @@ import { NavLink } from "react-router-dom";
 import { IoCartOutline, IoBagHandle } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 
-
 const MAP_API = "Hah9iiWdUd7fEtqmHB2sgS64Io0qoSmW";
 
-const FoodHeader = ({ isAuther, isLoading = true, setFun = ()=> {} }) => {
+const FoodHeader = ({
+  isAuther,
+  isLoading = true,
+  setFun = () => {},
+  isGifImgShow = false,
+}) => {
   const [locatioShow, setLoactionShow] = useState(false);
   const [locInput, setLocInput] = useState("");
   const [citys, setCitys] = useState([]);
+  const [tab, setTab] = useState(window.location.pathname);
 
   useEffect(() => {
     let city = localStorage.getItem("city");
@@ -59,7 +64,7 @@ const FoodHeader = ({ isAuther, isLoading = true, setFun = ()=> {} }) => {
     setLoactionShow(false);
     if (citys[index].lat !== 0 && citys[index].lan !== undefined)
       localStorage.setItem("city", JSON.stringify(citys[index]));
-      setFun(citys[index])
+    setFun(citys[index]);
   };
 
   return (
@@ -69,7 +74,7 @@ const FoodHeader = ({ isAuther, isLoading = true, setFun = ()=> {} }) => {
           <div className="d-flex align-items-center sm-width">
             <div className="logo ms-xl-5 ms-lg-5 ms-md-5 ms-sm-1 ms-1">
               <img
-                src="../img/logo2.png"
+                src="../../img/logo2.png"
                 alt=""
                 height="80px"
                 width="70px"
@@ -178,12 +183,35 @@ const FoodHeader = ({ isAuther, isLoading = true, setFun = ()=> {} }) => {
                     </NavLink>
                   </div>
                   <div className="mx-xl-4 mx-lg-4 mx-md-3 mx-4 mt-1">
-                    <NavLink
-                      to={"/save"}
-                      className="text-dark d-flex align-items-center"
+                    <div
+                      className={`position-absolute top-0 ${
+                        isGifImgShow ? "d-block" : "d-none"
+                      }`}
                     >
-                      <IoCartOutline size={20} />
-                      <span className="ms-1 mt-1"> Cart </span>
+                      <img
+                        src="../../img/add-card.gif"
+                        width={"30px"}
+                        alt="abc"
+                      />
+                    </div>
+                    <NavLink
+                      to={"/my/cart"}
+                      className="text-dark d-flex align-items-center"
+                      onClick={()=>setTab('/my/cart')}
+                    >
+                      <IoCartOutline
+                        size={20}
+                        color={`${tab === "/my/cart" ? "#ff6600" : "black"}`}
+                      />
+                      <span
+                        className="ms-1 mt-1"
+                        style={{
+                          color: `${tab === "/my/cart" ? "#ff6600" : "black"}`,
+                        }}
+                      >
+                        {" "}
+                        Cart{" "}
+                      </span>
                     </NavLink>
                   </div>
                   <div className="mx-xl-4 mx-lg-4 mx-md-3 mx-4 mt-1">
@@ -201,15 +229,15 @@ const FoodHeader = ({ isAuther, isLoading = true, setFun = ()=> {} }) => {
               <>
                 <div className="h-100">
                   <div className="d-flex align-items-center justify-content-end for-not-log-user h-100">
-                  <div className="mx-xl-4 mx-lg-4 mx-md-3 mx-4">
-                    <NavLink
-                      to={"/search"}
-                      className="text-dark d-flex align-items-center"
-                    >
-                      <BiSearch size={20} className="mt-1" />
-                      <span className="ms-1 mt-1">Search</span>
-                    </NavLink>
-                  </div>
+                    <div className="mx-xl-4 mx-lg-4 mx-md-3 mx-4">
+                      <NavLink
+                        to={"/search"}
+                        className="text-dark d-flex align-items-center"
+                      >
+                        <BiSearch size={20} className="mt-1" />
+                        <span className="ms-1 mt-1">Search</span>
+                      </NavLink>
+                    </div>
                     <NavLink to="/login" className="mx-2">
                       <button>Login</button>
                     </NavLink>

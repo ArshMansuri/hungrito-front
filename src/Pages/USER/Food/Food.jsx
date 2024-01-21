@@ -8,7 +8,7 @@ import { NavLink} from "react-router-dom";
 import ResCard from "../../../Components/ResCard/ResCard";
 import {useDispatch, useSelector} from "react-redux"
 import { getNearestRestus } from "../../../redux/actions/user";
-import Skeleton from "../../../Components/Loaders/Skeleton"
+import Loader from "../../../Components/Loaders/Loader";
 
 const Food = ({ isAuther, isLoading = true }) => {
 
@@ -76,7 +76,7 @@ const Food = ({ isAuther, isLoading = true }) => {
       <div className="container d-flex justify-content-xl-start justify-content-lg-start justify-content-md-start justify-content-sm-center justify-content-center flex-wrap">
 
     {
-      isNearestFoodLoading && <Skeleton width="100vw" count={20} />
+      isNearestFoodLoading && <Loader/>
     }
 
       {restus !== undefined && restus.length > 0 ? (
@@ -87,7 +87,7 @@ const Food = ({ isAuther, isLoading = true }) => {
                   foodImg={data?.resFoodImage?.publicUrl || ""}
                   foodOffer={data?.resOffer?.offer || ""}
                   resName={data?.resName || ""}
-                  resCategory={data.resCategory[0]?.type || ""}
+                  resCategory={data?.resCategory.length > 1 ? data.resCategory[0]?.type +", "+ data?.resCategory[1]?.type : data?.resCategory[0]?.type || ""}
                   resCity={data?.resAddress}
                   resId={data?._id}
                 />

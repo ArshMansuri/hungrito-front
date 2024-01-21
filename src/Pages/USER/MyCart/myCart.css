@@ -1,0 +1,50 @@
+.my-cart-page{
+    height: 100vh;
+    overflow-y: hidden;
+}
+
+.my-cart-page .my-cart-item-scrollbar{
+    overflow-y: auto;
+    height: 90vh;
+}
+
+.my-cart-page .my-cart-item-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.my-cart-page .price-summary-box{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+    border-radius: 10px;
+    background: #fff;
+}
+
+.my-cart-page .my-cart-btn{
+    background-color: #ff6600;
+    border: 0;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px; 
+}
+
+.form-check-input{
+    border-color: #FF5B5B;
+}
+
+.form-check-input:checked {
+    background-color: #FF5B5B;
+    border-color: #FF5B5B;
+    outline: none !important;
+}
+
+@media (max-width: 760px) {
+.my-cart-page{
+    height: max-content !important;
+}
+.my-cart-page .my-cart-item-scrollbar{
+    height: max-content;
+}
+}

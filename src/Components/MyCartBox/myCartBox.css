@@ -1,0 +1,37 @@
+.my-cart-div{
+    height: 110px;
+    width: 500px;
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.my-cart-div .img-div{
+    height: 100%;
+    width: 110px;
+}
+
+.my-cart-div .food-name{
+    font-size: 20px;
+    line-height: 8px;
+}
+.my-cart-div .food-price{
+    font-size: 13px;
+    margin-top: 13px;
+}
+
+.my-cart-div .sub-total{
+    font-size: 17px;
+}
+
+.my-cart-page .cart-btn{
+    width: 70px;
+    background-color: #ffbb8e7d;
+    border-radius: 8px;
+    height: 33px;
+}
+
+.my-cart-div  .cart-btn .add-icon, .my-cart-div  .cart-btn .remove-icon{
+    color: #ff6600;
+}
