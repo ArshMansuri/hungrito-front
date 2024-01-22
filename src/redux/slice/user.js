@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addToCart, getNearestRestus, getUserResFoods, removeFromCart, userLoad, userLogin, userPhoneOtpVerify, userSignUp } from "../actions/user";
+import { addToCart, decreaseQutInCart, getMyCartDetail, getNearestRestus, getUserResFoods, increaseQutInCart, removeFromCart, userLoad, userLogin, userPhoneOtpVerify, userSignUp } from "../actions/user";
 
 const initialState = {
   isAuther: false,
@@ -107,6 +107,46 @@ export const userResFoodsReduser = createSlice({
   }
 })
 
+export const myCartDetailReduser = createSlice({
+  name: "user",
+  initialState: {isLoading: false},
+  reducers:{
+    updateMyCartDetail(state,action){
+      const {resId, foodId, foodPrice, foodQut} = action?.payload
+      const resIndex = state.cart.restu.findIndex(obj=> obj.resId === resId)
+      const foodIndex = state.cart.restu[resIndex].foods.findIndex(obj => obj.foodId === foodId)
+      state.cart.total -= (foodPrice * foodQut)
+      state.cart.restu[resIndex].foods.splice(foodIndex, 1)
+    },
+    incresseMyCartDetail(state,action){
+      const {resId, foodId, foodPrice} = action?.payload
+      const resIndex = state.cart.restu.findIndex(obj=> obj.resId === resId)
+      const foodIndex = state.cart.restu[resIndex].foods.findIndex(obj => obj.foodId === foodId)
+      state.cart.restu[resIndex].foods[foodIndex].subTotal += foodPrice
+      state.cart.total += foodPrice 
+    },
+    decreaseMyCartDetail(state, action){
+      const {resId, foodId, foodPrice,} = action?.payload
+      const resIndex = state.cart.restu.findIndex(obj=> obj.resId === resId)
+      const foodIndex = state.cart.restu[resIndex].foods.findIndex(obj => obj.foodId === foodId)
+      state.cart.restu[resIndex].foods[foodIndex].subTotal -= foodPrice
+      state.cart.total -= foodPrice
+    }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(getMyCartDetail.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getMyCartDetail.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.cart = action?.payload?.cart || []
+    });
+    builder.addCase(getMyCartDetail.rejected, (state, action) => {
+      state.message = action.payload?.message || action.payload;
+      state.isLoading = false;
+    });
+  }
+})
 export const addToCartReduser = createSlice({
   name: "user",
   initialState: {isLoading: false},
@@ -142,3 +182,41 @@ export const removeFromCartReduser = createSlice({
     });
   }
 })
+
+export const increaseQutInCartReduser = createSlice({
+  name: "user",
+  initialState: {isLoading: false},
+  extraReducers: (builder) => {
+    builder.addCase(increaseQutInCart.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(increaseQutInCart.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.message = action?.payload?.message
+    });
+    builder.addCase(increaseQutInCart.rejected, (state, action) => {
+      state.message = action.payload?.message || action.payload;
+      state.isLoading = false;
+    });
+  }
+})
+
+export const decreaseQutInCartReduser = createSlice({
+  name: "user",
+  initialState: {isLoading: false},
+  extraReducers: (builder) => {
+    builder.addCase(decreaseQutInCart.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(decreaseQutInCart.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.message = action?.payload?.message
+    });
+    builder.addCase(decreaseQutInCart.rejected, (state, action) => {
+      state.message = action.payload?.message || action.payload;
+      state.isLoading = false;
+    });
+  }
+})
+
+export const {updateMyCartDetail, incresseMyCartDetail, decreaseMyCartDetail} = myCartDetailReduser.actions 

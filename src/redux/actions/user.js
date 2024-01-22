@@ -145,6 +145,24 @@ export const getUserResFoods = createAsyncThunk(
   }
 );
 
+export const getMyCartDetail = createAsyncThunk(
+  "getMyCartDetail",
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(
+        `${BASE_URL}/api/v1/user/my/cart`,
+        {
+          withCredentials: true,
+        }
+      );
+      return data;
+    } catch (error) {
+      console.log("catch error", error);
+      return rejectWithValue(error.response?.data || "fail to get data");
+    }
+  }
+);
+
 export const addToCart = createAsyncThunk(
   "addToCart",
   async ({ foodInfo }, { rejectWithValue }) => {
@@ -157,7 +175,8 @@ export const addToCart = createAsyncThunk(
             resName: foodInfo?.resName,
             foodName: foodInfo?.foodName,
             foodPrice: foodInfo?.foodPrice,
-            foodQut: foodInfo?.foodQut
+            foodQut: foodInfo?.foodQut,
+            foodImg: foodInfo?.foodImg
         },
         {
           headers: {
@@ -167,7 +186,6 @@ export const addToCart = createAsyncThunk(
         }
       );
       toast.success(data.message, tostOpstion)
-      console.log(data)
       return data;
     } catch (error) {
       console.log("catch error", error);
@@ -194,7 +212,58 @@ export const removeFromCart = createAsyncThunk(
         }
       );
       toast.success(data.message, tostOpstion)
+      return data;
+    } catch (error) {
+      console.log("catch error", error);
+      return rejectWithValue(error.response?.data || "fail to get data");
+    }
+  }
+);
+
+export const increaseQutInCart = createAsyncThunk(
+  "increaseQutInCart",
+  async ({ foodInfo }, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.put(
+        `${BASE_URL}/api/v1/user/update/cart`,
+        { 
+            resId: foodInfo?.resId, 
+            foodId: foodInfo?.foodId,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+      toast.success(data.message, tostOpstion)
+      return data;
+    } catch (error) {
+      console.log("catch error", error);
+      return rejectWithValue(error.response?.data || "fail to get data");
+    }
+  }
+);
+export const decreaseQutInCart = createAsyncThunk(
+  "decreaseQutInCart",
+  async ({ foodInfo }, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.put(
+        `${BASE_URL}/api/v1/user/remove/cart`,
+        { 
+            resId: foodInfo?.resId, 
+            foodId: foodInfo?.foodId,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
       console.log(data)
+      toast.success(data.message, tostOpstion)
       return data;
     } catch (error) {
       console.log("catch error", error);

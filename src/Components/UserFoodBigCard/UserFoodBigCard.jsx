@@ -42,7 +42,8 @@ const UserFoodBigCard = ({
       resId, foodId, resName, 
       foodName: name,
       foodPrice: price,
-      foodQut: qut
+      foodQut: qut,
+      foodImg: img
     }
     dispatch(addToCart({foodInfo}))
     addImgShowFun()

@@ -35,7 +35,7 @@ const UserRes = ({ isAuther, isLoading = true }) => {
     if(isAddCardImgShow){
       setTimeout(function() {
         setIsAddCardImgshow(false)
-      }, 2000);
+      }, 4000);
     }
   }, [isAddCardImgShow])
 
@@ -120,7 +120,7 @@ const UserRes = ({ isAuther, isLoading = true }) => {
         )}
       </div>
       <div className="user-res-footer-page d-xl-none d-lg-none d-md-none d-sm-block d-block position-fixed bottom-0 start-0 end-0 bg-white shadow-lg">
-        <FoodFooterNav isAuther={isAuther} isLoading={isLoading} />
+        <FoodFooterNav isAuther={isAuther} isLoading={isLoading} isGifImgShow={isAddCardImgShow}  />
       </div>
     </div>
   );
