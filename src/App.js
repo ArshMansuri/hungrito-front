@@ -45,6 +45,7 @@ const UpdateFood = lazy(() =>
 );
 const MyCart = lazy(() => import("./Pages/USER/MyCart/MyCart"));
 const UsreOnly = lazy(() => import("./Components/ProtectedRoute/UsreOnly"));
+const Checkout = lazy(() => import("./Pages/USER/Checkout/Checkout"));
 const Temp = lazy(() => import("./temp/Temp"));
 
 function App() {
@@ -126,6 +127,10 @@ function App() {
             <Route
               path="/my/cart"
               element={<MyCart isAuther={isAuther} isLoading={isLoading} />}
+            />
+            <Route
+              path="/user/checkout"
+              element={<Checkout isAuther={isAuther} isLoading={isLoading} />}
             />
           </Route>
 

@@ -18,7 +18,7 @@ const FoodFooterNav = ({
 }) => {
   const [tab, setTab] = useState(window.location.pathname);
   const profileImg = useSelector((state)=> state.user?.user?.profilImg || "https://res.cloudinary.com/dbirutg8t/image/upload/v1705764347/hungriTo/userAvatar/m0ozb0onaxl2lca6vcri.jpg")
-  console.log(profileImg)
+  
   return (
     <div
       className="food-footer-com d-flex align-items-center justify-content-around"

@@ -128,7 +128,7 @@ const ResSignUp = ({ isRestuAuther, isResLoading = true }) => {
         map.current = null;
       }
     };
-  }, [mapContainer, map, marker]);
+  }, [mapContainer, map, marker, mapContainer.current]);
 
   useEffect(() => {
     if (
@@ -305,6 +305,7 @@ const ResSignUp = ({ isRestuAuther, isResLoading = true }) => {
       resName !== "" &&
       password !== ""
     ) {
+    console.log("hmmm")
       const restu = {
         resName,
         password,

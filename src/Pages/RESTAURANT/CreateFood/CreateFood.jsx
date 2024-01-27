@@ -244,7 +244,7 @@ const CreateFood = ({ isRestuAuther, isResLoading }) => {
                     required
                   />
                 )}
-                <button type="submit" className="my-2">
+                <button type="submit" className="submit-btn my-2">
                   Submit
                 </button>
               </form>
@@ -281,6 +281,7 @@ const CreateFood = ({ isRestuAuther, isResLoading }) => {
                       ? foodDetail.foodWeight
                       : "00 gm"
                   }
+                  isAvailable={true}
                 />
               </div>
             </div>

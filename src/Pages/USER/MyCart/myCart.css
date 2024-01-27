@@ -30,6 +30,18 @@
     border-radius: 5px; 
 }
 
+.my-cart-page .cod-btn{
+    background-color: transparent;
+    color: #ff6600;
+    border: 1px solid #ff6600;
+}
+
+.my-cart-page .cod-btn:hover{
+    background-color: #ff6600;
+    color: white;
+    border: 1px solid #ff6600;
+}
+
 .form-check-input{
     border-color: #FF5B5B;
 }
@@ -38,6 +50,24 @@
     background-color: #FF5B5B;
     border-color: #FF5B5B;
     outline: none !important;
+}
+
+.my-cart-page .cart-location-popup{
+    max-width: 430px;
+    width: 95%;
+    /* padding: 30px 0; */
+    margin:  0 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+}
+
+.my-cart-page .cart-location-input-container .input{
+    outline: none;
+    padding: 6px 11px;
+    letter-spacing: 1px;
+    font-size: 18px;
+    width: 85%;
+    border-radius: 5px; 
 }
 
 @media (max-width: 760px) {

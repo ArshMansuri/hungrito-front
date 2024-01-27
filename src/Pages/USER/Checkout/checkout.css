@@ -1,0 +1,20 @@
+.form--checkout-container{
+    max-width: 400px;
+    width: 94%;
+    min-height: 500px;
+    margin: auto;
+}
+
+.form--checkout-container form{
+    
+}
+
+.form--checkout-container form button{
+    background-color: #ff6600;
+    border: 0;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px; 
+}

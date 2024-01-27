@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addToCart, decreaseQutInCart, getMyCartDetail, getNearestRestus, getUserResFoods, increaseQutInCart, removeFromCart, userLoad, userLogin, userPhoneOtpVerify, userSignUp } from "../actions/user";
+import { addToCart, decreaseQutInCart, getMyCartDetail, getNearestRestus, getUserResFoods, increaseQutInCart, placeCodOrder, placeOnlineOrder, removeFromCart, userLoad, userLogin, userPhoneOtpVerify, userSignUp } from "../actions/user";
 
 const initialState = {
   isAuther: false,
@@ -120,14 +120,14 @@ export const myCartDetailReduser = createSlice({
     },
     incresseMyCartDetail(state,action){
       const {resId, foodId, foodPrice} = action?.payload
-      const resIndex = state.cart.restu.findIndex(obj=> obj.resId === resId)
+      const resIndex = state.cart.restu.findIndex(obj=> obj.resId._id === resId)
       const foodIndex = state.cart.restu[resIndex].foods.findIndex(obj => obj.foodId === foodId)
       state.cart.restu[resIndex].foods[foodIndex].subTotal += foodPrice
       state.cart.total += foodPrice 
     },
     decreaseMyCartDetail(state, action){
       const {resId, foodId, foodPrice,} = action?.payload
-      const resIndex = state.cart.restu.findIndex(obj=> obj.resId === resId)
+      const resIndex = state.cart.restu.findIndex(obj=> obj.resId._id === resId)
       const foodIndex = state.cart.restu[resIndex].foods.findIndex(obj => obj.foodId === foodId)
       state.cart.restu[resIndex].foods[foodIndex].subTotal -= foodPrice
       state.cart.total -= foodPrice
@@ -219,4 +219,56 @@ export const decreaseQutInCartReduser = createSlice({
   }
 })
 
+export const placeCodOrderReduser = createSlice({
+  name: "user",
+  initialState: {isLoading: false, success: false},
+  reducers:{
+    makePlaceCodSuccessFalse(state){
+      state.success = false
+    }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(placeCodOrder.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(placeCodOrder.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.message = action?.payload?.message
+      state.success = true
+    });
+    builder.addCase(placeCodOrder.rejected, (state, action) => {
+      state.message = action.payload?.message || action.payload;
+      state.isLoading = false;
+      state.success = false
+    });
+  }
+})
+
+export const placeOnlineOrderReduser = createSlice({
+  name: "user",
+  initialState: {isLoading: false, success: false},
+  reducers:{
+    makePlaceOnlineSuccessFalse(state){
+      state.success = false
+    }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(placeOnlineOrder.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(placeOnlineOrder.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.message = action?.payload?.message
+      state.success = true
+    });
+    builder.addCase(placeOnlineOrder.rejected, (state, action) => {
+      state.message = action.payload?.message || action.payload;
+      state.isLoading = false;
+      state.success = false
+    });
+  }
+})
+
 export const {updateMyCartDetail, incresseMyCartDetail, decreaseMyCartDetail} = myCartDetailReduser.actions 
+export const {makePlaceCodSuccessFalse} = placeCodOrderReduser.actions 
+export const {makePlaceOnlineSuccessFalse} = placeOnlineOrderReduser.actions 

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./resSideBar.css";
-import { NavLink } from "react-router-dom";
+import { NavLink,useLocation } from "react-router-dom";
 import { AiOutlineHome } from "react-icons/ai";
 import { CiCircleList, CiFileOn, CiWallet } from "react-icons/ci";
 import { IoMdClose } from "react-icons/io";
@@ -10,12 +10,19 @@ import { IoFastFoodOutline } from "react-icons/io5";
 
 const ResSideBar = ({closeSideBar=()=>{}}) => {
 
+    const location = useLocation();
     const [tab, setTab] = useState(window.location.pathname)
+
+    useEffect(()=>{
+        const pathSegments = location.pathname.split('/')
+        const mainTab = pathSegments[2]
+        setTab(mainTab)
+    }, [location.pathname])
 
   return (
     <div className="res-sidebar-com ">
       <div className="d-xl-none d-lg-none d-md-none d-sm-block d-block text-end p-3" style={{backgroundColor: 'rgb(248, 247, 246)'}}>
-        <IoMdClose size={22} color="#FF5B5B" onClick={()=>closeSideBar(false)}/>
+        <IoMdClose size={22} color="#FF5B5B" />
       </div>
       <div className="d-flex flex-column align-items-center">
         <div className="app-logo d-flex align-items-center my-2">
@@ -28,8 +35,8 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
         </div>
         <div className="navs w-100">
             <div className="w-100 d-flex justify-content-center w-100 my-3">
-            <NavLink to={'/res/dashboard'} className='w-75' onClick={()=>setTab('/res/dashboard')}>
-                <button className={`${tab === '/res/dashboard' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
+            <NavLink to={'/res/dashboard'} className='w-75' >
+                <button className={`${tab === 'dashboard' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
                     <span className="nav-icon">
                         <AiOutlineHome size={18} />
                     </span>
@@ -40,7 +47,7 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
             </NavLink>
             </div>
             <div className="w-100 d-flex justify-content-center w-100 my-3">
-            <NavLink to={'/res/order/list'} className='w-75' onClick={()=>setTab('/res/order/list')}>
+            <NavLink to={'/res/order/list'} className='w-75' >
                 <button className={`${tab === '/res/order/list' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
                     <span className="nav-icon">
                         <CiCircleList size={18} />
@@ -89,8 +96,8 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
             </NavLink>
             </div>
             <div className="w-100 d-flex justify-content-center w-100 my-3">
-            <NavLink to={'/res/food/list'} className='w-75' onClick={()=>setTab('/res/food/list')}>
-                <button className={`${tab === '/res/food/list' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
+            <NavLink to={'/res/food/list'} className='w-75' >
+                <button className={`${tab === 'food' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
                     <span className="nav-icon">
                         <IoFastFoodOutline size={18} />
                     </span>

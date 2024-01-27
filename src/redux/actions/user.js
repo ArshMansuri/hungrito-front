@@ -245,6 +245,7 @@ export const increaseQutInCart = createAsyncThunk(
     }
   }
 );
+
 export const decreaseQutInCart = createAsyncThunk(
   "decreaseQutInCart",
   async ({ foodInfo }, { rejectWithValue }) => {
@@ -254,6 +255,64 @@ export const decreaseQutInCart = createAsyncThunk(
         { 
             resId: foodInfo?.resId, 
             foodId: foodInfo?.foodId,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+      console.log(data)
+      toast.success(data.message, tostOpstion)
+      return data;
+    } catch (error) {
+      console.log("catch error", error);
+      return rejectWithValue(error.response?.data || "fail to get data");
+    }
+  }
+);
+
+export const placeCodOrder = createAsyncThunk(
+  "placeCodOrder",
+  async ({ orderInfo }, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post(
+        `${BASE_URL}/api/v1/user/order/create/cod`,
+        { 
+            isToken: orderInfo.isApplyToken,
+            deliveryCharg: orderInfo.deliveryCharg,
+            deliveryAddress: orderInfo.deliveryAddress
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+      console.log(data)
+      toast.success(data.message, tostOpstion)
+      return data;
+    } catch (error) {
+      console.log("catch error", error);
+      return rejectWithValue(error.response?.data || "fail to get data");
+    }
+  }
+);
+export const placeOnlineOrder = createAsyncThunk(
+  "placeOnlineOrder",
+  async ({ orderInfo }, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post(
+        `${BASE_URL}/api/v1/user/order/create/online`,
+        { 
+            isToken: orderInfo.isApplyToken,
+            deliveryCharg: orderInfo.deliveryCharg,
+            deliveryAddress: orderInfo.deliveryAddress,
+            paymentToken: orderInfo.paymentToken,
+            paymentId: orderInfo.paymentId,
+            paymentMethodId: orderInfo.paymentMethodId
         },
         {
           headers: {
