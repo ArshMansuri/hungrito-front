@@ -38,7 +38,7 @@ const Checkout = ({ isAuther, isLoading = true }) => {
   const deliveryAddress = location.state?.deliveryAddress || undefined;
   const isApplyToken = location.state?.isApplyToken || false;
   const deliveryCharg = location.state?.deliveryCharg || undefined;
-
+console.log(paymentToken, deliveryAddress, isApplyToken, deliveryCharg)
   useEffect(() => {
     if (
       !paymentToken ||
