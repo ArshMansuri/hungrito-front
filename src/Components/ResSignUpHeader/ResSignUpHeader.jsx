@@ -1,7 +1,7 @@
 import React from "react";
 import './resSignUpHeader.css'
 
-const ResSignUpHeader = () => {
+const ResSignUpHeader = ({text="business"}) => {
   return (
     <header className="res-signup-header border-bottom">
       <div className="d-flex align-items-center">
@@ -19,7 +19,7 @@ const ResSignUpHeader = () => {
           </figcaption>
         </figure>
         <div className="text-center w-100">
-          <h4 className="text-dark">HungriTo for business</h4>
+          <h4 className="text-dark">HungriTo for {text}</h4>
         </div>
       </div>
     </header>

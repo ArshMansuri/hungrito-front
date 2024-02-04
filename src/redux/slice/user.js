@@ -113,7 +113,7 @@ export const myCartDetailReduser = createSlice({
   reducers:{
     updateMyCartDetail(state,action){
       const {resId, foodId, foodPrice, foodQut} = action?.payload
-      const resIndex = state.cart.restu.findIndex(obj=> obj.resId === resId)
+      const resIndex = state.cart.restu.findIndex(obj=> obj.resId._id === resId)
       const foodIndex = state.cart.restu[resIndex].foods.findIndex(obj => obj.foodId === foodId)
       state.cart.total -= (foodPrice * foodQut)
       state.cart.restu[resIndex].foods.splice(foodIndex, 1)
