@@ -13,6 +13,7 @@ import axios from "axios";
 import UserOtp from "../../../../Components/UserOtpVerify/UserOtp";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../../../Components/Loaders/Loader";
+import { dbMakePhoneOtp, dbSignUpFirstPage, dbVerifyPhoneOtp } from "../../../../redux/actions/delBoy";
 
 let DefaultIcon = L.icon({
   iconUrl: icon,
@@ -21,7 +22,7 @@ let DefaultIcon = L.icon({
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
-const DbSignUp = () => {
+const DbSignUp = ({isDbAuther=undefined, isDbLoading=true}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -48,12 +49,11 @@ const DbSignUp = () => {
   const [citys, setCitys] = useState([]);
   const [isDbModalShow, setIsDbModalShow] = useState(false);
 
-  const isResPhoneVerify = useSelector(
-    (state) => state.restu?.restu?.resPhone?.isVerify || false
+  const isDbPhoneVerify = useSelector(
+    (state) => state.delBoy?.delBoy?.dbPhone?.isVerify || false
   );
-  const isResOwnerPhoneVerify = useSelector(
-    (state) => state.restu?.restu?.resOwnerPhone?.isVerify || false
-  );
+  const { delBoy } = useSelector((state) => state.delBoy);
+
   const MAP_API = "Hah9iiWdUd7fEtqmHB2sgS64Io0qoSmW";
 
   useEffect(() => {
@@ -115,6 +115,48 @@ const DbSignUp = () => {
     };
   }, [mapContainer, map, marker, mapContainer.current]);
 
+  useEffect(() => {
+    if (
+      delBoy !== undefined &&
+      delBoy?.dbName !== "" &&
+      delBoy.dbName !== undefined
+    ) {
+      navigate(`/db/signup/p2/${delBoy?.dbEmail?.email}`);
+    }
+
+    if (
+      delBoy !== undefined &&
+      delBoy.dbName === "" &&
+      delBoy.dbName !== undefined
+    ) {
+      if (delBoy?.dbComplateAddress?.latitude !== null) {
+        setDbComplateAddress({
+          address: delBoy?.dbComplateAddress?.address || "",
+          country: delBoy.dbComplateAddress?.country || "",
+          state: delBoy?.dbComplateAddress?.state || "",
+          city: delBoy?.dbComplateAddress?.city || "",
+          pincode: delBoy?.dbComplateAddress?.pincode || null,
+          latitude: delBoy?.dbComplateAddress?.latitude || null,
+          longitude: delBoy?.dbComplateAddress?.longitude || null,
+        });
+        setInpAdress(delBoy?.dbComplateAddress?.address || "");
+      }
+      setDbAddress(delBoy?.dbAddress || "");
+      setDbPhone(delBoy?.dbPhone || { phone: "", isVerify: false });
+    }
+  }, [delBoy, navigate]);
+
+  useEffect(() => {
+    if (isDbPhoneVerify && isDbModalShow === true) {
+      setDbPhone((p) => ({ ...p, isVerify: true }));
+      setIsDbModalShow(false);
+    }
+  }, [
+    isDbPhoneVerify,
+    isDbModalShow,
+  ]);
+
+
   // {/* =============== user click on location div from location popup =============== */}
   const onSetLocation = async (e) => {
     let index = e.currentTarget.id;
@@ -149,9 +191,9 @@ const DbSignUp = () => {
     }
   }
 
-  const makeResNumOtp = () => {
+  const makeDbNumOtp = () => {
     if (dbPhone.phone.trim().length === 10) {
-    //   dispatch(resMakePhoneOtp({ resPhone }));
+      dispatch(dbMakePhoneOtp({ dbPhone }));
       setIsDbModalShow(true);
     }
   };
@@ -197,10 +239,10 @@ const DbSignUp = () => {
     }
   };
 
-  const onResNumOtpVerify = (otp) => {
+  const onDbNumOtpVerify = (otp) => {
     otp = Number.parseInt(otp);
     if (dbPhone.phone.trim().length === 10 && dbPhone.isVerify === false) {
-      //   dispatch(resVerifyPhoneOtp({ otp }));
+        dispatch(dbVerifyPhoneOtp({ otp }));
     }
   };
 
@@ -213,8 +255,7 @@ const DbSignUp = () => {
       dbComplateAddress.longitude !== null &&
       dbPhone.phone !== "" &&
       dbPhone.isVerify !== false &&
-      isResPhoneVerify &&
-      isResOwnerPhoneVerify &&
+      isDbPhoneVerify &&
       dbName !== "" &&
       password !== ""
     ) {
@@ -226,7 +267,7 @@ const DbSignUp = () => {
         dbComplateAddress,
         dbPhone: dbPhone.phone,
       };
-      //   dispatch(resSignUpFirstPage({ restu }));
+        dispatch(dbSignUpFirstPage({ delBoy }));
     } else {
       console.log("eneter all filddddd");
     }
@@ -239,6 +280,10 @@ const DbSignUp = () => {
   return (
     <div className="res-signup-page">
       <ResSignUpHeader text={"job"} />
+      {
+        isDbLoading ? (
+          <Loader />
+        ) :
       <>
         <div className="res-detail-box d-flex justify-content-center mt-4">
           <div className="res-detail-width w-75 border p-4">
@@ -461,7 +506,7 @@ const DbSignUp = () => {
                     <div className="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
                       <div className="w-100">
                         <button
-                          onClick={makeResNumOtp}
+                          onClick={makeDbNumOtp}
                           disabled={dbPhone.isVerify}
                         >
                           {dbPhone.isVerify ? "Verified" : "Verify"}
@@ -479,7 +524,7 @@ const DbSignUp = () => {
           <div className="position-absolute w-100 user-otp-modal bottom-0">
             <UserOtp
               onClickClose={onModlaClose}
-              onOtpSubmit={onResNumOtpVerify}
+              onOtpSubmit={onDbNumOtpVerify}
               sendOn={dbPhone?.phone}
               successUrl="/"
             />
@@ -493,6 +538,7 @@ const DbSignUp = () => {
           />
         </div>
       </>
+      }
     </div>
   );
 };

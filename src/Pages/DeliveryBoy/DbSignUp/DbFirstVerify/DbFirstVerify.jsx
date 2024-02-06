@@ -8,25 +8,30 @@ import { SiFacebook } from "react-icons/si";
 import UserOtp from '../../../../Components/UserOtpVerify/UserOtp';
 import { useDispatch, useSelector } from 'react-redux';
 import '../../../RESTAURANT/ResLogin/resLogin.css'
+import { dbEmailVerify, dbSignUpVerify } from '../../../../redux/actions/delBoy';
 
 const DbFirstVerify = ({isDbLoading=false}) => {
     const navigator = useNavigate()
     const dispatch = useDispatch()
-  
+
+    const success = useSelector((state)=> state?.delBoy?.success)
+    const isEmailVerify = useSelector((state)=> state?.delBoy?.delBoy?.dbEmail?.isVerify)
+    const dbEmail = useSelector((state)=> state?.delBoy?.delBoy?.dbEmail?.email)
+
     const [email, setEmail] = useState("")
     const [isOtpModalShow, setIsOtpModalShow] = useState(false)
   
-    // useEffect(()=>{
-    //   if(success === true){
-    //     setIsOtpModalShow(true)
-    //   }
-    // }, [success])
+    useEffect(()=>{
+      if(success === true){
+        setIsOtpModalShow(true)
+      }
+    }, [success])
   
-    // useEffect(()=>{
-    //   if(isEmailVerify === true){
-    //     navigator(`/res/signup/${resEmail}`)
-    //   }
-    // }, [isEmailVerify, resEmail, navigator])
+    useEffect(()=>{
+      if(isEmailVerify === true){
+        navigator(`/db/signup/${dbEmail}`)
+      }
+    }, [isEmailVerify, dbEmail, navigator])
   
     function onModlaClose(value){
       setIsOtpModalShow(value)
@@ -34,13 +39,13 @@ const DbFirstVerify = ({isDbLoading=false}) => {
   
     const onSendOtp = () =>{
       if(email !== ""){
-        // dispatch(restuSignUpVerify({email}))
+        dispatch(dbSignUpVerify({email}))
       }
     }
   
     const onOtpSubmit = (otp) =>{
       otp = Number.parseInt(otp)
-    //   dispatch(resEmailVerify({otp}))
+      dispatch(dbEmailVerify({otp}))
     }
   return (
     <>

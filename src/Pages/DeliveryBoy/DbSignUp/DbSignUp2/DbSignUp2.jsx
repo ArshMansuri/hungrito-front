@@ -1,19 +1,45 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ResSignUpHeader from "../../../../Components/ResSignUpHeader/ResSignUpHeader";
 import ResSignUpFooter from "../../../../Components/ResSignUpFooter/ResSignUpFooter";
 import Loader from "../../../../Components/Loaders/Loader";
 import { LuImagePlus } from "react-icons/lu";
 import { GiCancel } from "react-icons/gi";
 import "./dbSignUp2.css";
+import { useDispatch, useSelector } from "react-redux";
+import { dbSignUpSecondPage } from "../../../../redux/actions/delBoy";
+import { removeDbName } from "../../../../redux/slice/delBoy";
+import { useNavigate } from "react-router-dom";
 
-const DbSignUp2 = () => {
+const DbSignUp2 = ({isDbAuther=undefined, isDbLoading=true}) => {
   const dbImgRef = useRef();
   const dbVehicleImgRef = useRef();
   const dbLicenseImgRef = useRef();
 
+  const dispatch = useDispatch()
+  const navigate = useNavigate()  
+
   const [dbImg, setDbImg] = useState("");
   const [dbVehicleImg, setDbVehicleImg] = useState("");
   const [dbLicenseImg, setDbLicenseImg] = useState("");
+
+  const { delBoy } = useSelector((state) => state.delBoy);
+
+  useEffect(() => {
+    if (
+      delBoy !== undefined &&
+      delBoy?.dbImage !== undefined &&
+      delBoy?.dbImage?.publicUrl !== undefined &&
+      delBoy?.dbImage?.publicUrl !== "" &&
+      delBoy?.dbVihicalImage !== undefined &&
+      delBoy?.dbVihicalImage?.publicUrl !== undefined &&
+      delBoy?.dbVihicalImage?.publicUrl !== "" &&
+      delBoy?.dbLicenseImage !== undefined &&
+      delBoy?.dbLicenseImage?.publicUrl !== undefined &&
+      delBoy?.dbLicenseImage?.publicUrl !== "" 
+    ) {
+      navigate('/')
+    }
+  }, [delBoy, navigate]);
 
   const openImgDilog = (type) => {
     console.log(type);
@@ -69,13 +95,14 @@ const DbSignUp2 = () => {
         dbVehicleImg,
         dbLicenseImg,
       };
+      dispatch(dbSignUpSecondPage({delBoy}))
     } else {
       console.log("eneter all fild");
     }
   };
 
   const onClickBack = () => {
-    // dispatch(removeResType());
+    dispatch(removeDbName());
   };
   return (
     <>
@@ -83,7 +110,7 @@ const DbSignUp2 = () => {
         <ResSignUpHeader />
 
         {/* =======================    Restaurant Food Image  ===========================*/}
-        {false ? (
+        {isDbLoading ? (
           <Loader />
         ) : (
           <>

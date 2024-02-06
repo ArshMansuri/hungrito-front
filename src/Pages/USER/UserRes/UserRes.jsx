@@ -48,7 +48,7 @@ const UserRes = ({ isAuther, isLoading = true }) => {
         <FoodHeader isAuther={isAuther} isLoading={isLoading} isGifImgShow={isAddCardImgShow} />
       </div>
       <div className="w-100" style={{ marginTop: "85px" }}>
-        {foods === undefined && isFoodsLoading ? (
+        {foods === undefined || isFoodsLoading ? (
           <Loader />
         ) : (
           <div className="row w-100 position-relative">

@@ -6,6 +6,8 @@ import { userLoad } from "./redux/actions/user";
 import { resLoad } from "./redux/actions/restaurant";
 import Loader from "./Components/Loaders/Loader";
 import axios from "axios";
+import AuthDelBoyProtected from "./Components/ProtectedRoute/DelBoyProtected/AuthDelBoyProtected";
+import { dbLoad } from "./redux/actions/delBoy";
 
 const Home = lazy(() => import("./Pages/USER/Home/Home"));
 const UserRes = lazy(() => import("./Pages/USER/UserRes/UserRes"));
@@ -46,9 +48,15 @@ const UpdateFood = lazy(() =>
 const MyCart = lazy(() => import("./Pages/USER/MyCart/MyCart"));
 const UsreOnly = lazy(() => import("./Components/ProtectedRoute/UsreOnly"));
 const Checkout = lazy(() => import("./Pages/USER/Checkout/Checkout"));
-const DbFirstVerify = lazy(() => import("./Pages/DeliveryBoy/DbSignUp/DbFirstVerify/DbFirstVerify"));
-const DbSignUp = lazy(() => import("./Pages/DeliveryBoy/DbSignUp/DbSignUp1/DbSignUp"));
-const DbSignUp2 = lazy(() => import("./Pages/DeliveryBoy/DbSignUp/DbSignUp2/DbSignUp2"));
+const DbFirstVerify = lazy(() =>
+  import("./Pages/DeliveryBoy/DbSignUp/DbFirstVerify/DbFirstVerify")
+);
+const DbSignUp = lazy(() =>
+  import("./Pages/DeliveryBoy/DbSignUp/DbSignUp1/DbSignUp")
+);
+const DbSignUp2 = lazy(() =>
+  import("./Pages/DeliveryBoy/DbSignUp/DbSignUp2/DbSignUp2")
+);
 const DbLogin = lazy(() => import("./Pages/DeliveryBoy/DbLogin/DbLogin"));
 const Temp = lazy(() => import("./temp/Temp"));
 
@@ -58,6 +66,8 @@ function App() {
   const { isAuther, isLoading } = useSelector((state) => state.user);
   const isRestuAuther = useSelector((state) => state.restu?.isRestuAuther);
   const { isLoading: isResLoading } = useSelector((state) => state.restu);
+  const isDbAuther = useSelector((state) => state.delBoy?.isDbAuther);
+  const { isLoading: isDbLoading } = useSelector((state) => state.delBoy);
 
   const MAP_API = process.env.REACT_APP_TOM_TOM_API_KEY;
 
@@ -67,6 +77,9 @@ function App() {
     }
     if (localStorage.getItem("isRestu") === "true") {
       dispatch(resLoad());
+    }
+    if (localStorage.getItem("isDelBoy") === "true") {
+      dispatch(dbLoad());
     }
   }, [dispatch]);
 
@@ -124,9 +137,7 @@ function App() {
           />
 
           <Route
-            element={
-              <UsreOnly isAuther={isAuther} isLoading={isLoading} />
-            }
+            element={<UsreOnly isAuther={isAuther} isLoading={isLoading} />}
           >
             <Route
               path="/my/cart"
@@ -271,32 +282,39 @@ function App() {
               path="/db/verify"
               element={
                 <DbFirstVerify
+                  isDbAuther={isDbAuther}
+                  isDbLoading={isDbLoading}
                 />
               }
             />
           <Route
-              path="/db/signup"
+            element={
+              <AuthDelBoyProtected
+                isDbAuther={isDbAuther}
+                isDbLoading={isDbLoading}
+              />
+            }
+          >
+            <Route
+              path="/db/signup/:email"
               element={
-                <DbSignUp
-                />
+                <DbSignUp isDbAuther={isDbAuther} isDbLoading={isDbLoading} />
               }
             />
-          <Route
-              path="/db/signup/p2"
+            <Route
+              path="/db/signup/p2/:email"
               element={
-                <DbSignUp2
-                />
+                <DbSignUp2 isDbAuther={isDbAuther} isDbLoading={isDbLoading} />
               }
             />
-          <Route
+            <Route
               path="/db/login"
               element={
-                <DbLogin
-                  isRestuAuther={isRestuAuther}
-                  isResLoading={isResLoading}
-                />
+                <DbLogin isDbAuther={isDbAuther} isDbLoading={isDbLoading} />
               }
             />
+          </Route>
+
           <Route
             path="/food"
             element={<Food isAuther={isAuther} isLoading={isLoading} />}
