@@ -253,3 +253,18 @@ export const resLoad = createAsyncThunk(
     }
   }
 );
+
+export const getResNewOrders = createAsyncThunk(
+  "getResNewOrders",
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(`${BASE_URL}/api/v1/restaurant/neworders`, {
+        withCredentials: true,
+      });
+      return data;
+    } catch (error) {
+      console.log("catch error", error);
+      return rejectWithValue(error.response?.data || "fail to login");
+    }
+  }
+);

@@ -21,9 +21,6 @@ const DelBoyOnly = ({ isDbAuther = undefined, isDbLoading = true }) => {
           <div style={{ minHeight: "95vh", backgroundColor: "#f8f7f6", overflow: 'hidden' }}>
             <Outlet />
           </div>
-          {/* <div style={{ minHeight: "95vh", backgroundColor: "#f8f7f6" }}>
-            <Outlet />
-          </div> */}
           <div className="food-footer-page d-xl-none d-lg-none d-md-none d-sm-block d-block position-fixed bottom-0 start-0 end-0 bg-white shadow-lg">
             <DbBottemNav isDbAuther={isDbAuther} isDbLoading={isDbLoading} />
           </div>

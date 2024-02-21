@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  getResNewOrders,
   resEmailVerify,
   resLoad,
   resLogin,
@@ -226,6 +227,33 @@ export const restuReduser = createSlice({
       state.restu = action.payload.restu;
     });
     builder.addCase(resLogin.rejected, (state, action) => {
+      state.isLoading = false;
+      state.message = action.payload?.message || action.payload;
+      state.success = false;
+    });
+  },
+});
+
+export const getResNewOrdersReduser = createSlice({
+  name: "createFood",
+  initialState: {
+    isLoading: false
+  },
+  reducers: {
+    makeCreateFoodSuccessFalse(state) {
+      state.success = false;
+    },
+  },
+  extraReducers: (builder) => {
+    // ================ Restaurant get new orders   ================
+    builder.addCase(getResNewOrders.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getResNewOrders.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.orders = action.payload?.orders || [];
+    });
+    builder.addCase(getResNewOrders.rejected, (state, action) => {
       state.isLoading = false;
       state.message = action.payload?.message || action.payload;
       state.success = false;

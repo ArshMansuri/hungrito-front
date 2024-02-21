@@ -8,6 +8,7 @@ import Loader from "./Components/Loaders/Loader";
 import axios from "axios";
 import AuthDelBoyProtected from "./Components/ProtectedRoute/DelBoyProtected/AuthDelBoyProtected";
 import { dbLoad } from "./redux/actions/delBoy";
+import socketIO from "socket.io-client";
 
 const Home = lazy(() => import("./Pages/USER/Home/Home"));
 const UserRes = lazy(() => import("./Pages/USER/UserRes/UserRes"));
@@ -38,6 +39,7 @@ const ResDashboard = lazy(() =>
 );
 const ResOnly = lazy(() => import("./Components/ProtectedRoute/ResOnly"));
 const OrderList = lazy(() => import("./Pages/RESTAURANT/OrderList/OrderList"));
+const NewOrder = lazy(() => import("./Pages/RESTAURANT/NewOrder/NewOrder"));
 const FoodList = lazy(() => import("./Pages/RESTAURANT/FoodList/FoodList"));
 const CreateFood = lazy(() =>
   import("./Pages/RESTAURANT/CreateFood/CreateFood")
@@ -65,28 +67,41 @@ const DbHome = lazy(() => import("./Pages/DeliveryBoy/DbHome/DbHome"));
 const DbOrder = lazy(() => import("./Pages/DeliveryBoy/DbOrder/DbOrder"));
 const Temp = lazy(() => import("./temp/Temp"));
 
+const socket = socketIO(process.env.REACT_APP_BASE_URL, { transports: ["websocket"] });
+
 function App() {
   const dispatch = useDispatch();
 
-  const { isAuther, isLoading } = useSelector((state) => state.user);
+  const { isAuther, isLoading, user } = useSelector((state) => state.user);
   const isRestuAuther = useSelector((state) => state.restu?.isRestuAuther);
-  const { isLoading: isResLoading } = useSelector((state) => state.restu);
+  const { isLoading: isResLoading, restu } = useSelector((state) => state.restu);
   const isDbAuther = useSelector((state) => state.delBoy?.isDbAuther);
-  const { isLoading: isDbLoading } = useSelector((state) => state.delBoy);
+  const { isLoading: isDbLoading, delBoy } = useSelector((state) => state.delBoy);
 
   const MAP_API = process.env.REACT_APP_TOM_TOM_API_KEY;
 
   useEffect(() => {
     if (localStorage.getItem("isUser") === "true") {
       dispatch(userLoad());
-    }
-    if (localStorage.getItem("isRestu") === "true") {
+    }else if (localStorage.getItem("isRestu") === "true") {
       dispatch(resLoad());
-    }
-    if (localStorage.getItem("isDelBoy") === "true") {
+    }else if (localStorage.getItem("isDelBoy") === "true") {
       dispatch(dbLoad());
     }
   }, [dispatch]);
+
+  useEffect(()=>{
+    if(user){
+      console.log("user")
+      socket.emit("user-online", {userId: user?._id})
+    } else if(isDbAuther && delBoy?._id !== undefined){
+      console.log(("del"))
+      socket.emit("deliveryBoy-online", {dbId: delBoy?._id})
+    }  else if(isRestuAuther && restu?._id !== undefined){
+      console.log(("res"))
+      socket.emit("restaurant-online", {resId: restu?._id})
+    } 
+  }, [user, isDbAuther, isRestuAuther])
 
   useEffect(() => {
     if (!localStorage.getItem("city")) {
@@ -192,6 +207,15 @@ function App() {
               path="/res/order/list"
               element={
                 <OrderList
+                  isRestuAuther={isRestuAuther}
+                  isResLoading={isResLoading}
+                />
+              }
+            />
+            <Route
+              path="/res/neworder"
+              element={
+                <NewOrder
                   isRestuAuther={isRestuAuther}
                   isResLoading={isResLoading}
                 />

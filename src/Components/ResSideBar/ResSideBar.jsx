@@ -7,6 +7,7 @@ import { IoMdClose } from "react-icons/io";
 import { HiOutlineUsers, HiOutlinePencilSquare } from "react-icons/hi2";
 import { TbDeviceAnalytics } from "react-icons/tb";
 import { IoFastFoodOutline } from "react-icons/io5";
+import { MdOutlineBorderColor, MdOutlineDeliveryDining } from "react-icons/md";
 
 const ResSideBar = ({closeSideBar=()=>{}}) => {
 
@@ -59,13 +60,25 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
             </NavLink>
             </div>
             <div className="w-100 d-flex justify-content-center w-100 my-3">
+            <NavLink to={'/res/neworder'} className='w-75'>
+                <button className={`${tab === '/res/neworder' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
+                    <span className="nav-icon">
+                        <MdOutlineBorderColor size={18} />
+                    </span>
+                    <span className="mt-1 ps-2">
+                        New Order 
+                    </span>
+                </button>
+            </NavLink>
+            </div>
+            <div className="w-100 d-flex justify-content-center w-100 my-3">
             <NavLink className='w-75'>
                 <button className={`${tab === '/res/order/lis' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
                     <span className="nav-icon">
-                        <CiFileOn size={18} />
+                        <MdOutlineDeliveryDining size={18} />
                     </span>
                     <span className="mt-1 ps-2">
-                        Order Detail
+                        Active Order
                     </span>
                 </button>
             </NavLink>
