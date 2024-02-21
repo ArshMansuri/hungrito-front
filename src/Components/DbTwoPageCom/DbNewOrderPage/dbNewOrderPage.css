@@ -1,0 +1,31 @@
+.db-new-order-page .new-order-div{
+    width: 95%;
+    /* height: 280px; */
+    flex-shrink: 0;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.04);
+    border-radius: 14px;
+    background: #fff;
+    font-family: 'Roboto', sans-serif;
+}
+
+.res-all-addresses .address-icon .address-text{
+    font-size: 18px;
+    line-height: 21px;
+    color: #ff6600;
+}
+
+.db-new-order-page .new-order-btn{
+    padding: 8PX 10PX;
+    color: white;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+.db-new-order-page .accept-order-btn{
+    background-color: #ff6600;
+    border: 1px solid #ff6600;
+}
+.db-new-order-page .reject-order-btn{
+    background-color: #d83c39;
+    border: 1px solid #d83c39;
+}

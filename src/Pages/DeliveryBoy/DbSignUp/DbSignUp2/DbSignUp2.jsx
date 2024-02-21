@@ -10,13 +10,13 @@ import { dbSignUpSecondPage } from "../../../../redux/actions/delBoy";
 import { removeDbName } from "../../../../redux/slice/delBoy";
 import { useNavigate } from "react-router-dom";
 
-const DbSignUp2 = ({isDbAuther=undefined, isDbLoading=true}) => {
+const DbSignUp2 = ({ isDbAuther = undefined, isDbLoading = true }) => {
   const dbImgRef = useRef();
   const dbVehicleImgRef = useRef();
   const dbLicenseImgRef = useRef();
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()  
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [dbImg, setDbImg] = useState("");
   const [dbVehicleImg, setDbVehicleImg] = useState("");
@@ -35,9 +35,9 @@ const DbSignUp2 = ({isDbAuther=undefined, isDbLoading=true}) => {
       delBoy?.dbVihicalImage?.publicUrl !== "" &&
       delBoy?.dbLicenseImage !== undefined &&
       delBoy?.dbLicenseImage?.publicUrl !== undefined &&
-      delBoy?.dbLicenseImage?.publicUrl !== "" 
+      delBoy?.dbLicenseImage?.publicUrl !== ""
     ) {
-      navigate('/')
+      return navigate("/");
     }
   }, [delBoy, navigate]);
 
@@ -95,7 +95,7 @@ const DbSignUp2 = ({isDbAuther=undefined, isDbLoading=true}) => {
         dbVehicleImg,
         dbLicenseImg,
       };
-      dispatch(dbSignUpSecondPage({delBoy}))
+      dispatch(dbSignUpSecondPage({ delBoy }));
     } else {
       console.log("eneter all fild");
     }

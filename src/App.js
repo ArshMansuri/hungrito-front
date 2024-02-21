@@ -48,6 +48,9 @@ const UpdateFood = lazy(() =>
 const MyCart = lazy(() => import("./Pages/USER/MyCart/MyCart"));
 const UsreOnly = lazy(() => import("./Components/ProtectedRoute/UsreOnly"));
 const Checkout = lazy(() => import("./Pages/USER/Checkout/Checkout"));
+const DelBoyOnly = lazy(() =>
+  import("./Components/ProtectedRoute/DelBoyProtected/DelBoyOnly")
+);
 const DbFirstVerify = lazy(() =>
   import("./Pages/DeliveryBoy/DbSignUp/DbFirstVerify/DbFirstVerify")
 );
@@ -58,6 +61,8 @@ const DbSignUp2 = lazy(() =>
   import("./Pages/DeliveryBoy/DbSignUp/DbSignUp2/DbSignUp2")
 );
 const DbLogin = lazy(() => import("./Pages/DeliveryBoy/DbLogin/DbLogin"));
+const DbHome = lazy(() => import("./Pages/DeliveryBoy/DbHome/DbHome"));
+const DbOrder = lazy(() => import("./Pages/DeliveryBoy/DbOrder/DbOrder"));
 const Temp = lazy(() => import("./temp/Temp"));
 
 function App() {
@@ -277,6 +282,28 @@ function App() {
               }
             />
           </Route>
+
+          <Route
+            element={
+              <DelBoyOnly
+                isDbAuther={isDbAuther}
+                isDbLoading={isDbLoading}
+              />
+            }
+          >
+            <Route
+              path="/db/dashboard"
+              element={
+                <DbHome isDbAuther={isDbAuther} isDbLoading={isDbLoading} />
+              }
+            />
+            <Route
+              path="/db/order"
+              element={
+                <DbOrder isDbAuther={isDbAuther} isDbLoading={isDbLoading} />
+              }
+            />
+            </Route>
 
           <Route
               path="/db/verify"

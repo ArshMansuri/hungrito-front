@@ -9,7 +9,9 @@ import { useNavigate } from "react-router-dom";
 import { makeCreateFoodSuccessFalse } from "../../../redux/slice/food";
 
 // const BASE_URL = "https://hungritobackend.onrender.com";
-const BASE_URL = "http://localhost:6010";
+// const BASE_URL = "http://localhost:6010";
+const BASE_URL = process.env.REACT_APP_BASE_URL
+
 
 const CreateFood = ({ isRestuAuther, isResLoading }) => {
   const dispatch = useDispatch();

@@ -9,8 +9,9 @@ import { resSignUpSecPage } from "../../../../redux/actions/restaurant";
 import ResSignUpHeader from "../../../../Components/ResSignUpHeader/ResSignUpHeader";
 import Loader from "../../../../Components/Loaders/Loader";
 
-// const BASE_URL = "https://hungritobackend.onrender.com";
-const BASE_URL = "http://localhost:6010";
+// // const BASE_URL = "https://hungritobackend.onrender.com";
+// const BASE_URL = "http://localhost:6010";
+const BASE_URL = process.env.REACT_APP_BASE_URL
 const ResSignUp2 = ({ isRestuAuther, isResLoading = true }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();

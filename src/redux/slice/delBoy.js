@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   dbEmailVerify,
   dbLoad,
+  dbLogin,
   dbMakePhoneOtp,
   dbSignUpFirstPage,
   dbSignUpSecondPage,
@@ -20,17 +21,19 @@ const initialState = {
     dbCompletAddress: {},
     dbPhone: {},
     dbEmail: {},
-    resOwnerPhone: {},
+    dbImg: {},
+    dbVehicleImg: {},
+    dbLicenseImg: {},
   },
 };
 
 export const delBoyReduser = createSlice({
   name: "restu",
   initialState: initialState,
-  reducers:{
-    removeDbName(state){
-        state.delBoy.dbName = ""
-    }
+  reducers: {
+    removeDbName(state) {
+      state.delBoy.dbName = "";
+    },
   },
   extraReducers: (builder) => {
     // ================ delivery boy first email register  ================
@@ -67,16 +70,19 @@ export const delBoyReduser = createSlice({
     // ================ delivery boy make Phone Otp   ================
     builder.addCase(dbMakePhoneOtp.pending, (state) => {
       state.isLoading = true;
+      state.delBoy.dbPhone.isShowModal = false;
     });
     builder.addCase(dbMakePhoneOtp.fulfilled, (state, action) => {
       state.isLoading = false;
       state.delBoy.dbPhone = action.payload?.delBoy || {};
+      state.delBoy.dbPhone.isShowModal = true;
       state.success = true;
       state.message = action.payload?.message || action.payload;
     });
     builder.addCase(dbMakePhoneOtp.rejected, (state, action) => {
       state.isLoading = false;
       state.message = action.payload?.message || action.payload;
+      state.delBoy.dbPhone.isShowModal = false;
       state.success = false;
     });
 
@@ -86,7 +92,7 @@ export const delBoyReduser = createSlice({
     });
     builder.addCase(dbVerifyPhoneOtp.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.delBoy.dbPhone={isVerify: true}
+      state.delBoy.dbPhone.isVerify = true;
       state.success = true;
       state.message = action.payload?.message || action.payload;
     });
@@ -114,15 +120,15 @@ export const delBoyReduser = createSlice({
       state.success = false;
     });
 
-    // ================ delivery boy Third SignUp Page   ================
+    // ================ delivery boy Second SignUp Page   ================
     builder.addCase(dbSignUpSecondPage.pending, (state) => {
       state.isLoading = true;
     });
     builder.addCase(dbSignUpSecondPage.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.delBoy.dbImg = action.payload?.delBoy?.dbImg;
-      state.delBoy.dbVehicleImg = action.payload?.delBoy?.dbVehicleImg;
-      state.delBoy.dbLicenseImg = action.payload?.delBoy?.dbLicenseImg;
+      state.delBoy.dbImg = action.payload?.delBoy?.dbImage;
+      state.delBoy.dbVehicleImg = action.payload?.delBoy?.dbVehicleImage;
+      state.delBoy.dbLicenseImg = action.payload?.delBoy?.dbLicenseImage;
       state.success = true;
       state.message = action.payload?.message || action.payload;
     });
@@ -146,7 +152,22 @@ export const delBoyReduser = createSlice({
       state.message = action.payload?.message || action.payload;
       state.success = false;
     });
+
+    // ================ delivery boy Login   ================
+    builder.addCase(dbLogin.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(dbLogin.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isDbAuther = true;
+      state.delBoy = action.payload.delBoy;
+    });
+    builder.addCase(dbLogin.rejected, (state, action) => {
+      state.isLoading = false;
+      state.message = action.payload?.message || action.payload;
+      state.success = false;
+    });
   },
 });
 
-export const {removeDbName} = delBoyReduser.actions
+export const { removeDbName } = delBoyReduser.actions;

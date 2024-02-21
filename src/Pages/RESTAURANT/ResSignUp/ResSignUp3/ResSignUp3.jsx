@@ -29,7 +29,7 @@ const ResSignUp3 = ({isRestuAuther, isResLoading=true}) => {
       restu?.resFoodImage?.publicUrl !== undefined &&
       restu?.resFoodImage?.publicUrl !== ""
     ) {
-      navigate('/')
+      return navigate('/')
     }
   }, [restu, navigate]);
 
