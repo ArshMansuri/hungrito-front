@@ -195,3 +195,21 @@ export const dbLoad = createAsyncThunk(
     }
   }
 );
+
+export const getDbNewOrders = createAsyncThunk(
+  "getDbNewOrders",
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post(`${BASE_URL}/api/v1/delboy/neworders`,{
+        latitude: 23.32134931473346,
+        longitude: 72.33133407090695
+      }, {
+        withCredentials: true,
+      });
+      return data;
+    } catch (error) {
+      console.log("catch error", error);
+      return rejectWithValue(error.response?.data || "fail to login");
+    }
+  }
+);

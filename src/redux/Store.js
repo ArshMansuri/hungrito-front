@@ -2,7 +2,7 @@ import {configureStore} from "@reduxjs/toolkit"
 import { addToCartReduser, decreaseQutInCartReduser, increaseQutInCartReduser, myCartDetailReduser, nearestRestuReduser, placeCodOrderReduser, placeOnlineOrderReduser, removeFromCartReduser, userReduser, userResFoodsReduser } from "./slice/user"
 import { getResNewOrdersReduser, restuReduser } from "./slice/restaurant"
 import { createFoodReduser, deleteResFoodReduser, getResFoodListReduser, getResSingleFoodReduser, updateResFoodReduser, updateResFoodisAvailableReduser } from "./slice/food"
-import { delBoyReduser } from "./slice/delBoy"
+import { delBoyReduser, getDbNewOrdersReduser } from "./slice/delBoy"
 import { getResNewOrders } from "./actions/restaurant"
 
 
@@ -27,6 +27,7 @@ const store = configureStore({
         resFoodDelete: deleteResFoodReduser.reducer,
         resNewOrders: getResNewOrdersReduser.reducer,
         delBoy: delBoyReduser.reducer,
+        dbNewOrders: getDbNewOrdersReduser.reducer,
     }
 })
 

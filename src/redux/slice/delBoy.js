@@ -8,6 +8,7 @@ import {
   dbSignUpSecondPage,
   dbSignUpVerify,
   dbVerifyPhoneOtp,
+  getDbNewOrders,
 } from "../actions/delBoy";
 
 const initialState = {
@@ -163,6 +164,33 @@ export const delBoyReduser = createSlice({
       state.delBoy = action.payload.delBoy;
     });
     builder.addCase(dbLogin.rejected, (state, action) => {
+      state.isLoading = false;
+      state.message = action.payload?.message || action.payload;
+      state.success = false;
+    });
+  },
+});
+
+export const getDbNewOrdersReduser = createSlice({
+  name: "createFood",
+  initialState: {
+    isLoading: false
+  },
+  reducers: {
+    makeCreateFoodSuccessFalse(state) {
+      state.success = false;
+    },
+  },
+  extraReducers: (builder) => {
+    // ================ Restaurant get new orders   ================
+    builder.addCase(getDbNewOrders.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getDbNewOrders.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.orders = action.payload?.orders || [];
+    });
+    builder.addCase(getDbNewOrders.rejected, (state, action) => {
       state.isLoading = false;
       state.message = action.payload?.message || action.payload;
       state.success = false;

@@ -1,10 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./dbOrder.css";
 import DbNewOrderPage from "../../../Components/DbTwoPageCom/DbNewOrderPage/DbNewOrderPage";
 import DbActiveOrderPage from "../../../Components/DbTwoPageCom/DbActiveOrderPage/DbActiveOrderPage";
+import {useDispatch, useSelector} from "react-redux"
+import { getDbNewOrders } from "../../../redux/actions/delBoy";
 
 const DbOrder = () => {
+
+  const dispatch = useDispatch()
+
+
   const [activeScree, setActiveScreen] = useState("newOrder");
+
+  useEffect(()=>{
+    dispatch(getDbNewOrders())
+  }, [])
+  
 
   return (
     <div className="db-order-page">
