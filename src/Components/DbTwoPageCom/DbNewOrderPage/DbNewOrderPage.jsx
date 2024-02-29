@@ -4,22 +4,23 @@ import { FaLocationDot } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 
 const DbNewOrderPage = () => {
-  const orders = useSelector((state) => state.dbNewOrders.orders);
-  console.log(orders);
+  
+  const order = useSelector((state) => state.dbNewOrders.orders);
+
   return (
     <div className="db-new-order-page">
       <div className="d-flex flex-column align-items-center">
-        {orders !== undefined && orders.length > 0 ? (
-          orders.map((ord) => (
+          {
+            order !== undefined &&
             <div className="new-order-div my-3 p-3">
               <div className="res-address-main">
                 <div className="res-address-head text-secondary">
                   Restaurant Address
                 </div>
                 <div className="res-all-addresses">
-                  {ord.restaurantAddresses !== undefined &&
-                  ord.restaurantAddresses.length > 0
-                    ? ord.restaurantAddresses.map((resAddress) => (
+                  {order?.restaurantAddresses !== undefined &&
+                  order?.restaurantAddresses.length > 0
+                    ? order?.restaurantAddresses.map((resAddress) => (
                         <div className="address-icon d-flex my-2">
                           <div className="icon">
                             <FaLocationDot color="#ff6600" size={22} />
@@ -41,13 +42,13 @@ const DbNewOrderPage = () => {
                     <div className="icon">
                       <FaLocationDot color="#ff6600" size={22} />
                     </div>
-                    {ord?.deliveryAddress !== undefined &&
-                    ord.deliveryAddress?.doorFlat !== undefined &&
-                    ord?.deliveryAddress?.landMark !== undefined ? (
+                    {order?.deliveryAddress !== undefined &&
+                    order?.deliveryAddress?.doorFlat !== undefined &&
+                    order?.deliveryAddress?.landMark !== undefined ? (
                       <div className="address-text mx-2">
-                        {ord.deliveryAddress.doorFlat +
+                        {order?.deliveryAddress.doorFlat +
                           ", " +
-                          ord.deliveryAddress.landMark}
+                          order?.deliveryAddress.landMark}
                       </div>
                     ) : null}
                   </div>
@@ -62,10 +63,10 @@ const DbNewOrderPage = () => {
                       <span className="ms-1">5 km</span>
                     </div>
                     {
-                        ord?.orders !== undefined && ord?.orders?.deliveryCharg !== undefined ?
+                        order?.orders !== undefined && order?.orders?.deliveryCharg !== undefined ?
                         <div>
                         <span className="text-secondary">Delivery charge:</span>
-                        <span className="ms-1">{ord?.orders?.deliveryCharg} ₹</span>
+                        <span className="ms-1">{order?.orders?.deliveryCharg} ₹</span>
                       </div>
                         :null
                     }
@@ -86,10 +87,7 @@ const DbNewOrderPage = () => {
                 </div>
               </div>
             </div>
-          ))
-        ) : (
-          <></>
-        )}
+          }
       </div>
     </div>
   );

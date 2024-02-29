@@ -8,12 +8,12 @@ import { getDbNewOrders } from "../../../redux/actions/delBoy";
 const DbOrder = () => {
 
   const dispatch = useDispatch()
-
-
   const [activeScree, setActiveScreen] = useState("newOrder");
 
+
+
   useEffect(()=>{
-    dispatch(getDbNewOrders())
+      dispatch(getDbNewOrders())
   }, [])
   
 

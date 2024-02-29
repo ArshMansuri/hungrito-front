@@ -240,9 +240,16 @@ export const getResNewOrdersReduser = createSlice({
     isLoading: false
   },
   reducers: {
-    makeCreateFoodSuccessFalse(state) {
-      state.success = false;
-    },
+    // makeCreateFoodSuccessFalse(state) {
+    //   state.success = false;
+    // },
+    resRemoveOrder(state, action){
+      console.log(action.payload)
+      const ordIndex = state.orders.findIndex(obj=> obj._id.toString() === action.payload.toString())
+      if(ordIndex !== -1){
+        state.orders.splice(ordIndex,1)
+      }
+    }
   },
   extraReducers: (builder) => {
     // ================ Restaurant get new orders   ================
@@ -262,3 +269,4 @@ export const getResNewOrdersReduser = createSlice({
 });
 
 export const { removeResName, removeResType } = restuReduser.actions;
+export const { resRemoveOrder } = getResNewOrdersReduser.actions;

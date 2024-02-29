@@ -200,10 +200,7 @@ export const getDbNewOrders = createAsyncThunk(
   "getDbNewOrders",
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post(`${BASE_URL}/api/v1/delboy/neworders`,{
-        latitude: 23.32134931473346,
-        longitude: 72.33133407090695
-      }, {
+      const { data } = await axios.get(`${BASE_URL}/api/v1/delboy/neworders`,{
         withCredentials: true,
       });
       return data;

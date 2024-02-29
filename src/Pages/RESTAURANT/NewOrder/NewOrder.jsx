@@ -3,6 +3,11 @@ import "./newOrder.css";
 import { FaLocationDot } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { getResNewOrders } from "../../../redux/actions/restaurant";
+import axios from "axios";
+import { resRemoveOrder } from "../../../redux/slice/restaurant";
+import { toast } from "react-toastify";
+
+const BASE_URL = process.env.REACT_APP_BASE_URL
 
 const NewOrder = () => {
   const dispatch = useDispatch();
@@ -12,6 +17,23 @@ const NewOrder = () => {
   useEffect(() => {
     dispatch(getResNewOrders());
   }, []);
+
+  const resAcceptOrderHendler = async (ordId) =>{
+    try {
+      if(ordId !== undefined){
+        const {data} = await axios.get(`${BASE_URL}/api/v1/restaurant/accept/${ordId}`, {withCredentials: true})
+        console.log(data)
+        if(data.success === true){
+          dispatch(resRemoveOrder(ordId))
+          toast.success(data?.message)
+        } else {
+          toast.error(data?.message || "Somthing Went Wrong")
+        }
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div className="neworder-page mx-2">
@@ -125,7 +147,7 @@ const NewOrder = () => {
                     </div>
                     <div className="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 d-flex justify-content-start">
                       <div className="mx-1">
-                        <button className="accept-order-btn new-order-btn">
+                        <button className="accept-order-btn new-order-btn" onClick={()=>resAcceptOrderHendler(ord._id)}>
                           ACCEPT
                         </button>
                       </div>
