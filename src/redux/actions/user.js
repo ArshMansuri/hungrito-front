@@ -300,6 +300,7 @@ export const placeCodOrder = createAsyncThunk(
     }
   }
 );
+
 export const placeOnlineOrder = createAsyncThunk(
   "placeOnlineOrder",
   async ({ orderInfo }, { rejectWithValue }) => {
@@ -330,3 +331,17 @@ export const placeOnlineOrder = createAsyncThunk(
     }
   }
 );
+
+export const getMySaveFoods = createAsyncThunk(
+  "getMySaveFoods",
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(`${BASE_URL}/api/v1/user/my/save`, {withCredentials: true});
+      return data;
+    } catch (error) {
+      console.log("catch error", error);
+      return rejectWithValue(error.response?.data || "fail to get data");
+    }
+  }
+);
+

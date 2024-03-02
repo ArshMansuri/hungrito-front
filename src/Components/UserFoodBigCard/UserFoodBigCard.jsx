@@ -1,12 +1,15 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './UserFoodBigCard.css'
-import { IoMdAdd, IoMdRemove } from "react-icons/io";
+import { IoMdAdd, IoMdRemove,IoIosHeartEmpty, IoMdHeart } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/actions/user";
+import axios from "axios";
+import { removeFromSave } from "../../redux/slice/user";
 
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const UserFoodBigCard = ({
   foodId,
@@ -21,12 +24,24 @@ const UserFoodBigCard = ({
   isAuther = false,
   resId,
   resName = "",
-  addImgShowFun=()=>{}
+  addImgShowFun=()=>{},
+  saveFood=[],
+  isRestu=false,
+  isSavePage=false
 }) => {
 
   const navigator = useNavigate()
   const dispatch = useDispatch()
   const [qut, setQut] = useState(0)
+  const [isSave, setIsSave] = useState(false)
+
+
+  useEffect(()=>{
+    const index = saveFood.indexOf(foodId)
+    if(index !== -1){
+      setIsSave(true)
+    }
+  }, [])
 
   const addToCartHandler = ()=>{
     if(!isAuther){
@@ -61,6 +76,21 @@ const UserFoodBigCard = ({
       setQut(qut-1)
     }
   }
+
+  const saveUnsaveHendler = async() =>{
+    if(isSavePage){
+      dispatch(removeFromSave(foodId))
+    }
+    if(!isRestu){
+      try {
+        setIsSave(!isSave)
+        const data = await axios.get(`${BASE_URL}/api/v1/user/addoremove/save/${foodId}`, {withCredentials: true})
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+
   return (
     <div className="big-food-card d-flex justify-content-center align-items-center w-100">
 
@@ -70,10 +100,15 @@ const UserFoodBigCard = ({
     >
       <div className="food-card-top d-flex align-items-center justify-content-between">
         <div className="left">{weight}</div>
-        <div className="right p-2 d-flex flex-column justify-content-center align-items-center rounded-circle g-0">
+        <div className="right cursor-pointer" onClick={saveUnsaveHendler}>
+          {
+            isSave ? <IoMdHeart size={18} /> : <IoIosHeartEmpty size={18}/>
+          }
+        </div>
+        {/* <div className="right p-2 d-flex flex-column justify-content-center align-items-center rounded-circle g-0">
           <div>{dis}</div>
           <div>{unit}</div>
-        </div>
+        </div> */}
       </div>
       <div className="food-detail d-flex flex-column align-items-center justify-content-center">
         <div className="img-div">

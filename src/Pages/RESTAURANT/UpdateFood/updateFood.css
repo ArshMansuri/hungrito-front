@@ -17,7 +17,7 @@
     outline: none !important;
 }
 
-.food-manage-page button{
+.food-manage-page .update-btn{
     background-color: #ff6600;
     border: 0;
     color: white;
@@ -27,7 +27,7 @@
     border-radius: 5px; 
 }
 
-.food-manage-page button:hover{
+.food-manage-page .update-btn:hover{
     background-color: #ff4300;
 }
 

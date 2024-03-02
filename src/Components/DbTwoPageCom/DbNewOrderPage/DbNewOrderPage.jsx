@@ -7,26 +7,28 @@ const DbNewOrderPage = () => {
   
   const order = useSelector((state) => state.dbNewOrders.orders);
 
+  console.log(order)
+
   return (
     <div className="db-new-order-page">
       <div className="d-flex flex-column align-items-center">
           {
-            order !== undefined &&
+            order !== undefined && order?.orders !== undefined ?
             <div className="new-order-div my-3 p-3">
               <div className="res-address-main">
                 <div className="res-address-head text-secondary">
                   Restaurant Address
                 </div>
                 <div className="res-all-addresses">
-                  {order?.restaurantAddresses !== undefined &&
-                  order?.restaurantAddresses.length > 0
-                    ? order?.restaurantAddresses.map((resAddress) => (
+                  {order?.orders?.restu !== undefined &&
+                  order?.orders?.restu?.length > 0
+                    ? order?.orders?.restu?.map((r) => (
                         <div className="address-icon d-flex my-2">
                           <div className="icon">
                             <FaLocationDot color="#ff6600" size={22} />
                           </div>
                           <div className="address-text mx-2">
-                            {resAddress.resAddress}
+                            {r?.resId?.resAddress}
                           </div>
                         </div>
                       ))
@@ -86,7 +88,7 @@ const DbNewOrderPage = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> : <></>
           }
       </div>
     </div>

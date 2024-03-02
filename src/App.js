@@ -48,6 +48,7 @@ const UpdateFood = lazy(() =>
   import("./Pages/RESTAURANT/UpdateFood/UpdateFood")
 );
 const MyCart = lazy(() => import("./Pages/USER/MyCart/MyCart"));
+const MySaveFood = lazy(() => import("./Pages/USER/MySaveFood/MySaveFood"));
 const UsreOnly = lazy(() => import("./Components/ProtectedRoute/UsreOnly"));
 const Checkout = lazy(() => import("./Pages/USER/Checkout/Checkout"));
 const DelBoyOnly = lazy(() =>
@@ -159,6 +160,10 @@ function App() {
           <Route
             element={<UsreOnly isAuther={isAuther} isLoading={isLoading} />}
           >
+            <Route
+              path="/save"
+              element={<MySaveFood isAuther={isAuther} isLoading={isLoading} />}
+            />
             <Route
               path="/my/cart"
               element={<MyCart isAuther={isAuther} isLoading={isLoading} />}

@@ -1,44 +1,40 @@
 import React, { useEffect, useState } from "react";
+import "./mySaveFood.css";
 import FoodHeader from "../../../Components/FoodHeader/FoodHeader";
 import FoodFooterNav from "../../../Components/FoodFooterNav/FoodFooterNav";
-import "./uesrRes.css";
 import FoodCart from "../../../Components/FoodCart/FoodCart";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserResFoods } from "../../../redux/actions/user";
 import { useParams } from "react-router-dom";
 import Loader from "../../../Components/Loaders/Loader";
-import UserFoodBigCard from "../../../Components/UserFoodBigCard/UserFoodBigCard"
+import UserFoodBigCard from "../../../Components/UserFoodBigCard/UserFoodBigCard";
+import { getMySaveFoods } from "../../../redux/actions/user";
 
-const UserRes = ({ isAuther, isLoading = true }) => {
+const MySaveFood = ({ isAuther, isLoading = true }) => {
   const dispatch = useDispatch();
-  const params = useParams();
 
-  const {
-    foods,
-    isLoading: isFoodsLoading,
-    resName,
-  } = useSelector((state) => state.userResFoods);
-  const saveFood = useSelector((state)=> state.user?.user?.saveFood || [])
+  const { isLoading: isFoodsLoading } = useSelector(
+    (state) => state.userSaveFoods
+  );
+  const foods = useSelector((state) => state.userSaveFoods?.saveFood || []);
+  const saveFood = useSelector((state) => state.user?.user?.saveFood || []);
 
-  const [isAddCardImgShow, setIsAddCardImgshow] = useState(false)
+  const [isAddCardImgShow, setIsAddCardImgshow] = useState(false);
 
   useEffect(() => {
-    if (params.resId) {
-      dispatch(getUserResFoods({ resId: params.resId }));
-    }
-  }, [dispatch, params.resId]);
+    dispatch(getMySaveFoods());
+  }, []);
 
-  const addImgShowFun = () =>{
-    setIsAddCardImgshow(true)
-  }
+  const addImgShowFun = () => {
+    setIsAddCardImgshow(true);
+  };
 
-  useEffect(()=>{
-    if(isAddCardImgShow){
-      setTimeout(function() {
-        setIsAddCardImgshow(false)
+  useEffect(() => {
+    if (isAddCardImgShow) {
+      setTimeout(function () {
+        setIsAddCardImgshow(false);
       }, 4000);
     }
-  }, [isAddCardImgShow])
+  }, [isAddCardImgShow]);
 
   return (
     <div className="user-res-page">
@@ -46,7 +42,11 @@ const UserRes = ({ isAuther, isLoading = true }) => {
         className="user-res-header overflow-hidden w-100 overflow-visible position-fixed top-0 start-0 end-0 shadow-sm"
         style={{ zIndex: "20" }}
       >
-        <FoodHeader isAuther={isAuther} isLoading={isLoading} isGifImgShow={isAddCardImgShow} />
+        <FoodHeader
+          isAuther={isAuther}
+          isLoading={isLoading}
+          isGifImgShow={isAddCardImgShow}
+        />
       </div>
       <div className="w-100" style={{ marginTop: "85px" }}>
         {foods === undefined || isFoodsLoading ? (
@@ -55,21 +55,22 @@ const UserRes = ({ isAuther, isLoading = true }) => {
           <div className="row w-100 position-relative">
             <div className=" position-fixed start-0 col-xl-6 col-lg-6 col-md-6 col-sm-0 col-sm-0 d-xl-block d-lg-block d-md-block d-sm-none d-none">
               {foods !== undefined && foods.length > 0 ? (
-                  <UserFoodBigCard
-                    key={foods[0]?._id}
-                    foodId={foods[0]?._id}
-                    weight={foods[0]?.foodWeight}
-                    img={foods[0]?.foodImage?.publicUrl}
-                    name={foods[0]?.foodName}
-                    text={foods[0]?.foodDescription}
-                    price={foods[0]?.foodPrice}
-                    isAvailable={foods[0]?.isAvailable}
-                    isAuther={isAuther}
-                    resId={params?.resId}
-                    resName={resName}
-                    addImgShowFun={addImgShowFun}
-                    saveFood={saveFood}
-                  />
+                <UserFoodBigCard
+                  key={foods[0]?._id}
+                  foodId={foods[0]?._id}
+                  weight={foods[0]?.foodWeight}
+                  img={foods[0]?.foodImage?.publicUrl}
+                  name={foods[0]?.foodName}
+                  text={foods[0]?.foodDescription}
+                  price={foods[0]?.foodPrice}
+                  isAvailable={foods[0]?.isAvailable}
+                  isAuther={isAuther}
+                  resId={foods[0]?.foodRestaurant?._id}
+                  resName={foods[0]?.foodRestaurant?.resName}
+                  addImgShowFun={addImgShowFun}
+                  saveFood={saveFood}
+                  isSavePage={true}
+                />
               ) : (
                 <></>
               )}
@@ -87,11 +88,11 @@ const UserRes = ({ isAuther, isLoading = true }) => {
                     price={foods[0]?.foodPrice}
                     isAvailable={foods[0]?.isAvailable}
                     isAuther={isAuther}
-                    resId={params?.resId}
-                    resName={resName}
+                    resId={foods[0]?.foodRestaurant?._id}
+                    resName={foods[0]?.foodRestaurant?.resName}
                     addImgShowFun={addImgShowFun}
                     saveFood={saveFood}
-
+                    isSavePage={true}
                   />
                 ) : (
                   <></>
@@ -110,10 +111,11 @@ const UserRes = ({ isAuther, isLoading = true }) => {
                       price={f?.foodPrice}
                       isAvailable={f?.isAvailable}
                       isAuther={isAuther}
-                      resId={params?.resId}
-                      resName={resName}
+                      resId={f?.foodRestaurant?._id}
+                      resName={f?.foodRestaurant?.resName}
                       addImgShowFun={addImgShowFun}
                       saveFood={saveFood}
+                      isSavePage={true}
                     />
                   ) : null
                 )
@@ -125,10 +127,14 @@ const UserRes = ({ isAuther, isLoading = true }) => {
         )}
       </div>
       <div className="user-res-footer-page d-xl-none d-lg-none d-md-none d-sm-block d-block position-fixed bottom-0 start-0 end-0 bg-white shadow-lg">
-        <FoodFooterNav isAuther={isAuther} isLoading={isLoading} isGifImgShow={isAddCardImgShow}  />
+        <FoodFooterNav
+          isAuther={isAuther}
+          isLoading={isLoading}
+          isGifImgShow={isAddCardImgShow}
+        />
       </div>
     </div>
   );
 };
 
-export default UserRes;
+export default MySaveFood;

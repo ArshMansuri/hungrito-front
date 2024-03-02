@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addToCart, decreaseQutInCart, getMyCartDetail, getNearestRestus, getUserResFoods, increaseQutInCart, placeCodOrder, placeOnlineOrder, removeFromCart, userLoad, userLogin, userPhoneOtpVerify, userSignUp } from "../actions/user";
+import { addToCart, decreaseQutInCart, getMyCartDetail, getMySaveFoods, getNearestRestus, getUserResFoods, increaseQutInCart, placeCodOrder, placeOnlineOrder, removeFromCart, userLoad, userLogin, userPhoneOtpVerify, userSignUp } from "../actions/user";
 
 const initialState = {
   isAuther: false,
@@ -269,6 +269,35 @@ export const placeOnlineOrderReduser = createSlice({
   }
 })
 
+export const getMySaveFoodsReduser = createSlice({
+  name: "getMySaveFoodsReduser",
+  initialState: {isLoading: false, success: false},
+  reducers:{
+    removeFromSave(state,action){
+      const index = state.saveFood.findIndex((obj)=>obj._id.toString() === action.payload.toString())
+      if(index !== -1){
+        state.saveFood.splice(index,1)
+      }
+    }
+  },  
+  extraReducers: (builder) => {
+    builder.addCase(getMySaveFoods.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getMySaveFoods.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.saveFood = action?.payload?.foods
+      state.success = true
+    });
+    builder.addCase(getMySaveFoods.rejected, (state, action) => {
+      state.message = action.payload?.message || action.payload;
+      state.isLoading = false;
+      state.success = false
+    });
+  }
+})
+
 export const {updateMyCartDetail, incresseMyCartDetail, decreaseMyCartDetail} = myCartDetailReduser.actions 
 export const {makePlaceCodSuccessFalse} = placeCodOrderReduser.actions 
 export const {makePlaceOnlineSuccessFalse} = placeOnlineOrderReduser.actions 
+export const {removeFromSave} = getMySaveFoodsReduser.actions 

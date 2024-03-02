@@ -9,8 +9,7 @@ import Loader from "../../../Components/Loaders/Loader";
 import Skeleton from "../../../Components/Loaders/Skeleton";
 import {makeDeleteSuccessFalse, makeSuccessFalse } from "../../../redux/slice/food";
 
-const BASE_URL = "https://hungritobackend.onrender.com";
-// const BASE_URL = "http://localhost:6010";
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const UpdateFood = ({ isRestuAuther, isResLoading }) => {
   const dispatch = useDispatch();
@@ -354,10 +353,10 @@ const UpdateFood = ({ isRestuAuther, isResLoading }) => {
                       required
                     />
                   )}
-                  <button type="submit" className="my-2">
+                  <button type="submit" className="my-2 update-btn">
                     Update
                   </button>
-                  <button type="button" className="my-2 delet-btn" onClick={deleteFoodhendlar}>
+                  <button type="button" className="my-2 update-btn delet-btn" onClick={deleteFoodhendlar}>
                     Delete
                   </button>
                 </form>
@@ -394,6 +393,8 @@ const UpdateFood = ({ isRestuAuther, isResLoading }) => {
                         ? foodDetail.foodWeight
                         : "00 gm"
                     }
+                    isAvailable={true}
+                    isRestu={true}
                   />
                 </div>
               </div>

@@ -284,6 +284,7 @@ const CreateFood = ({ isRestuAuther, isResLoading }) => {
                       : "00 gm"
                   }
                   isAvailable={true}
+                  isRestu={true}
                 />
               </div>
             </div>

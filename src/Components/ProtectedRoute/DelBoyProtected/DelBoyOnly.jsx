@@ -16,7 +16,6 @@ const DelBoyOnly = ({ isDbAuther = undefined, isDbLoading = true }) => {
   const [userLocation, setUserLocation] = useState(null);
   // const [error, setError] = useState(null);
 
-  console.log(userLocation)
   useEffect(() => {
     let watchId;
     const successHandler = (position) => {
@@ -47,7 +46,6 @@ const DelBoyOnly = ({ isDbAuther = undefined, isDbLoading = true }) => {
 
   useEffect(()=>{
     const updateLocation = async() =>{
-      console.log(active, dbLocation)
       try {
         if(active && dbLocation !== null && dbLocation?.latitude !== undefined && dbLocation?.longitude !== undefined){
           const {data} = await axios.post(`${BASE_URL}/api/v1/delboy/update/location`, {

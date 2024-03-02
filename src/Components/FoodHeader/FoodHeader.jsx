@@ -177,9 +177,15 @@ const FoodHeader = ({
                     <NavLink
                       to={"/save"}
                       className="text-dark d-flex align-items-center"
+                      onClick={()=>setTab('/save')}
                     >
-                      <IoBagHandle size={20} />
-                      <span className="ms-1 mt-1">Save</span>
+                      <IoBagHandle
+                       size={20}
+                       color={`${tab === "/save" ? "#ff6600" : "black"}`}
+                       />
+                      <span className="ms-1 mt-1"  style={{
+                          color: `${tab === "/save" ? "#ff6600" : "black"}`,
+                        }}>Save</span>
                     </NavLink>
                   </div>
                   <div className="mx-xl-4 mx-lg-4 mx-md-3 mx-4 mt-1">
