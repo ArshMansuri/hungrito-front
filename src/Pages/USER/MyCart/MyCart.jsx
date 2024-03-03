@@ -35,7 +35,7 @@ const tostOpstion = {
   theme: "dark",
 };
 
-const MyCart = ({ isAuther, isLoading = true }) => {
+const MyCart = ({ isAuther, isLoading = true, socket }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const mapContainer = useRef(null);
@@ -224,7 +224,8 @@ const MyCart = ({ isAuther, isLoading = true }) => {
     const orderInfo = {
       deliveryAddress,
       isApplyToken,
-      deliveryCharg
+      deliveryCharg,
+      socket
     };
     dispatch(placeCodOrder({ orderInfo }));
   };

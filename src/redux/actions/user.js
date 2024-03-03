@@ -292,6 +292,9 @@ export const placeCodOrder = createAsyncThunk(
         }
       );
       console.log(data)
+      if(data.success === true && data.orderId !== undefined){
+        orderInfo.socket.emit("new-order-from-user", {orderId: data.orderId})
+      }
       toast.success(data.message, tostOpstion)
       return data;
     } catch (error) {

@@ -70,6 +70,7 @@ const FoodFooterNav = ({
       {isAuther === true ? (
         <>
           <NavLink
+            to={"/save"}
             className="d-flex flex-column justify-content-center align-items-end"
             onClick={() => setTab("/save")}
           >

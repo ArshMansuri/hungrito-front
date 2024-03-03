@@ -4,12 +4,12 @@ import { FaLocationDot } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { getResNewOrders } from "../../../redux/actions/restaurant";
 import axios from "axios";
-import { resRemoveOrder } from "../../../redux/slice/restaurant";
+import { addResNewOrder, resRemoveOrder } from "../../../redux/slice/restaurant";
 import { toast } from "react-toastify";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL
 
-const NewOrder = () => {
+const NewOrder = ({socket}) => {
   const dispatch = useDispatch();
 
   const orders = useSelector((state) => state.resNewOrders?.orders);
@@ -17,6 +17,17 @@ const NewOrder = () => {
   useEffect(() => {
     dispatch(getResNewOrders());
   }, []);
+
+  useEffect(()=>{
+    socket.on("new-order-add-in-res", ({sendOrders})=>{
+      console.log(JSON.parse(sendOrders))
+      dispatch(addResNewOrder(JSON.parse(sendOrders)))
+    })
+
+    return () => {
+      socket.off();
+    };
+  }, [])
 
   const resAcceptOrderHendler = async (ordId) =>{
     try {

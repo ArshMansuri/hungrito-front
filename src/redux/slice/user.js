@@ -234,6 +234,7 @@ export const placeCodOrderReduser = createSlice({
     builder.addCase(placeCodOrder.fulfilled, (state, action) => {
       state.isLoading = false;
       state.message = action?.payload?.message
+      state.orderId = action?.payload?.orderId
       state.success = true
     });
     builder.addCase(placeCodOrder.rejected, (state, action) => {

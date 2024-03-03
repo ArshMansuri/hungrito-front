@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./home.css";
 import { NavLink } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -54,6 +54,7 @@ const Home = ({ isAuther, isLoading = true }) => {
     if (citys[index].lat !== 0 && citys[index].lan !== undefined)
       localStorage.setItem("city", JSON.stringify(citys[index]));
   };
+
 
   return (
     <>

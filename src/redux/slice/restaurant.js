@@ -244,10 +244,15 @@ export const getResNewOrdersReduser = createSlice({
     //   state.success = false;
     // },
     resRemoveOrder(state, action){
-      console.log(action.payload)
       const ordIndex = state.orders.findIndex(obj=> obj._id.toString() === action.payload.toString())
       if(ordIndex !== -1){
         state.orders.splice(ordIndex,1)
+      }
+    },
+    addResNewOrder(state,action){
+      if(action.payload !== undefined){
+        console.log(action.payload)
+        state.orders.unshift(action.payload)
       }
     }
   },
@@ -269,4 +274,4 @@ export const getResNewOrdersReduser = createSlice({
 });
 
 export const { removeResName, removeResType } = restuReduser.actions;
-export const { resRemoveOrder } = getResNewOrdersReduser.actions;
+export const { resRemoveOrder, addResNewOrder } = getResNewOrdersReduser.actions;

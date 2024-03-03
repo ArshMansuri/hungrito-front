@@ -150,7 +150,7 @@ function App() {
           {/* ================= User Without Auth Routes ==================*/}
           <Route
             path="/"
-            element={<Home isAuther={isAuther} isLoading={isLoading} />}
+            element={<Home isAuther={isAuther} isLoading={isLoading} socket={socket} />}
           />
           <Route
             path="/user/res/:resId"
@@ -166,7 +166,7 @@ function App() {
             />
             <Route
               path="/my/cart"
-              element={<MyCart isAuther={isAuther} isLoading={isLoading} />}
+              element={<MyCart isAuther={isAuther} isLoading={isLoading} socket={socket} />}
             />
             <Route
               path="/user/checkout"
@@ -223,6 +223,7 @@ function App() {
                 <NewOrder
                   isRestuAuther={isRestuAuther}
                   isResLoading={isResLoading}
+                  socket={socket}
                 />
               }
             />
