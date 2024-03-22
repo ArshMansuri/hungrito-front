@@ -4,7 +4,6 @@ import FoodHeader from "../../../Components/FoodHeader/FoodHeader";
 import FoodFooterNav from "../../../Components/FoodFooterNav/FoodFooterNav";
 import FoodCart from "../../../Components/FoodCart/FoodCart";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 import Loader from "../../../Components/Loaders/Loader";
 import UserFoodBigCard from "../../../Components/UserFoodBigCard/UserFoodBigCard";
 import { getMySaveFoods } from "../../../redux/actions/user";
@@ -22,7 +21,7 @@ const MySaveFood = ({ isAuther, isLoading = true }) => {
 
   useEffect(() => {
     dispatch(getMySaveFoods());
-  }, []);
+  }, [dispatch]);
 
   const addImgShowFun = () => {
     setIsAddCardImgshow(true);

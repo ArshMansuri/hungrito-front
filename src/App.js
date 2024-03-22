@@ -12,6 +12,7 @@ import socketIO from "socket.io-client";
 
 const Home = lazy(() => import("./Pages/USER/Home/Home"));
 const UserRes = lazy(() => import("./Pages/USER/UserRes/UserRes"));
+const UserProfile = lazy(() => import("./Pages/USER/UserProfile/UserProfile"));
 const Login = lazy(() => import("./Pages/USER/Login/Login"));
 const SignUp = lazy(() => import("./Pages/USER/SignUp/SignUp"));
 const ResLogin = lazy(() => import("./Pages/RESTAURANT/ResLogin/ResLogin"));
@@ -66,43 +67,50 @@ const DbSignUp2 = lazy(() =>
 const DbLogin = lazy(() => import("./Pages/DeliveryBoy/DbLogin/DbLogin"));
 const DbHome = lazy(() => import("./Pages/DeliveryBoy/DbHome/DbHome"));
 const DbOrder = lazy(() => import("./Pages/DeliveryBoy/DbOrder/DbOrder"));
+const DbProfile = lazy(() => import("./Pages/DeliveryBoy/DbProfile/DbProfile"));
 const Temp = lazy(() => import("./temp/Temp"));
 
-const socket = socketIO(process.env.REACT_APP_BASE_URL, { transports: ["websocket"] });
+const socket = socketIO(process.env.REACT_APP_BASE_URL, {
+  transports: ["websocket"],
+});
 
 function App() {
   const dispatch = useDispatch();
 
   const { isAuther, isLoading, user } = useSelector((state) => state.user);
   const isRestuAuther = useSelector((state) => state.restu?.isRestuAuther);
-  const { isLoading: isResLoading, restu } = useSelector((state) => state.restu);
+  const { isLoading: isResLoading, restu } = useSelector(
+    (state) => state.restu
+  );
   const isDbAuther = useSelector((state) => state.delBoy?.isDbAuther);
-  const { isLoading: isDbLoading, delBoy } = useSelector((state) => state.delBoy);
+  const { isLoading: isDbLoading, delBoy } = useSelector(
+    (state) => state.delBoy
+  );
 
   const MAP_API = process.env.REACT_APP_TOM_TOM_API_KEY;
 
   useEffect(() => {
     if (localStorage.getItem("isUser") === "true") {
       dispatch(userLoad());
-    }else if (localStorage.getItem("isRestu") === "true") {
+    } else if (localStorage.getItem("isRestu") === "true") {
       dispatch(resLoad());
-    }else if (localStorage.getItem("isDelBoy") === "true") {
+    } else if (localStorage.getItem("isDelBoy") === "true") {
       dispatch(dbLoad());
     }
   }, [dispatch]);
 
-  useEffect(()=>{
-    if(user){
-      console.log("user")
-      socket.emit("user-online", {userId: user?._id})
-    } else if(isDbAuther && delBoy?._id !== undefined){
-      console.log(("del"))
-      socket.emit("deliveryBoy-online", {dbId: delBoy?._id})
-    }  else if(isRestuAuther && restu?._id !== undefined){
-      console.log(("res"))
-      socket.emit("restaurant-online", {resId: restu?._id})
-    } 
-  }, [user, isDbAuther, isRestuAuther])
+  useEffect(() => {
+    if (user) {
+      console.log("user");
+      socket.emit("user-online", { userId: user?._id });
+    } else if (isDbAuther && delBoy?._id !== undefined) {
+      console.log("del");
+      socket.emit("deliveryBoy-online", { dbId: delBoy?._id });
+    } else if (isRestuAuther && restu?._id !== undefined) {
+      console.log("res");
+      socket.emit("restaurant-online", { resId: restu?._id });
+    }
+  }, [user, isDbAuther, isRestuAuther]);
 
   useEffect(() => {
     if (!localStorage.getItem("city")) {
@@ -150,8 +158,11 @@ function App() {
           {/* ================= User Without Auth Routes ==================*/}
           <Route
             path="/"
-            element={<Home isAuther={isAuther} isLoading={isLoading} socket={socket} />}
+            element={
+              <Home isAuther={isAuther} isLoading={isLoading} socket={socket} />
+            }
           />
+
           <Route
             path="/user/res/:resId"
             element={<UserRes isAuther={isAuther} isLoading={isLoading} />}
@@ -166,11 +177,27 @@ function App() {
             />
             <Route
               path="/my/cart"
-              element={<MyCart isAuther={isAuther} isLoading={isLoading} socket={socket} />}
+              element={
+                <MyCart
+                  isAuther={isAuther}
+                  isLoading={isLoading}
+                  socket={socket}
+                />
+              }
             />
             <Route
               path="/user/checkout"
               element={<Checkout isAuther={isAuther} isLoading={isLoading} />}
+            />
+            <Route
+              path="/user/profile"
+              element={
+                <UserProfile
+                  isAuther={isAuther}
+                  isLoading={isLoading}
+                  socket={socket}
+                />
+              }
             />
           </Route>
 
@@ -318,6 +345,7 @@ function App() {
               <DelBoyOnly
                 isDbAuther={isDbAuther}
                 isDbLoading={isDbLoading}
+                socket={socket}
               />
             }
           >
@@ -330,20 +358,34 @@ function App() {
             <Route
               path="/db/order"
               element={
-                <DbOrder isDbAuther={isDbAuther} isDbLoading={isDbLoading} />
-              }
-            />
-            </Route>
-
-          <Route
-              path="/db/verify"
-              element={
-                <DbFirstVerify
+                <DbOrder
                   isDbAuther={isDbAuther}
                   isDbLoading={isDbLoading}
+                  socket={socket}
                 />
               }
             />
+            <Route
+              path="/db/profile"
+              element={
+                <DbProfile
+                isDbAuther={isDbAuther}
+                isDbLoading={isDbLoading}
+                  socket={socket}
+                />
+              }
+            />
+          </Route>
+
+          <Route
+            path="/db/verify"
+            element={
+              <DbFirstVerify
+                isDbAuther={isDbAuther}
+                isDbLoading={isDbLoading}
+              />
+            }
+          />
           <Route
             element={
               <AuthDelBoyProtected

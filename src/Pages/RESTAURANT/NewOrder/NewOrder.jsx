@@ -33,10 +33,12 @@ const NewOrder = ({socket}) => {
     try {
       if(ordId !== undefined){
         const {data} = await axios.get(`${BASE_URL}/api/v1/restaurant/accept/${ordId}`, {withCredentials: true})
-        console.log(data)
         if(data.success === true){
           dispatch(resRemoveOrder(ordId))
           toast.success(data?.message)
+          if(data?.sendDelBoyLiveOrd){
+            socket.emit("new-order-from-restu", {ordId})
+          }
         } else {
           toast.error(data?.message || "Somthing Went Wrong")
         }

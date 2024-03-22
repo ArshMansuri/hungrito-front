@@ -137,7 +137,7 @@ const MyCart = ({ isAuther, isLoading = true, socket }) => {
         map.current = null;
       }
     };
-  }, [mapContainer, map, marker, showLoactionPopUp]);
+  }, [mapContainer, map, marker, showLoactionPopUp, deliveryAddress.lat, deliveryAddress.lon]);
 
   const applayTokenHandler = () => {
     if (isApplyToken) {

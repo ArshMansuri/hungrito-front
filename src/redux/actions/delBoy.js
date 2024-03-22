@@ -4,16 +4,16 @@ import { toast } from "react-toastify";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
-const tostOpstion = {
-  position: "bottom-center",
-  autoClose: 3000,
-  hideProgressBar: false,
-  closeOnClick: true,
-  pauseOnHover: true,
-  draggable: true,
-  progress: undefined,
-  theme: "dark",
-};
+// const tostOpstion = {
+//   position: "bottom-center",
+//   autoClose: 3000,
+//   hideProgressBar: false,
+//   closeOnClick: true,
+//   pauseOnHover: true,
+//   draggable: true,
+//   progress: undefined,
+//   theme: "dark",
+// };
 
 export const dbSignUpVerify = createAsyncThunk(
   "dbSignUpVerify",

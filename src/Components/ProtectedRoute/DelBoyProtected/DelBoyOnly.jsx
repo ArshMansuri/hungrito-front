@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
 import DbLogin from "../../../Pages/DeliveryBoy/DbLogin/DbLogin";
-import { Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import DbBottemNav from "../../DbBottemNav/DbBottemNav";
 import DbHeader from "../../DbHeader/DbHeader";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import "./delBoyOnly.css";
+import { IoMdClose } from "react-icons/io";
 
-const BASE_URL = process.env.REACT_APP_BASE_URL
-let dbLocation = null
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+let dbLocation = null;
 
-const DelBoyOnly = ({ isDbAuther = undefined, isDbLoading = true }) => {
-
-  const active = useSelector((state)=> state?.delBoy?.delBoy?.active || false)
+const DelBoyOnly = ({ isDbAuther = undefined, isDbLoading = true, socket }) => {
+  const active = useSelector((state) => state?.delBoy?.delBoy?.active || false);
 
   const [userLocation, setUserLocation] = useState(null);
+  const [isDbNewOrderAvailbale, setIsDbNewOrderAvailable] = useState(false);
+  // const [sound, setSound] = useState(null);
   // const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -21,7 +24,7 @@ const DelBoyOnly = ({ isDbAuther = undefined, isDbLoading = true }) => {
     const successHandler = (position) => {
       const { latitude, longitude } = position.coords;
       setUserLocation({ latitude, longitude });
-      dbLocation = { latitude, longitude }
+      dbLocation = { latitude, longitude };
     };
 
     const errorHandler = (error) => {
@@ -44,26 +47,46 @@ const DelBoyOnly = ({ isDbAuther = undefined, isDbLoading = true }) => {
     };
   }, []);
 
-  useEffect(()=>{
-    const updateLocation = async() =>{
+  useEffect(() => {
+    const updateLocation = async () => {
       try {
-        if(active && dbLocation !== null && dbLocation?.latitude !== undefined && dbLocation?.longitude !== undefined){
-          const {data} = await axios.post(`${BASE_URL}/api/v1/delboy/update/location`, {
-            longitude: dbLocation.longitude,
-            latitude: dbLocation.latitude
-          }, {withCredentials: true})
-          console.log(data)
+        if (
+          active &&
+          dbLocation !== null &&
+          dbLocation?.latitude !== undefined &&
+          dbLocation?.longitude !== undefined
+        ) {
+          const { data } = await axios.post(
+            `${BASE_URL}/api/v1/delboy/update/location`,
+            {
+              longitude: dbLocation.longitude,
+              latitude: dbLocation.latitude,
+            },
+            { withCredentials: true }
+          );
+          console.log(data);
         }
       } catch (error) {
-       console.log(error) 
+        console.log(error);
       }
-    }
-    updateLocation()
-    const intervalId = setInterval(updateLocation, 120000)
+    };
+    updateLocation();
+    const intervalId = setInterval(updateLocation, 120000);
     // const intervalId = setInterval(updateLocation, 1000)
 
-    return () => clearInterval(intervalId)
-  }, [active])
+    return () => clearInterval(intervalId);
+  }, [active]);
+
+
+useEffect(() => {
+    socket.on(
+      "new-order-notification-for-delboy",
+      ({ isNewOrderAvailable }) => {
+        setIsDbNewOrderAvailable(true);
+      }
+    );
+    
+  }, []);
 
   if (!isDbLoading && isDbAuther && isDbAuther !== undefined) {
     return (
@@ -87,6 +110,25 @@ const DelBoyOnly = ({ isDbAuther = undefined, isDbLoading = true }) => {
           >
             <Outlet />
           </div>
+          {isDbNewOrderAvailbale && (
+            <div className="new-order-notification position-fixed start-0 end-0 bg-white mx-3 pb-2">
+              <div className="text-end me-2 my-2">
+                <IoMdClose
+                  size={20}
+                  onClick={() => setIsDbNewOrderAvailable(false)}
+                />
+              </div>
+              <div className="d-flex justify-content-between m-2">
+                <div>New Order Available</div>
+                <div onClick={() => setIsDbNewOrderAvailable(false)}>
+                  <NavLink to={"/db/order"} style={{ color: "#ff6600" }}>
+                    View
+                  </NavLink>
+                </div>
+              </div>
+            </div>
+          )}
+
           <div className="food-footer-page d-xl-none d-lg-none d-md-none d-sm-block d-block position-fixed bottom-0 start-0 end-0 bg-white shadow-lg">
             <DbBottemNav isDbAuther={isDbAuther} isDbLoading={isDbLoading} />
           </div>

@@ -4,14 +4,27 @@ import { NavLink } from "react-router-dom";
 import { AiFillHome, AiOutlineHome } from "react-icons/ai";
 import { IoIosList, IoIosListBox } from "react-icons/io";
 import { MdOutlineDeliveryDining, MdDeliveryDining } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const DbBottemNav = () => {
-    const [tab, setTab] = useState(window.location.pathname);
-    const profileImg = "https://res.cloudinary.com/dbirutg8t/image/upload/v1705764347/hungriTo/userAvatar/m0ozb0onaxl2lca6vcri.jpg"
+const DbBottemNav = ({}) => {
+  const navigate = useNavigate();
 
+  const [tab, setTab] = useState(window.location.pathname);
+
+  const profileImg = useSelector(
+    (state) =>
+      state?.delBoy?.delBoy?.dbImage?.publicUrl ||
+      "https://res.cloudinary.com/dbirutg8t/image/upload/v1705764347/hungriTo/userAvatar/m0ozb0onaxl2lca6vcri.jpg"
+  );
+
+  const onClickProfile = () => {
+    setTab("/db/profile");
+    return navigate("/db/profile");
+  };
   return (
     <div
-      className="food-footer-com d-flex align-items-center justify-content-around"
+      className="food-footer-com db-footer-nave-com d-flex align-items-center justify-content-around"
       style={{ height: "66px" }}
     >
       <NavLink
@@ -61,27 +74,29 @@ const DbBottemNav = () => {
       <div
         className="d-flex flex-column justify-content-center align-items-center img-nave"
         style={{ width: "38px", paddingBottom: "3px" }}
-        onClick={() => setTab("/db/profile")}
+        onClick={onClickProfile}
       >
-        <div className="foot-nav-icon img-div w-75">
+        <div
+          className="foot-nav-icon img-div rounded-circle d-flex justify-content-center align-items-center"
+          style={{
+            border: `${
+              tab === "/db/profile" ? "1px solid #ff6600" : "1px solid black"
+            }`,
+            padding: "2px"
+          }}
+        >
           <img
             src={profileImg}
             width="100%"
             alt=""
             srcSet=""
             className="rounded-circle"
-            style={{
-              border: `${
-                tab === "/profile" ? "1px solid #ff6600" : "1px solid black"
-              }`,
-              padding: "2px"
-            }}
           />
         </div>
         <div
           className="foot-nav-text"
           style={{
-            color: `${tab === "/profile" ? "#ff6600" : "black"}`,
+            color: `${tab === "/db/profile" ? "#ff6600" : "black"}`,
             fontSize: "13px",
           }}
         >

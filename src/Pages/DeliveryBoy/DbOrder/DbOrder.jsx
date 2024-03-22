@@ -4,17 +4,46 @@ import DbNewOrderPage from "../../../Components/DbTwoPageCom/DbNewOrderPage/DbNe
 import DbActiveOrderPage from "../../../Components/DbTwoPageCom/DbActiveOrderPage/DbActiveOrderPage";
 import {useDispatch, useSelector} from "react-redux"
 import { getDbNewOrders } from "../../../redux/actions/delBoy";
+import axios from "axios";
 
-const DbOrder = () => {
+const BASE_URL = process.env.REACT_APP_BASE_URL
+
+const DbOrder = ({socket}) => {
 
   const dispatch = useDispatch()
   const [activeScree, setActiveScreen] = useState("newOrder");
+  const isDelBoyActive = useSelector((state)=> state?.delBoy?.delBoy?.active || false)
 
-
+  const [isDbActive, setIsDbActive] = useState()
 
   useEffect(()=>{
       dispatch(getDbNewOrders())
   }, [])
+
+  useEffect(()=>{
+    setIsDbActive(isDelBoyActive)
+  }, [isDelBoyActive])
+
+  const changeActiveScreen = (value) =>{
+    setActiveScreen(value)
+  }
+
+  const activeDeActiveHendler = async(e)=>{
+    try {
+
+      const {data} = await axios.get(`${BASE_URL}/api/v1/delBoy/active/deactive`, {withCredentials: true})
+      
+      if(data !== undefined && data?.success === true){
+        if(isDbActive){
+          setIsDbActive(false)
+        } else {
+          setIsDbActive(true)
+        }
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
   
 
   return (
@@ -28,6 +57,9 @@ const DbOrder = () => {
                 class="form-check-input"
                 type="checkbox"
                 id="flexSwitchCheckDefault"
+                value={isDbActive}
+                onClick={activeDeActiveHendler}
+                checked={isDbActive}
               />
             </div>
           </div>
@@ -57,9 +89,9 @@ const DbOrder = () => {
       </div>
       <div style={{marginTop: "98px"}}>
         {activeScree === "newOrder" ? (
-          <DbNewOrderPage />
+          <DbNewOrderPage socket={socket}  />
         ) : (
-          <DbActiveOrderPage />
+          <DbActiveOrderPage changeActiveScreenFun={changeActiveScreen}/>
         )}
       </div>
     </div>

@@ -3,7 +3,6 @@ import { addToCartReduser, decreaseQutInCartReduser, getMySaveFoodsReduser, incr
 import { getResNewOrdersReduser, restuReduser } from "./slice/restaurant"
 import { createFoodReduser, deleteResFoodReduser, getResFoodListReduser, getResSingleFoodReduser, updateResFoodReduser, updateResFoodisAvailableReduser } from "./slice/food"
 import { delBoyReduser, getDbNewOrdersReduser } from "./slice/delBoy"
-import { getResNewOrders } from "./actions/restaurant"
 
 
 const store = configureStore({

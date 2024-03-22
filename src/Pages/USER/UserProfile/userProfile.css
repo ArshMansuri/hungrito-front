@@ -1,0 +1,37 @@
+.user-profile-page .center-div{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.user-profile-page .profile-pic-div{
+    max-width: 30%;
+}
+
+.user-profile-page .profile-text{
+    font-family: 'Roboto', sans-serif;
+}
+.user-profile-page .profile-text .username{
+    font-size: 22px;
+    text-transform: capitalize;
+}
+.user-profile-page .profile-text .token{
+    font-size: 18px;
+    text-transform: capitalize;
+}
+
+.user-profile-page .active-screen{
+    font-weight: 500;
+    border-bottom: 2px solid #ff6600;
+    font-family: 'Roboto', sans-serif;
+    color: #ff6600;
+}
+
+.user-profile-page .inactive-screen{
+    border-bottom: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+@media (max-width: 770px) {
+    .user-profile-page .center-div{
+        min-width: 100vw;
+    }
+}

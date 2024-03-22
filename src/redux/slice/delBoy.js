@@ -177,9 +177,15 @@ export const getDbNewOrdersReduser = createSlice({
     isLoading: false
   },
   reducers: {
-    makeCreateFoodSuccessFalse(state) {
-      state.success = false;
-    },
+    // makeCreateFoodSuccessFalse(state) {
+    //   state.success = false;
+    // },
+    addDbNewOrder(state, action){
+      if(action.payload !== undefined){
+        console.log(action.payload)
+        state.orders = action.payload
+      }
+    }
   },
   extraReducers: (builder) => {
     // ================ Restaurant get new orders   ================
@@ -199,3 +205,4 @@ export const getDbNewOrdersReduser = createSlice({
 });
 
 export const { removeDbName } = delBoyReduser.actions;
+export const { addDbNewOrder } = getDbNewOrdersReduser.actions;
