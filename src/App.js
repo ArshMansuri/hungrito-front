@@ -9,6 +9,9 @@ import axios from "axios";
 import AuthDelBoyProtected from "./Components/ProtectedRoute/DelBoyProtected/AuthDelBoyProtected";
 import { dbLoad } from "./redux/actions/delBoy";
 import socketIO from "socket.io-client";
+import AuthAdminProtected from "./Components/ProtectedRoute/AdminProtected/AuthAdminProtected";
+import AdminOnly from "./Components/ProtectedRoute/AdminProtected/AdminOnly";
+import { adminLoad } from "./redux/actions/admin";
 
 const Home = lazy(() => import("./Pages/USER/Home/Home"));
 const UserRes = lazy(() => import("./Pages/USER/UserRes/UserRes"));
@@ -68,6 +71,9 @@ const DbLogin = lazy(() => import("./Pages/DeliveryBoy/DbLogin/DbLogin"));
 const DbHome = lazy(() => import("./Pages/DeliveryBoy/DbHome/DbHome"));
 const DbOrder = lazy(() => import("./Pages/DeliveryBoy/DbOrder/DbOrder"));
 const DbProfile = lazy(() => import("./Pages/DeliveryBoy/DbProfile/DbProfile"));
+const ResWallet = lazy(() => import("./Pages/RESTAURANT/ResWallet/ResWallet"));
+const AdminLogin = lazy(() => import("./Pages/Admin/AdminLogin/AdminLogin"));
+const AdminDashBoard = lazy(() => import("./Pages/Admin/AdminDashBoard/AdminDashBoard"));
 const Temp = lazy(() => import("./temp/Temp"));
 
 const socket = socketIO(process.env.REACT_APP_BASE_URL, {
@@ -86,6 +92,8 @@ function App() {
   const { isLoading: isDbLoading, delBoy } = useSelector(
     (state) => state.delBoy
   );
+  const isAdminAuther = useSelector((state) => state.admin?.isAdminAuther);
+  const { isLoading: isAdminLoading } = useSelector((state) => state.admin);
 
   const MAP_API = process.env.REACT_APP_TOM_TOM_API_KEY;
 
@@ -96,6 +104,8 @@ function App() {
       dispatch(resLoad());
     } else if (localStorage.getItem("isDelBoy") === "true") {
       dispatch(dbLoad());
+    } else if (localStorage.getItem("isAdmin") === "true") {
+      dispatch(adminLoad());
     }
   }, [dispatch]);
 
@@ -281,6 +291,15 @@ function App() {
                 />
               }
             />
+            <Route
+              path="/res/wallet"
+              element={
+                <ResWallet
+                  isRestuAuther={isRestuAuther}
+                  isResLoading={isResLoading}
+                />
+              }
+            />
             <Route path="/temp" element={<Temp />} />
           </Route>
 
@@ -369,8 +388,8 @@ function App() {
               path="/db/profile"
               element={
                 <DbProfile
-                isDbAuther={isDbAuther}
-                isDbLoading={isDbLoading}
+                  isDbAuther={isDbAuther}
+                  isDbLoading={isDbLoading}
                   socket={socket}
                 />
               }
@@ -418,6 +437,27 @@ function App() {
             path="/food"
             element={<Food isAuther={isAuther} isLoading={isLoading} />}
           />
+
+          <Route
+            element={
+              <AdminOnly
+                isAdminAuther={isAdminAuther}
+                isAdminLoading={isAdminLoading}
+              />
+            }
+          >
+            <Route path="/admin/dashboard" element={<AdminDashBoard isAdminAuther={isAdminAuther}  isAdminLoading={isAdminLoading} />} />
+          </Route>
+          <Route
+            element={
+              <AuthAdminProtected
+                isAdminAuther={isAdminAuther}
+                isAdminLoading={isAdminLoading}
+              />
+            }
+          >
+            <Route path="/admin/login" element={<AdminLogin isAdminAuther={isAdminAuther}  isAdminLoading={isAdminLoading} />} />
+          </Route>
         </Routes>
       </Suspense>
     </Router>

@@ -1,0 +1,14 @@
+.admin-only .sidbar-animation-helper {
+}
+
+.admin-only .sidbar-animation {
+  left: -3% !important;
+  transition: left 0.6s ease;
+}
+
+@media (max-width: 768px) {
+  .admin-only .sidbar-animation-helper {
+    left: -100%;
+    transition: left 0.3s ease;
+  }
+}

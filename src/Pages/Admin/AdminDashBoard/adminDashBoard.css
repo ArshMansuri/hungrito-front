@@ -1,0 +1,50 @@
+.admin-dashboard-main .dash-pie-chart,
+.admin-dashboard-main .dash-order-chart {
+  width: 95%;
+  height: 280px;
+  flex-shrink: 0;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.04);
+  border-radius: 14px;
+  background: #fff;
+  font-family: 'Roboto', sans-serif;
+}
+
+.admin-dashboard-main .dash-order-chart .order-chart{
+  height: 233px;
+}
+
+.admin-dashboard-main .dash-revenue-chart .revenue-chart{
+  height: 335px;
+}
+
+.admin-dashboard-main .dash-revenue-chart, .admin-dashboard-main .dash-customer-chart{
+  width: 95%;
+  height: 380px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.04);
+}
+
+.admin-dashboard-main .dash-chart-header{
+  font-family: 'Roboto', sans-serif;
+}
+
+.admin-dashboard-main .dash-pie-chart .center-text, .dash-pie-chart .bottem-text{
+  font-size: 13px;
+  font-weight: 500;
+}
+
+@media (max-width: 1200px) {
+  .admin-dashboard-main .dash-pie-chart, .dash-order-chart, .dash-order-chart .order-chart, .dash-revenue-chart, .dash-revenue-chart .revenue-chart, .dash-customer-chart, .dash-customer-chart .customer-chart{
+    height: fit-content !important;
+  }
+}
+@media (max-width: 450px) {
+  .admin-dashboard-main .dash-pie-chart .center-text{
+    font-size: 13px;
+  }
+  .admin-dashboard-main .dash-pie-chart .bottem-text{
+    font-size: 8px;
+  }
+}

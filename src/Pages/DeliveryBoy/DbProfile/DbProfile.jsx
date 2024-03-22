@@ -11,6 +11,7 @@ const DbProfile = ({ isDbLoading = true }) => {
   );
 
   const dbName = useSelector((state) => state?.delBoy?.delBoy?.dbName || "");
+  const dbMoney = useSelector((state) => state?.delBoy?.delBoy?.money || 0);
 
   return (
     <div className="db-profile-page">
@@ -30,7 +31,7 @@ const DbProfile = ({ isDbLoading = true }) => {
           <div className="ms-4 profile-text">
             <div className="username text-capitalize">{dbName}</div>
             <div className="token">
-              Money <span>{1000}</span>
+              Money <span>{dbMoney}</span>
             </div>
           </div>
         </div>

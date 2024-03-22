@@ -3,6 +3,7 @@ import { addToCartReduser, decreaseQutInCartReduser, getMySaveFoodsReduser, incr
 import { getResNewOrdersReduser, restuReduser } from "./slice/restaurant"
 import { createFoodReduser, deleteResFoodReduser, getResFoodListReduser, getResSingleFoodReduser, updateResFoodReduser, updateResFoodisAvailableReduser } from "./slice/food"
 import { delBoyReduser, getDbNewOrdersReduser } from "./slice/delBoy"
+import { adminReduser } from "./slice/admin"
 
 
 const store = configureStore({
@@ -28,6 +29,7 @@ const store = configureStore({
         resNewOrders: getResNewOrdersReduser.reducer,
         delBoy: delBoyReduser.reducer,
         dbNewOrders: getDbNewOrdersReduser.reducer,
+        admin: adminReduser.reducer
     }
 })
 

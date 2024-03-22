@@ -7,10 +7,12 @@ import iconImg2 from "./img/delivery-boy-bick-icon.png";
 import L from "leaflet";
 import "leaflet-routing-machine";
 import icon from "leaflet/dist/images/marker-icon.png";
+import { useDispatch } from "react-redux";
+import { addActiveOrdUserId, removeActiveOrdUserId } from "../../../redux/slice/delBoy";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
-const DbActiveOrderPage = ({ dbLocation, temp, changeActiveScreenFun =() =>{} }) => {
+const DbActiveOrderPage = ({ dbLocation, temp, changeActiveScreenFun =() =>{}, socket }) => {
   const [order, setOrder] = useState(undefined);
   const [isShowMap, setIsShowMap] = useState(false);
   const [dbLiveLocation, setDbLiveLocation] = useState(null);
@@ -21,6 +23,8 @@ const DbActiveOrderPage = ({ dbLocation, temp, changeActiveScreenFun =() =>{} })
   const marker = useRef(null);
   const markerEndPosition = useRef(null);
   const routingControlRef = useRef(null);
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     async function fetchData() {
@@ -37,6 +41,7 @@ const DbActiveOrderPage = ({ dbLocation, temp, changeActiveScreenFun =() =>{} })
         ) {
           setOrder(data.order);
           console.log(data.order);
+          dispatch(addActiveOrdUserId(data?.order?.userId))
           let isResCompalet = true;
           for (let i = 0; i < data.order?.orders?.restu.length; i++) {
             if (data.order?.orders?.restu[i].resStatus === "pending") {
@@ -173,7 +178,15 @@ const DbActiveOrderPage = ({ dbLocation, temp, changeActiveScreenFun =() =>{} })
         showAlternatives: false,
       }).addTo(mapRef.current);
     }
+
+    if( dbLiveLocation?.latitude !== undefined &&
+      dbLiveLocation?.longitude !== null && order !== null && order !== undefined){
+        socket.emit("db-live-loc-for-user", {location: dbLiveLocation, userId: order?.userId})
+      }
+
   }, [dbLiveLocation, endLocation]);
+
+
 
   const pickUpHendler = async () => {
     if (order) {
@@ -260,6 +273,7 @@ const DbActiveOrderPage = ({ dbLocation, temp, changeActiveScreenFun =() =>{} })
       if(data !== undefined && data?.success === true){
         setOrder(undefined)
         setEndLocation(undefined)
+        dispatch(removeActiveOrdUserId())
         changeActiveScreenFun("newOrder")
       }
     } catch (error) {

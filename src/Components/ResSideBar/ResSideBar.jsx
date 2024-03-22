@@ -133,13 +133,13 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
             </NavLink>
             </div>
             <div className="w-100 d-flex justify-content-center w-100 my-3">
-            <NavLink className='w-75'>
-                <button className={`${tab === '/res/order/lis' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
+            <NavLink to={"/res/wallet"} className='w-75'>
+                <button className={`${tab === 'wallet' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
                     <span className="nav-icon">
                         <CiWallet size={18} />
                     </span>
                     <span className="mt-1 ps-2">
-                        Wallat
+                        Wallet
                     </span>
                 </button>
             </NavLink>

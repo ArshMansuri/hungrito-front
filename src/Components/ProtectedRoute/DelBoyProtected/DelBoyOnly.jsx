@@ -9,12 +9,13 @@ import "./delBoyOnly.css";
 import { IoMdClose } from "react-icons/io";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
-let dbLocation = null;
 
 const DelBoyOnly = ({ isDbAuther = undefined, isDbLoading = true, socket }) => {
   const active = useSelector((state) => state?.delBoy?.delBoy?.active || false);
+  const isAvilable = useSelector((state) => state?.delBoy?.delBoy?.isAvilable || false);
+  const ordUserId = useSelector((state) => state?.delBoy?.activeOrdId || false);
 
-  const [userLocation, setUserLocation] = useState(null);
+  const [dbLocation, setDbLocation] = useState(null);
   const [isDbNewOrderAvailbale, setIsDbNewOrderAvailable] = useState(false);
   // const [sound, setSound] = useState(null);
   // const [error, setError] = useState(null);
@@ -23,8 +24,7 @@ const DelBoyOnly = ({ isDbAuther = undefined, isDbLoading = true, socket }) => {
     let watchId;
     const successHandler = (position) => {
       const { latitude, longitude } = position.coords;
-      setUserLocation({ latitude, longitude });
-      dbLocation = { latitude, longitude };
+      setDbLocation({ latitude, longitude });
     };
 
     const errorHandler = (error) => {
@@ -87,6 +87,12 @@ useEffect(() => {
     );
     
   }, []);
+
+  useEffect(()=>{
+    if(dbLocation?.latitude !== undefined && dbLocation?.longitude !== null && isAvilable === false && ordUserId !== null){
+      socket.emit("db-live-loc-for-user", {location: dbLocation, userId: ordUserId})
+    }
+  }, [dbLocation])
 
   if (!isDbLoading && isDbAuther && isDbAuther !== undefined) {
     return (

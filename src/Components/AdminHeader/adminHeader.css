@@ -1,0 +1,10 @@
+.admin-header-com{
+ 
+}
+
+.admin-header-com .res-header-icons .icon-div{
+    background-color: rgba(255, 91, 91, 0.15);
+    max-width: 45px;
+    max-height: 45px;
+    border-radius: 12px;
+}

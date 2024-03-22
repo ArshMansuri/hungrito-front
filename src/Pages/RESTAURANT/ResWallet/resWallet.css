@@ -1,0 +1,12 @@
+.res-wallet-page  .db-order-tow-part .active-screen{
+    font-weight: 500;
+    border-bottom: 2px solid #ff6600;
+    font-family: 'Roboto', sans-serif;
+    color: #ff6600;
+  }
+
+  .res-wallet-page .db-order-tow-part .inactive-screen{
+    border-bottom: 0;
+    font-family: 'Roboto', sans-serif;
+
+  }

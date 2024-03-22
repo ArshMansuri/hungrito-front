@@ -4,7 +4,7 @@ import UserHistoryOrder from '../../../Components/UserHistoryOrder/UserHistoryOr
 import UserActiveOrder from '../../../Components/UserActiveOrder/UserActiveOrder';
 import { useSelector } from 'react-redux';
 
-const UserProfile = () => {
+const UserProfile = ({socket}) => {
 
   const user = useSelector((state)=> state?.user?.user)
 
@@ -44,7 +44,7 @@ const UserProfile = () => {
                 {
                     activeScree === "history" ?
                     <UserHistoryOrder /> :
-                    <UserActiveOrder />
+                    <UserActiveOrder socket={socket} />
                 }
             </div>
         </div>

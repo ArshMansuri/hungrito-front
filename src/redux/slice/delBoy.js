@@ -26,6 +26,7 @@ const initialState = {
     dbVehicleImg: {},
     dbLicenseImg: {},
   },
+  activeOrdId: null
 };
 
 export const delBoyReduser = createSlice({
@@ -35,6 +36,13 @@ export const delBoyReduser = createSlice({
     removeDbName(state) {
       state.delBoy.dbName = "";
     },
+    addActiveOrdUserId(state,action){
+      console.log(action?.payload)
+      state.activeOrdId = action?.payload || null
+    },
+    removeActiveOrdUserId(state){
+      state.activeOrdId = null
+    }
   },
   extraReducers: (builder) => {
     // ================ delivery boy first email register  ================
@@ -147,6 +155,7 @@ export const delBoyReduser = createSlice({
       state.isLoading = false;
       state.isDbAuther = action.payload?.delBoy?.isVerify || false;
       state.delBoy = action.payload.delBoy;
+      state.activeOrdId = action.payload?.userId || null;
     });
     builder.addCase(dbLoad.rejected, (state, action) => {
       state.isLoading = false;
@@ -204,5 +213,5 @@ export const getDbNewOrdersReduser = createSlice({
   },
 });
 
-export const { removeDbName } = delBoyReduser.actions;
+export const { removeDbName, addActiveOrdUserId, removeActiveOrdUserId } = delBoyReduser.actions;
 export const { addDbNewOrder } = getDbNewOrdersReduser.actions;
