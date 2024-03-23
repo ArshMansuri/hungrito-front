@@ -12,6 +12,7 @@ import socketIO from "socket.io-client";
 import AuthAdminProtected from "./Components/ProtectedRoute/AdminProtected/AuthAdminProtected";
 import AdminOnly from "./Components/ProtectedRoute/AdminProtected/AdminOnly";
 import { adminLoad } from "./redux/actions/admin";
+import AdminResVerify from "./Pages/Admin/AdminResVerify/AdminResVerify";
 
 const Home = lazy(() => import("./Pages/USER/Home/Home"));
 const UserRes = lazy(() => import("./Pages/USER/UserRes/UserRes"));
@@ -74,6 +75,11 @@ const DbProfile = lazy(() => import("./Pages/DeliveryBoy/DbProfile/DbProfile"));
 const ResWallet = lazy(() => import("./Pages/RESTAURANT/ResWallet/ResWallet"));
 const AdminLogin = lazy(() => import("./Pages/Admin/AdminLogin/AdminLogin"));
 const AdminDashBoard = lazy(() => import("./Pages/Admin/AdminDashBoard/AdminDashBoard"));
+const AdminResList = lazy(() => import("./Pages/Admin/AdminResList/AdminResList"));
+const AdminDbList = lazy(() => import("./Pages/Admin/AdminDbList/AdminDbList"));
+const AdminNewResList = lazy(() => import("./Pages/Admin/AdminNewResList/AdminNewResList"));
+const AdminNewDbList = lazy(() => import("./Pages/Admin/AdminNewDbList/AdminNewDbList"));
+const AdminDbVerify = lazy(() => import("./Pages/Admin/AdminDbVerify/AdminDbVerify"));
 const Temp = lazy(() => import("./temp/Temp"));
 
 const socket = socketIO(process.env.REACT_APP_BASE_URL, {
@@ -447,6 +453,12 @@ function App() {
             }
           >
             <Route path="/admin/dashboard" element={<AdminDashBoard isAdminAuther={isAdminAuther}  isAdminLoading={isAdminLoading} />} />
+            <Route path="/admin/res/list" element={<AdminResList isAdminAuther={isAdminAuther}  isAdminLoading={isAdminLoading} />} />
+            <Route path="/admin/db/list" element={<AdminDbList isAdminAuther={isAdminAuther}  isAdminLoading={isAdminLoading} />} />
+            <Route path="/admin/new/res/list" element={<AdminNewResList isAdminAuther={isAdminAuther}  isAdminLoading={isAdminLoading} />} />
+            <Route path="/admin/res/verify/:resId" element={<AdminResVerify isAdminAuther={isAdminAuther}  isAdminLoading={isAdminLoading} />} />
+            <Route path="/admin/new/db/list" element={<AdminNewDbList isAdminAuther={isAdminAuther}  isAdminLoading={isAdminLoading} />} />
+            <Route path="/admin/db/verify/:dbId" element={<AdminDbVerify isAdminAuther={isAdminAuther}  isAdminLoading={isAdminLoading} />} />
           </Route>
           <Route
             element={

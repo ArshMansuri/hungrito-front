@@ -1,0 +1,7 @@
+.admin-res-verify-page{
+    min-height: 95vh;
+}
+
+.admin-res-verify-page .accept-btn:hover{
+    background-color: #ff4300 !important;
+}
