@@ -85,7 +85,7 @@ const AdminResList = () => {
           manage: (
             <NavLink
               className="text-dark action-nav"
-              to={`admin/res/manage/${r?._id}`}
+              to={`/admin/res/manage/${r?._id}`}
             >
               <button>Manage</button>
             </NavLink>

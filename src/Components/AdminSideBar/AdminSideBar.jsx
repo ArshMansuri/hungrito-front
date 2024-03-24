@@ -3,22 +3,27 @@ import { NavLink, useLocation } from "react-router-dom";
 import { AiOutlineHome } from "react-icons/ai";
 import { CiCircleList, CiFileOn, CiWallet } from "react-icons/ci";
 import { IoMdClose } from "react-icons/io";
-import { HiOutlineUsers, HiOutlinePencilSquare } from "react-icons/hi2";
-import { TbDeviceAnalytics } from "react-icons/tb";
-import { IoFastFoodOutline, IoRestaurantOutline } from "react-icons/io5";
-import { MdOutlineBorderColor, MdOutlineDeliveryDining } from "react-icons/md";
+import {IoRestaurantOutline } from "react-icons/io5";
+import { MdOutlineDeliveryDining } from "react-icons/md";
 import "./adminSideBar.css";
 
 const AdminSideBar = () => {
   const location = useLocation();
   const [tab, setTab] = useState(window.location.pathname);
 
-//   useEffect(() => {
-//     const pathSegments = location.pathname.split("/");
-//     const mainTab = pathSegments[2];
-//     setTab(mainTab);
-//     console.log(mainTab)
-//   }, [location.pathname]);
+  useEffect(()=>{
+    const pathSegments = tab.split("/")
+    const mainTab = pathSegments[2] + "/" + pathSegments[3]
+    if(mainTab === "res/manage"){
+      setTab("/admin/res/list")
+    } else if(mainTab === "db/manage"){
+      setTab("/admin/db/list")
+    } else if(mainTab === "res/verify"){
+      setTab("/admin/new/res/list")
+    } else if(mainTab === "db/verify"){
+      setTab("/admin/new/db/list")
+    }
+  }, [tab])
 
   return (
     <div className="admin-sidebar-com ">
@@ -79,7 +84,7 @@ const AdminSideBar = () => {
             </NavLink>
           </div>
           <div className="w-100 d-flex justify-content-center w-100 my-3">
-            <NavLink to={"/admin/db/list"} className="w-75">
+            <NavLink to={"/admin/db/list"} className="w-75" onClick={()=>setTab("/admin/db/list")}>
               <button
                 className={`${
                   tab === "/admin/db/list" ? "nav-btn-active" : "nav-btn"
@@ -103,48 +108,6 @@ const AdminSideBar = () => {
                   <MdOutlineDeliveryDining size={18} />
                 </span>
                 <span className="mt-1 ps-2">New Delivery Boy</span>
-              </button>
-            </NavLink>
-          </div>
-          <div className="w-100 d-flex justify-content-center w-100 my-3">
-            <NavLink className="w-75">
-              <button
-                className={`${
-                  tab === "/res/order/lis" ? "nav-btn-active" : "nav-btn"
-                } w-100 py-1 px-2 border-0 d-flex align-items-center`}
-              >
-                <span className="nav-icon">
-                  <TbDeviceAnalytics size={18} />
-                </span>
-                <span className="mt-1 ps-2">Analytics</span>
-              </button>
-            </NavLink>
-          </div>
-          <div className="w-100 d-flex justify-content-center w-100 my-3">
-            <NavLink to={"/res/food/list"} className="w-75">
-              <button
-                className={`${
-                  tab === "food" ? "nav-btn-active" : "nav-btn"
-                } w-100 py-1 px-2 border-0 d-flex align-items-center`}
-              >
-                <span className="nav-icon">
-                  <IoFastFoodOutline size={18} />
-                </span>
-                <span className="mt-1 ps-2">Foods</span>
-              </button>
-            </NavLink>
-          </div>
-          <div className="w-100 d-flex justify-content-center w-100 my-3">
-            <NavLink className="w-75">
-              <button
-                className={`${
-                  tab === "/res/order/lis" ? "nav-btn-active" : "nav-btn"
-                } w-100 py-1 px-2 border-0 d-flex align-items-center`}
-              >
-                <span className="nav-icon">
-                  <HiOutlinePencilSquare size={18} />
-                </span>
-                <span className="mt-1 ps-2">Food Detail</span>
               </button>
             </NavLink>
           </div>

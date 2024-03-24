@@ -80,6 +80,9 @@ const AdminDbList = lazy(() => import("./Pages/Admin/AdminDbList/AdminDbList"));
 const AdminNewResList = lazy(() => import("./Pages/Admin/AdminNewResList/AdminNewResList"));
 const AdminNewDbList = lazy(() => import("./Pages/Admin/AdminNewDbList/AdminNewDbList"));
 const AdminDbVerify = lazy(() => import("./Pages/Admin/AdminDbVerify/AdminDbVerify"));
+const AdminResManage = lazy(() => import("./Pages/Admin/AdminResManage/AdminResManage"));
+const AdminDbManage = lazy(() => import("./Pages/Admin/AdminDbManage/AdminDbManage"));
+const AdminProfile = lazy(() => import("./Pages/Admin/AdminProfile/AdminProfile"));
 const Temp = lazy(() => import("./temp/Temp"));
 
 const socket = socketIO(process.env.REACT_APP_BASE_URL, {
@@ -459,6 +462,9 @@ function App() {
             <Route path="/admin/res/verify/:resId" element={<AdminResVerify isAdminAuther={isAdminAuther}  isAdminLoading={isAdminLoading} />} />
             <Route path="/admin/new/db/list" element={<AdminNewDbList isAdminAuther={isAdminAuther}  isAdminLoading={isAdminLoading} />} />
             <Route path="/admin/db/verify/:dbId" element={<AdminDbVerify isAdminAuther={isAdminAuther}  isAdminLoading={isAdminLoading} />} />
+            <Route path="/admin/res/manage/:resId" element={<AdminResManage isAdminAuther={isAdminAuther}  isAdminLoading={isAdminLoading} />} />
+            <Route path="/admin/db/manage/:dbId" element={<AdminDbManage isAdminAuther={isAdminAuther}  isAdminLoading={isAdminLoading} />} />
+            <Route path="/admin/profile" element={<AdminProfile isAdminAuther={isAdminAuther}  isAdminLoading={isAdminLoading} />} />
           </Route>
           <Route
             element={

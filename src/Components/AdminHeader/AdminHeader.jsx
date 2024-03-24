@@ -4,6 +4,7 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { IoSettingsOutline } from "react-icons/io5";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useSelector } from "react-redux";
+import { NavLink} from "react-router-dom";
 
 const AdminHeader = ({ navOpenClose = () => {} }) => {
 
@@ -12,6 +13,7 @@ const AdminHeader = ({ navOpenClose = () => {} }) => {
   const OnClickHamBurger = () => {
     navOpenClose();
   };
+
   return (
     <div className="admin-header-com py-2">
       <div className="d-flex align-items-center justify-content-between">
@@ -33,11 +35,12 @@ const AdminHeader = ({ navOpenClose = () => {} }) => {
               <IoSettingsOutline size={20} color="#FF5B5B" />
             </div>
           </div>
-          <div
+          <NavLink
+            to={"/admin/profile"}
             className="res-profile-div align-items-center justify-content-end"
             style={{ display: "contents" }}
           >
-            <span className="me-2 border-start ps-2 border-1 border-secondary text-capitalize">
+            <span className="me-2 border-start ps-2 border-1 border-secondary text-capitalize text-dark">
               {adminName}
             </span>
             <div style={{ display: "contents" }}>
@@ -48,7 +51,7 @@ const AdminHeader = ({ navOpenClose = () => {} }) => {
                 className="rounded-circle"
               />
             </div>
-          </div>
+          </NavLink>
         </div>
       </div>
     </div>

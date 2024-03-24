@@ -1,0 +1,12 @@
+.admin-db-manage-page{
+    min-height: 95vh;
+}
+
+.admin-db-manage-page input{
+    width: 290px;
+    border: 2px solid #ff6600;
+    outline: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    letter-spacing: 1px;
+}

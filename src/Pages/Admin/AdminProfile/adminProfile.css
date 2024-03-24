@@ -1,0 +1,23 @@
+.admin-profile-page{
+    min-height: 94vh;
+}
+
+.admin-profile-page .center-div{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.admin-profile-page .profile-pic-div{
+    max-width: 30%;
+}
+
+.admin-profile-page .profile-text{
+    font-family: 'Roboto', sans-serif;
+}
+.admin-profile-page .profile-text .username{
+    font-size: 22px;
+    text-transform: capitalize;
+}
+.admin-profile-page .profile-text .token{
+    font-size: 18px;
+    text-transform: capitalize;
+}
