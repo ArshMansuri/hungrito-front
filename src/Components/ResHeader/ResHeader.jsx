@@ -3,8 +3,13 @@ import "./resHeader.css";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { IoSettingsOutline } from "react-icons/io5";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { useSelector } from "react-redux";
 
 const ResHeader = ({ navOpenClose = () => {} }) => {
+
+  const resName = useSelector((state)=> state?.restu?.restu?.resName || "")
+  const resOwnerName = useSelector((state)=> state?.restu?.restu?.resOwnerName || "")
+
   const OnClickHamBurger = () => {
     navOpenClose();
   };
@@ -18,7 +23,7 @@ const ResHeader = ({ navOpenClose = () => {} }) => {
           >
             <RxHamburgerMenu size={22} color="#000" />
           </div>
-          <h5 className="res-name p-0 m-0 pt-1 ms-2">Modes</h5>
+          <h5 className="res-name p-0 m-0 pt-1 ms-2 text-capitalize">{resName}</h5>
         </div>
         <div className="d-flex align-items-center justify-content-end">
           <div className="res-header-icons d-flex align-items-center me-3">
@@ -33,8 +38,8 @@ const ResHeader = ({ navOpenClose = () => {} }) => {
             className="res-profile-div align-items-center justify-content-end"
             style={{ display: "contents" }}
           >
-            <span className="me-2 border-start ps-2 border-1 border-secondary">
-              Arsshhh
+            <span className="me-2 border-start ps-2 border-1 border-secondary text-capitalize">
+            {resOwnerName}
             </span>
             <div style={{ display: "contents" }}>
               <img

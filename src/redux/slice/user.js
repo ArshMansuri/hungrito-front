@@ -79,6 +79,7 @@ export const nearestRestuReduser = createSlice({
     });
     builder.addCase(getNearestRestus.fulfilled, (state, action) => {
       state.restus = action.payload?.restus || [];
+      state.filters = action.payload?.filters || [];
       state.isLoading = false;
     });
     builder.addCase(getNearestRestus.rejected, (state, action) => {

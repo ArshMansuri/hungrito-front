@@ -14,7 +14,7 @@ const Food = ({ isAuther, isLoading = true }) => {
 
   const dispatch = useDispatch()
 
-  const {restus, isLoading: isNearestFoodLoading} = useSelector((state)=> state.nearestRestus)
+  const {restus, isLoading: isNearestFoodLoading, } = useSelector((state)=> state.nearestRestus)
   
   const [userLocation, setUserLocation] = useState(JSON.parse(localStorage.getItem('city')))
   
@@ -61,7 +61,7 @@ const Food = ({ isAuther, isLoading = true }) => {
       >
         <div className="row">
           <div className="filter-scroll col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12 overflow-scroll">
-            <Filters />
+            <Filters   />
           </div>
           <div className="filter-scroll col-xl-4 col-lg-4 col-md-4 col-sm-0 col-0 d-xl-block d-lg-block d-md-block d-sm-none d-none">
             <div id="searchBox" className="d-none align-items-center h-100 w-100 justify-content-end pe-4">

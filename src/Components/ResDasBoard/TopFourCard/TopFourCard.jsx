@@ -5,7 +5,9 @@ import { IoFastFood } from "react-icons/io5";
 import { TbMoneybag } from "react-icons/tb";
 import './topFourCard.css'
 
-const TopFourCard = () => {
+const TopFourCard = ({
+  cardDetail = {}
+}) => {
   return (
     <div className="top-four-card-com">
     <div className="row dash-cards">
@@ -19,14 +21,14 @@ const TopFourCard = () => {
           <div className="w-75 px-2">
             <div className="d-flex flex-column justify-content-center">
               <div className="dash-card-number">
-                <h3>75</h3>
+                <h3>{cardDetail?.todayOrder?.count || 0}</h3>
               </div>
               <div className="dash-card-title" style={{ marginTop: "-2px" }}>
                 Today's Order
               </div>
               <div className="das-card-percentage d-flex align-items-center">
                 <div className="up-down-icon d-flex align-items-center mt-1">
-                  {true ? (
+                  {cardDetail?.todayOrder?.percentage >= 0 ? (
                     <div className="up-down p-0 d-flex justify-content-center align-items-center rounded-circle">
                       <FaArrowUp size={10} color="rgb(255, 91, 91)" />
                     </div>
@@ -35,7 +37,7 @@ const TopFourCard = () => {
                       <FaArrowDown size={10} color="rgb(255, 91, 91)" />
                     </div>
                   )}
-                  <div className="up-down-text mx-2">4% (30 days)</div>
+                  <div className="up-down-text mx-2">{cardDetail?.todayOrder?.percentage || 0}% (1 days)</div>
                 </div>
               </div>
             </div>
@@ -52,14 +54,14 @@ const TopFourCard = () => {
           <div className="w-75 px-2">
             <div className="d-flex flex-column justify-content-center">
               <div className="dash-card-number">
-                <h3>16</h3>
+                <h3>{cardDetail?.totalFood?.count || 0}</h3>
               </div>
               <div className="dash-card-title" style={{ marginTop: "-2px" }}>
                 Total Foods
               </div>
               <div className="das-card-percentage d-flex align-items-center">
                 <div className="up-down-icon d-flex align-items-center mt-1">
-                  {false ? (
+                  {cardDetail?.totalFood?.percentage >= 0  ? (
                     <div className="up-down p-0 d-flex justify-content-center align-items-center rounded-circle">
                       <FaArrowUp size={10} color="rgb(255, 91, 91)" />
                     </div>
@@ -68,7 +70,7 @@ const TopFourCard = () => {
                       <FaArrowDown size={10} color="rgb(255, 91, 91)" />
                     </div>
                   )}
-                  <div className="up-down-text mx-2">4% (30 days)</div>
+                  <div className="up-down-text mx-2">{cardDetail?.totalFood?.percentage || 0}% (1 days)</div>
                 </div>
               </div>
             </div>
@@ -85,14 +87,14 @@ const TopFourCard = () => {
           <div className="w-75 px-2">
             <div className="d-flex flex-column justify-content-center">
               <div className="dash-card-number">
-                <h3>3540</h3>
+                <h3>{cardDetail?.todayIncome?.count || 0}</h3>
               </div>
               <div className="dash-card-title" style={{ marginTop: "-2px" }}>
                 Today's Income
               </div>
               <div className="das-card-percentage d-flex align-items-center">
                 <div className="up-down-icon d-flex align-items-center mt-1">
-                  {true ? (
+                  {cardDetail?.todayIncome?.percentage >= 0  ? (
                     <div className="up-down p-0 d-flex justify-content-center align-items-center rounded-circle">
                       <FaArrowUp size={10} color="rgb(255, 91, 91)" />
                     </div>
@@ -101,7 +103,7 @@ const TopFourCard = () => {
                       <FaArrowDown size={10} color="rgb(255, 91, 91)" />
                     </div>
                   )}
-                  <div className="up-down-text mx-2">4% (30 days)</div>
+                  <div className="up-down-text mx-2">{cardDetail?.todayIncome?.percentage || 0}% (1 days)</div>
                 </div>
               </div>
             </div>
@@ -118,14 +120,14 @@ const TopFourCard = () => {
           <div className="w-75 px-2">
             <div className="d-flex flex-column justify-content-center">
               <div className="dash-card-number">
-                <h3>1,50,320</h3>
+                <h3>{cardDetail?.thisMonthIncome?.count || 0}</h3>
               </div>
               <div className="dash-card-title" style={{ marginTop: "-2px" }}>
               Total Revenue
               </div>
               <div className="das-card-percentage d-flex align-items-center">
                 <div className="up-down-icon d-flex align-items-center mt-1">
-                  {true ? (
+                  {cardDetail?.thisMonthIncome?.percentage >= 0  ? (
                     <div className="up-down p-0 d-flex justify-content-center align-items-center rounded-circle">
                       <FaArrowUp size={10} color="rgb(255, 91, 91)" />
                     </div>
@@ -134,7 +136,7 @@ const TopFourCard = () => {
                       <FaArrowDown size={10} color="rgb(255, 91, 91)" />
                     </div>
                   )}
-                  <div className="up-down-text mx-2">4% (01 year)</div>
+                  <div className="up-down-text mx-2">{cardDetail?.thisMonthIncome?.percentage || 0}% (30 days)</div>
                 </div>
               </div>
             </div>
