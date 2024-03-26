@@ -4,12 +4,15 @@ import { FaLocationDot } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { getResNewOrders } from "../../../redux/actions/restaurant";
 import axios from "axios";
-import { addResNewOrder, resRemoveOrder } from "../../../redux/slice/restaurant";
+import {
+  addResNewOrder,
+  resRemoveOrder,
+} from "../../../redux/slice/restaurant";
 import { toast } from "react-toastify";
 
-const BASE_URL = process.env.REACT_APP_BASE_URL
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
-const NewOrder = ({socket}) => {
+const NewOrder = ({ socket }) => {
   const dispatch = useDispatch();
 
   const orders = useSelector((state) => state.resNewOrders?.orders);
@@ -18,35 +21,58 @@ const NewOrder = ({socket}) => {
     dispatch(getResNewOrders());
   }, []);
 
-  useEffect(()=>{
-    socket.on("new-order-add-in-res", ({sendOrders})=>{
-      console.log(JSON.parse(sendOrders))
-      dispatch(addResNewOrder(JSON.parse(sendOrders)))
-    })
+  useEffect(() => {
+    socket.on("new-order-add-in-res", ({ sendOrders }) => {
+      console.log(JSON.parse(sendOrders));
+      dispatch(addResNewOrder(JSON.parse(sendOrders)));
+    });
 
     return () => {
       socket.off();
     };
-  }, [])
+  }, []);
 
-  const resAcceptOrderHendler = async (ordId) =>{
+  const resAcceptOrderHendler = async (ordId) => {
     try {
-      if(ordId !== undefined){
-        const {data} = await axios.get(`${BASE_URL}/api/v1/restaurant/accept/${ordId}`, {withCredentials: true})
-        if(data.success === true){
-          dispatch(resRemoveOrder(ordId))
-          toast.success(data?.message)
-          if(data?.sendDelBoyLiveOrd){
-            socket.emit("new-order-from-restu", {ordId})
+      if (ordId !== undefined) {
+        const { data } = await axios.get(
+          `${BASE_URL}/api/v1/restaurant/accept/${ordId}`,
+          { withCredentials: true }
+        );
+        if (data.success === true) {
+          dispatch(resRemoveOrder(ordId));
+          toast.success(data?.message);
+          if (data?.sendDelBoyLiveOrd) {
+            socket.emit("new-order-from-restu", { ordId });
           }
         } else {
-          toast.error(data?.message || "Somthing Went Wrong")
+          toast.error(data?.message || "Somthing Went Wrong");
         }
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
+
+  const resRejectOrderHendler = async (ordId) => {
+    try {
+      if (ordId !== undefined) {
+        const { data } = await axios.delete(
+          `${BASE_URL}/api/v1/restaurant/reject/${ordId}`,
+          { withCredentials: true }
+        );
+        if (data.success === true) {
+          dispatch(resRemoveOrder(ordId));
+          toast.success(data?.message);
+        } else {
+          toast.error(data?.message || "Somthing Went Wrong");
+        }
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "Somthing Went Wrong");
+      console.log(error?.response?.data?.message || error);
+    }
+  };
 
   return (
     <div className="neworder-page mx-2">
@@ -83,75 +109,77 @@ const NewOrder = ({socket}) => {
                     Food Details
                   </div>
                   <div className="overflow-scroll scroll-d-none">
-                  <div
-                    className="table-responsive mt-2"
-                    style={{ width: "max-content" }}
-                  >
-                    <table
-                      className="table table-bordered align-middle text-center table-striped table-hover"
-                      id="dataTable"
-                      width="100%"
-                      cellSpacing="0"
+                    <div
+                      className="table-responsive mt-2"
+                      style={{ width: "max-content" }}
                     >
-                      <thead className="text-secondary">
-                        <tr>
-                          <th>Image</th>
-                          <th>Name</th>
-                          <th>Price</th>
-                          <th>Weight</th>
-                          <th>Qut</th>
-                          <th>Sub Totel</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {ord?.orders?.restu !== undefined &&
-                          ord?.orders?.restu?.length > 0 &&
-                          ord?.orders?.restu.map((res) => {
-                            return (
-                              <>
-                                {res?.foods !== undefined &&
-                                res?.foods.length > 0 ? (
-                                  res.foods.map((f) => (
-                                    <tr>
-                                      <td>
-                                        <img
-                                          src={f.foodImg}
-                                          alt=""
-                                          style={{
-                                            maxHeight: "100%",
-                                            maxWidth: "100%",
-                                            height: "auto",
-                                            width: "auto",
-                                          }}
-                                        />
-                                      </td>
-                                      <td>{f?.foodName}</td>
-                                      <td>{f?.foodPrice}</td>
-                                      <td>{f?.foodId?.foodWeight}</td>
-                                      <td>{f?.foodQut}</td>
-                                      <td>{f?.subTotal}</td>
-                                    </tr>
-                                  ))
-                                ) : (
-                                  <></>
-                                )}
-                                <tr>
-                                  <td colSpan={3}>Totel</td>
-                                  <td colSpan={3}>{res?.resSubTotal}</td>
-                                </tr>
-                              </>
-                            );
-                          })}
-                      </tbody>
-                    </table>
-                  </div>
+                      <table
+                        className="table table-bordered align-middle text-center table-striped table-hover"
+                        id="dataTable"
+                        width="100%"
+                        cellSpacing="0"
+                      >
+                        <thead className="text-secondary">
+                          <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Weight</th>
+                            <th>Qut</th>
+                            <th>Sub Totel</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {ord?.orders?.restu !== undefined &&
+                            ord?.orders?.restu?.length > 0 &&
+                            ord?.orders?.restu.map((res) => {
+                              return (
+                                <>
+                                  {res?.foods !== undefined &&
+                                  res?.foods.length > 0 ? (
+                                    res.foods.map((f) => (
+                                      <tr>
+                                        <td>
+                                          <img
+                                            src={f.foodImg}
+                                            alt=""
+                                            style={{
+                                              maxHeight: "100%",
+                                              maxWidth: "100%",
+                                              height: "auto",
+                                              width: "auto",
+                                            }}
+                                          />
+                                        </td>
+                                        <td>{f?.foodName}</td>
+                                        <td>{f?.foodPrice}</td>
+                                        <td>{f?.foodId?.foodWeight}</td>
+                                        <td>{f?.foodQut}</td>
+                                        <td>{f?.subTotal}</td>
+                                      </tr>
+                                    ))
+                                  ) : (
+                                    <></>
+                                  )}
+                                  <tr>
+                                    <td colSpan={3}>Totel</td>
+                                    <td colSpan={3}>{res?.resSubTotal}</td>
+                                  </tr>
+                                </>
+                              );
+                            })}
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
                 <hr className="bg-secondary" />
                 <div className="new-order-bottem">
                   <div className="row align-items-center gy-2">
                     <div className="col-xl-3 col-lg-3 col-md-5 col-sm-12 col-12">
-                      <span className="text-secondary ms-sm-2 ms-2">Order By:</span>
+                      <span className="text-secondary ms-sm-2 ms-2">
+                        Order By:
+                      </span>
                       {ord?.userId?.username !== undefined ? (
                         <span className="ms-1 text-capitalize">
                           {ord?.userId?.username}
@@ -160,14 +188,23 @@ const NewOrder = ({socket}) => {
                     </div>
                     <div className="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 d-flex justify-content-start">
                       <div className="mx-1">
-                        <button className="accept-order-btn new-order-btn" onClick={()=>resAcceptOrderHendler(ord._id)}>
+                        <button
+                          className="accept-order-btn new-order-btn"
+                          onClick={() => resAcceptOrderHendler(ord._id)}
+                        >
                           ACCEPT
                         </button>
                       </div>
                       <div className="mx-1">
-                        <button className="reject-order-btn new-order-btn">
+                        {
+                          ord.status === "new" ?
+                          <button
+                          className="reject-order-btn new-order-btn"
+                          onClick={() => resRejectOrderHendler(ord._id)}
+                          >
                           REJECT
-                        </button>
+                        </button> : <></>
+                        }
                       </div>
                     </div>
                   </div>

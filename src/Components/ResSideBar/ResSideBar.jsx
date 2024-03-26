@@ -14,11 +14,11 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
     const location = useLocation();
     const [tab, setTab] = useState(window.location.pathname)
 
-    useEffect(()=>{
-        const pathSegments = location.pathname.split('/')
-        const mainTab = pathSegments[2]
-        setTab(mainTab)
-    }, [location.pathname])
+    // useEffect(()=>{
+    //     const pathSegments = location.pathname.split('/')
+    //     const mainTab = pathSegments[2]
+    //     setTab(mainTab)
+    // }, [location.pathname])
 
   return (
     <div className="res-sidebar-com ">
@@ -36,8 +36,8 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
         </div>
         <div className="navs w-100">
             <div className="w-100 d-flex justify-content-center w-100 my-3">
-            <NavLink to={'/res/dashboard'} className='w-75' >
-                <button className={`${tab === 'dashboard' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
+            <NavLink to={'/res/dashboard'} className='w-75' onClick={()=>setTab('/res/dashboard')}>
+                <button className={`${tab === '/res/dashboard' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
                     <span className="nav-icon">
                         <AiOutlineHome size={18} />
                     </span>
@@ -47,7 +47,7 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
                 </button>
             </NavLink>
             </div>
-            <div className="w-100 d-flex justify-content-center w-100 my-3">
+            {/* <div className="w-100 d-flex justify-content-center w-100 my-3">
             <NavLink to={'/res/order/list'} className='w-75' >
                 <button className={`${tab === '/res/order/list' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
                     <span className="nav-icon">
@@ -58,9 +58,9 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
                     </span>
                 </button>
             </NavLink>
-            </div>
+            </div> */}
             <div className="w-100 d-flex justify-content-center w-100 my-3">
-            <NavLink to={'/res/neworder'} className='w-75'>
+            <NavLink to={'/res/neworder'} className='w-75' onClick={()=>setTab('/res/neworder')}>
                 <button className={`${tab === '/res/neworder' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
                     <span className="nav-icon">
                         <MdOutlineBorderColor size={18} />
@@ -71,7 +71,7 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
                 </button>
             </NavLink>
             </div>
-            <div className="w-100 d-flex justify-content-center w-100 my-3">
+            {/* <div className="w-100 d-flex justify-content-center w-100 my-3">
             <NavLink className='w-75'>
                 <button className={`${tab === '/res/order/lis' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
                     <span className="nav-icon">
@@ -82,8 +82,8 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
                     </span>
                 </button>
             </NavLink>
-            </div>
-            <div className="w-100 d-flex justify-content-center w-100 my-3">
+            </div> */}
+            {/* <div className="w-100 d-flex justify-content-center w-100 my-3">
             <NavLink className='w-75'>
                 <button className={`${tab === '/res/order/lis' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
                     <span className="nav-icon">
@@ -94,8 +94,8 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
                     </span>
                 </button>
             </NavLink>
-            </div>
-            <div className="w-100 d-flex justify-content-center w-100 my-3">
+            </div> */}
+            {/* <div className="w-100 d-flex justify-content-center w-100 my-3">
             <NavLink className='w-75'>
                 <button className={`${tab === '/res/order/lis' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
                     <span className="nav-icon">
@@ -107,10 +107,10 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
                     </span>
                 </button>
             </NavLink>
-            </div>
+            </div> */}
             <div className="w-100 d-flex justify-content-center w-100 my-3">
-            <NavLink to={'/res/food/list'} className='w-75' >
-                <button className={`${tab === 'food' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
+            <NavLink to={'/res/food/list'} className='w-75' onClick={()=>setTab('/res/food/list')} >
+                <button className={`${tab === '/res/food/list' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
                     <span className="nav-icon">
                         <IoFastFoodOutline size={18} />
                     </span>
@@ -121,20 +121,20 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
             </NavLink>
             </div>
             <div className="w-100 d-flex justify-content-center w-100 my-3">
-            <NavLink className='w-75'>
-                <button className={`${tab === '/res/order/lis' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
+            <NavLink className='w-75' to={'/res/food/create'} onClick={()=>setTab('/res/food/create')}>
+                <button className={`${tab === '/res/food/create' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
                     <span className="nav-icon">
                         <HiOutlinePencilSquare size={18} />
                     </span>
                     <span className="mt-1 ps-2">
-                        Food Detail
+                        Add Food
                     </span>
                 </button>
             </NavLink>
             </div>
             <div className="w-100 d-flex justify-content-center w-100 my-3">
-            <NavLink to={"/res/wallet"} className='w-75'>
-                <button className={`${tab === 'wallet' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
+            <NavLink to={"/res/wallet"} className='w-75' onClick={()=>setTab('/res/wallet')}>
+                <button className={`${tab === '/res/wallet' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
                     <span className="nav-icon">
                         <CiWallet size={18} />
                     </span>

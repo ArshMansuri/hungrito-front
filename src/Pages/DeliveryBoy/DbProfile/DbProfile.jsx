@@ -31,7 +31,7 @@ const DbProfile = ({ isDbLoading = true }) => {
           <div className="ms-4 profile-text">
             <div className="username text-capitalize">{dbName}</div>
             <div className="token">
-              Money <span>{dbMoney}</span>
+              Money <span>{Number(dbMoney).toFixed(0)}</span>
             </div>
           </div>
         </div>

@@ -89,7 +89,7 @@ const DbOrder = ({socket}) => {
       </div>
       <div style={{marginTop: "98px"}}>
         {activeScree === "newOrder" ? (
-          <DbNewOrderPage socket={socket}  />
+          <DbNewOrderPage socket={socket} changeActiveScreenFun={changeActiveScreen}  />
         ) : (
           <DbActiveOrderPage changeActiveScreenFun={changeActiveScreen} socket={socket} />
         )}

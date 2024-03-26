@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import "./dbNewOrderPage.css";
 import { FaLocationDot } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
-import { addDbNewOrder } from "../../../redux/slice/delBoy";
+import { addDbNewOrder, dbRemoveOrder } from "../../../redux/slice/delBoy";
 import axios from "axios";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
-const DbNewOrderPage = ({socket}) => {
+const DbNewOrderPage = ({socket, changeActiveScreenFun =() =>{}}) => {
   
   const dispatch = useDispatch()
 
@@ -26,6 +26,8 @@ const DbNewOrderPage = ({socket}) => {
       const {data} = await axios.get(`${BASE_URL}/api/v1//delBoy/accept/${ordId}`, {withCredentials: true})
       if(data !== undefined && data.success === true){
         console.log(data.message)
+        dispatch(dbRemoveOrder())
+        changeActiveScreenFun("activeOrder")
       }
     } catch (error) {
       console.log(error)
@@ -104,9 +106,9 @@ const DbNewOrderPage = ({socket}) => {
                       </button>
                     </div>
                     <div className="mx-2">
-                      <button className="reject-order-btn new-order-btn">
+                      {/* <button className="reject-order-btn new-order-btn">
                         REJECT
-                      </button>
+                      </button> */}
                     </div>
                   </div>
                 </div>

@@ -89,7 +89,7 @@ const Search = ({ isAuther, isLoading = true }) => {
 
       <div className="container">
         {activeBtn === "dish" ? (
-          <div className="d-flex flex-wrap">
+          <div className="d-flex flex-wrap justify-content-center">
             {foods !== undefined && foods.length > 0 ? (
               foods.map((f, i) => (
                 <FoodCart
@@ -113,7 +113,7 @@ const Search = ({ isAuther, isLoading = true }) => {
             )}
           </div>
         ) : (
-          <div className="d-flex flex-wrap">
+          <div className="d-flex flex-wrap justify-content-center">
             {restus !== undefined && restus.length > 0 ? (
               restus.map((data, index) => {
                 return (

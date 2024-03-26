@@ -189,6 +189,9 @@ export const getDbNewOrdersReduser = createSlice({
     // makeCreateFoodSuccessFalse(state) {
     //   state.success = false;
     // },
+    dbRemoveOrder(state){
+      state.orders = undefined
+    },
     addDbNewOrder(state, action){
       if(action.payload !== undefined){
         console.log(action.payload)
@@ -214,4 +217,4 @@ export const getDbNewOrdersReduser = createSlice({
 });
 
 export const { removeDbName, addActiveOrdUserId, removeActiveOrdUserId } = delBoyReduser.actions;
-export const { addDbNewOrder } = getDbNewOrdersReduser.actions;
+export const { addDbNewOrder, dbRemoveOrder } = getDbNewOrdersReduser.actions;

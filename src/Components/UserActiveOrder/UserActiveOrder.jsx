@@ -141,6 +141,20 @@ const UserActiveOrder = ({socket}) => {
     }
   }, [dbLiveLocation]);
 
+  const cancelOrderHendelr = async()=>{
+    if(order?.status !== "new") return
+    try {
+      const {data} = await axios.delete(`${BASE_URL}/api/v1/user/order/cancel/${order?._id}`, {withCredentials: true})
+      console.log(data)
+      if(data !== undefined && data?.success === true){
+        console.log(data?.message)
+        setOrder(undefined)
+      }
+    } catch (error) {
+      console.log(error?.response?.data?.message || error)
+    }
+  }
+
   return (
     <div className="user-new-order-com overflow-hidden w-100">
       {order !== undefined && order !== null ? (
@@ -231,8 +245,17 @@ const UserActiveOrder = ({socket}) => {
                       </span>
                     </div>
                     <div>
+                      {
+                        order.status === "new" ?
                       <button
-                        className="accept-order-btn new-order-btn"
+                        className="accept-order-btn new-order-btn mx-1 bg-danger"
+                        onClick={cancelOrderHendelr}
+                      >
+                        Cancel Order
+                      </button> : <></>
+                      }
+                      <button
+                        className="accept-order-btn new-order-btn mx-1"
                         onClick={() => setIsShowMap(true)}
                       >
                         Show Map
