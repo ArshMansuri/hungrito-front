@@ -107,11 +107,58 @@ export const userLoad = createAsyncThunk(
 
 export const getNearestRestus = createAsyncThunk(
   "getNearestRestus",
-  async ({ location }, { rejectWithValue }) => {
+  async ({ location, category, price, veg }, { rejectWithValue }) => {
     try {
+      console.log(category)
+      console.log(price)
+      console.log(veg)
       const { data } = await axios.post(
         `${BASE_URL}/api/v1/user/nearestrestu`,
-        { longitude: location.longitude, latitude: location.latitude },
+        { longitude: location.longitude, latitude: location.latitude, category: category?.name, price: price?.name, veg: veg?.access},
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+      return data;
+    } catch (error) {
+      console.log("catch error", error);
+      return rejectWithValue(error.response?.data || "fail to get data");
+    }
+  }
+);
+
+export const getSearchNearestRestus = createAsyncThunk(
+  "getSearchNearestRestus",
+  async ({ location, search }, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post(
+        `${BASE_URL}/api/v1/user/nearestrestu/search/res`,
+        { longitude: location.longitude, latitude: location.latitude, search},
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+      return data;
+    } catch (error) {
+      console.log("catch error", error);
+      return rejectWithValue(error.response?.data || "fail to get data");
+    }
+  }
+);
+
+export const getSearchDishNearestRestus = createAsyncThunk(
+  "getSearchDishNearestRestus",
+  async ({ location, search }, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post(
+        `${BASE_URL}/api/v1/user/nearestrestu/search/dish`,
+        { longitude: location.longitude, latitude: location.latitude, search},
         {
           headers: {
             "Content-Type": "application/json",

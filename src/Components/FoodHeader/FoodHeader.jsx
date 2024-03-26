@@ -168,9 +168,12 @@ const FoodHeader = ({
                     <NavLink
                       to={"/search"}
                       className="text-dark d-flex align-items-center"
+                      onClick={()=>setTab('/search')}
                     >
-                      <BiSearch size={20} className="mt-1" />
-                      <span className="ms-1 mt-1">Search</span>
+                      <BiSearch size={20} className="mt-1"  color={`${tab === "/search" ? "#ff6600" : "black"}`} />
+                      <span className="ms-1 mt-1"  style={{
+                          color: `${tab === "/search" ? "#ff6600" : "black"}`,
+                        }}>Search</span>
                     </NavLink>
                   </div>
                   <div className="mx-xl-4 mx-lg-4 mx-md-3 mx-4">
@@ -239,9 +242,12 @@ const FoodHeader = ({
                       <NavLink
                         to={"/search"}
                         className="text-dark d-flex align-items-center"
+                        onClick={()=>setTab('/search')}
                       >
-                        <BiSearch size={20} className="mt-1" />
-                        <span className="ms-1 mt-1">Search</span>
+                        <BiSearch size={20} className="mt-1"  color={`${tab === "/search" ? "#ff6600" : "black"}`}/>
+                        <span className="ms-1 mt-1"  style={{
+                          color: `${tab === "/search" ? "#ff6600" : "black"}`,
+                        }}>Search</span>
                       </NavLink>
                     </div>
                     <NavLink to="/login" className="mx-2">

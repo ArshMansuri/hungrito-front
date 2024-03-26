@@ -15,6 +15,7 @@ import { adminLoad } from "./redux/actions/admin";
 import AdminResVerify from "./Pages/Admin/AdminResVerify/AdminResVerify";
 
 const Home = lazy(() => import("./Pages/USER/Home/Home"));
+const Search = lazy(() => import("./Pages/USER/Search/Search"));
 const UserRes = lazy(() => import("./Pages/USER/UserRes/UserRes"));
 const UserProfile = lazy(() => import("./Pages/USER/UserProfile/UserProfile"));
 const Login = lazy(() => import("./Pages/USER/Login/Login"));
@@ -185,6 +186,11 @@ function App() {
           <Route
             path="/user/res/:resId"
             element={<UserRes isAuther={isAuther} isLoading={isLoading} />}
+          />
+
+          <Route
+            path="/search"
+            element={<Search isAuther={isAuther} isLoading={isLoading} />}
           />
 
           <Route

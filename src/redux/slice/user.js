@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addToCart, decreaseQutInCart, getMyCartDetail, getMySaveFoods, getNearestRestus, getUserResFoods, increaseQutInCart, placeCodOrder, placeOnlineOrder, removeFromCart, userLoad, userLogin, userPhoneOtpVerify, userSignUp } from "../actions/user";
+import { addToCart, decreaseQutInCart, getMyCartDetail, getMySaveFoods, getNearestRestus, getSearchDishNearestRestus, getSearchNearestRestus, getUserResFoods, increaseQutInCart, placeCodOrder, placeOnlineOrder, removeFromCart, userLoad, userLogin, userPhoneOtpVerify, userSignUp } from "../actions/user";
 
 const initialState = {
   isAuther: false,
@@ -79,10 +79,45 @@ export const nearestRestuReduser = createSlice({
     });
     builder.addCase(getNearestRestus.fulfilled, (state, action) => {
       state.restus = action.payload?.restus || [];
-      state.filters = action.payload?.filters || [];
       state.isLoading = false;
     });
     builder.addCase(getNearestRestus.rejected, (state, action) => {
+      state.message = action.payload?.message || action.payload;
+      state.isLoading = false;
+    });
+  }
+})
+
+export const nearestSearchRestuReduser = createSlice({
+  name: "user",
+  initialState: {isLoading: false},
+  extraReducers: (builder) => {
+    builder.addCase(getSearchNearestRestus.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getSearchNearestRestus.fulfilled, (state, action) => {
+      state.restus = action.payload?.restus || [];
+      state.isLoading = false;
+    });
+    builder.addCase(getSearchNearestRestus.rejected, (state, action) => {
+      state.message = action.payload?.message || action.payload;
+      state.isLoading = false;
+    });
+  }
+})
+
+export const nearestSearchDishRestuReduser = createSlice({
+  name: "user",
+  initialState: {isLoading: false},
+  extraReducers: (builder) => {
+    builder.addCase(getSearchDishNearestRestus.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getSearchDishNearestRestus.fulfilled, (state, action) => {
+      state.foods = action.payload?.foods || [];
+      state.isLoading = false;
+    });
+    builder.addCase(getSearchDishNearestRestus.rejected, (state, action) => {
       state.message = action.payload?.message || action.payload;
       state.isLoading = false;
     });

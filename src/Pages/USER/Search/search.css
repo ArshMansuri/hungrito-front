@@ -1,0 +1,27 @@
+.search-page{
+    min-height: 100vh;
+}
+
+.search-page .search-input-div{
+    border-bottom: 2px solid #ff6600;
+}
+
+.search-page .search-input-div input{
+    border: 0;
+    outline: none;
+    width: 60vw;
+    margin-top: 2px;
+    font-size: 20px;
+}
+
+.search-page .res-dish-btn-div button{
+    background-color: white;
+    padding: 3px 9px;
+    border-radius: 16px;
+    border: 1px solid #ff6600;
+}
+
+.search-page .res-dish-btn-div .active-btn{
+    background-color: #ff6600 !important;
+    color: white !important;
+}
