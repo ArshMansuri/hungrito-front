@@ -9,3 +9,12 @@
     border-radius: 12px;
 }
 
+.res-header-com .setting-popup{
+    width: 200px;
+    background-color: white;
+    margin-top: 130px;
+    right: 0;
+    min-height: 80px;
+    border-radius: 10px;
+}
+

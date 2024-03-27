@@ -5,6 +5,18 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import "leaflet-routing-machine";
 import icon from "leaflet/dist/images/marker-icon.png";
+import { toast } from "react-toastify";
+
+const tostOpstion = {
+  position: "bottom-center",
+  autoClose: 3000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "dark",
+};
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 const UserActiveOrder = ({socket}) => {
@@ -149,8 +161,10 @@ const UserActiveOrder = ({socket}) => {
       if(data !== undefined && data?.success === true){
         console.log(data?.message)
         setOrder(undefined)
+        toast.success("Order Canceled", tostOpstion)
       }
     } catch (error) {
+      toast.error("You Can't Cancel Order", tostOpstion)
       console.log(error?.response?.data?.message || error)
     }
   }
@@ -163,8 +177,9 @@ const UserActiveOrder = ({socket}) => {
             <div className="new-orders-main d-flex flex-column justify-content-center">
               <div className="new-order-div p-3 my-3">
                 <div className="user-food-detail-main">
-                  <div className="user-food-detail-head text-secondary">
-                    Food Details
+                  <div className="user-food-detail-head text-secondary d-flex flex-column">
+                    <span>Order Token No: <span>{order?.OrderTokne}</span></span>
+                    <span>Food Details</span>
                   </div>
                   <div className="overflow-scroll scroll-d-none">
                     <div

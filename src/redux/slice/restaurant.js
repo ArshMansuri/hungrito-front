@@ -4,6 +4,7 @@ import {
   resEmailVerify,
   resLoad,
   resLogin,
+  resLogout,
   resMakePhoneOtp,
   resOwnerMakePhoneOtp,
   resOwnerVerifyPhoneOtp,
@@ -230,6 +231,21 @@ export const restuReduser = createSlice({
       state.isLoading = false;
       state.message = action.payload?.message || action.payload;
       state.success = false;
+    });
+
+    // ================ Restaurant Logout   ================
+    builder.addCase(resLogout.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(resLogout.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isRestuAuther = false;
+      state.restu = initialState;
+    });
+    builder.addCase(resLogout.rejected, (state, action) => {
+      state.isLoading = false;
+      state.message = action.payload?.message || action.payload;
+      // state.success = false;
     });
   },
 });

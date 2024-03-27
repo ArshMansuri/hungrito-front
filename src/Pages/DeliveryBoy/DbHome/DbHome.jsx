@@ -25,6 +25,7 @@ const DbHome = () => {
           { withCredentials: true }
         );
         if (data !== undefined && data?.success === true) {
+          console.log("inn", data)
           setTopTwoCard(data?.topTwoCart);
           setPieChart(data?.pieChart);
           setAreaChart(data?.areaChart);

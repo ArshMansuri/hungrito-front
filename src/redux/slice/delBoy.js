@@ -3,6 +3,7 @@ import {
   dbEmailVerify,
   dbLoad,
   dbLogin,
+  dbLogout,
   dbMakePhoneOtp,
   dbSignUpFirstPage,
   dbSignUpSecondPage,
@@ -173,6 +174,21 @@ export const delBoyReduser = createSlice({
       state.delBoy = action.payload.delBoy;
     });
     builder.addCase(dbLogin.rejected, (state, action) => {
+      state.isLoading = false;
+      state.message = action.payload?.message || action.payload;
+      state.success = false;
+    });
+
+    // ================ delivery boy Logout   ================
+    builder.addCase(dbLogout.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(dbLogout.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isDbAuther = false;
+      state.delBoy = initialState;
+    });
+    builder.addCase(dbLogout.rejected, (state, action) => {
       state.isLoading = false;
       state.message = action.payload?.message || action.payload;
       state.success = false;

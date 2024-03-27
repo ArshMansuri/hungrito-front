@@ -126,10 +126,11 @@ const FoodFooterNav = ({
         <></>
       )}
 
-      <div
+      <NavLink
         className="d-flex flex-column justify-content-center align-items-center img-nave"
         style={{ width: "38px", paddingBottom: "3px" }}
-        onClick={() => setTab("/profile")}
+        to={'/user/profile'}
+        onClick={() => setTab("/user/profile")}
       >
         <div className="foot-nav-icon img-div w-75">
           <img
@@ -140,7 +141,7 @@ const FoodFooterNav = ({
             className="rounded-circle"
             style={{
               border: `${
-                tab === "/profile" ? "1px solid #ff6600" : "1px solid black"
+                tab === "/user/profile" ? "1px solid #ff6600" : "1px solid black"
               }`,
               padding: "2px"
             }}
@@ -149,13 +150,13 @@ const FoodFooterNav = ({
         <div
           className="foot-nav-text"
           style={{
-            color: `${tab === "/profile" ? "#ff6600" : "black"}`,
+            color: `${tab === "/user/profile" ? "#ff6600" : "black"}`,
             fontSize: "13px",
           }}
         >
           Profile
         </div>
-      </div>
+      </NavLink>
     </div>
   );
 };

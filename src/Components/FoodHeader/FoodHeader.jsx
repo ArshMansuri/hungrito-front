@@ -225,8 +225,9 @@ const FoodHeader = ({
                   </div>
                   <div className="mx-xl-4 mx-lg-4 mx-md-3 mx-4 mt-1">
                     <NavLink
-                      to={"/save"}
+                      to={"/user/profile"}
                       className="text-dark d-flex align-items-center"
+                      onClick={()=>setTab('/user/profile')}
                     >
                       <CgProfile size={20} />
                       <span className="ms-1 mt-1">Profile</span>

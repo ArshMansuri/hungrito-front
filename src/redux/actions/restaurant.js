@@ -237,6 +237,43 @@ export const resLogin = createAsyncThunk(
   }
 );
 
+export const resLogout = createAsyncThunk(
+  "resLogout",
+  async ({_}, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(
+        `${BASE_URL}/api/v1/restaurant/logout`,
+        { withCredentials: true }
+      );
+      toast.success("Logout Successfully", {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      })
+      localStorage.removeItem("isRestu")
+      return data;
+    } catch (error) {
+      toast.error(`${error?.response?.data?.message || "fail to login"}`, {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      console.log("catch error", error);
+      return rejectWithValue(error.response?.data || "fail to login");
+    }
+  }
+);
+
 export const resLoad = createAsyncThunk(
   "resLoad",
   async (_, { rejectWithValue }) => {

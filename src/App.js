@@ -43,6 +43,9 @@ const AuthResProtected = lazy(() =>
 const ResDashboard = lazy(() =>
   import("./Pages/RESTAURANT/Dashboard/ResDashboard")
 );
+const ResProfile = lazy(() =>
+  import("./Pages/RESTAURANT/ResProfile/ResProfile")
+);
 const ResOnly = lazy(() => import("./Components/ProtectedRoute/ResOnly"));
 const OrderList = lazy(() => import("./Pages/RESTAURANT/OrderList/OrderList"));
 const NewOrder = lazy(() => import("./Pages/RESTAURANT/NewOrder/NewOrder"));
@@ -301,6 +304,15 @@ function App() {
               path="/res/food/manage/:id"
               element={
                 <UpdateFood
+                  isRestuAuther={isRestuAuther}
+                  isResLoading={isResLoading}
+                />
+              }
+            />
+            <Route
+              path="/res/profile"
+              element={
+                <ResProfile
                   isRestuAuther={isRestuAuther}
                   isResLoading={isResLoading}
                 />

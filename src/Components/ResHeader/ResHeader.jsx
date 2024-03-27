@@ -1,18 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import "./resHeader.css";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { IoSettingsOutline } from "react-icons/io5";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { resLogout } from "../../redux/actions/restaurant";
 
 const ResHeader = ({ navOpenClose = () => {} }) => {
+
+  const dispatch = useDispatch()
 
   const resName = useSelector((state)=> state?.restu?.restu?.resName || "")
   const resOwnerName = useSelector((state)=> state?.restu?.restu?.resOwnerName || "")
 
+  const [showSetting, setShowSetting] = useState(false)
+
   const OnClickHamBurger = () => {
     navOpenClose();
   };
+
+  const logOutHendler = async()=>{
+    console.log("clickkkkk")
+    dispatch(resLogout({}))
+  }
   return (
     <div className="res-header-com py-2">
       <div className="d-flex align-items-center justify-content-between">
@@ -30,8 +41,14 @@ const ResHeader = ({ navOpenClose = () => {} }) => {
             <div className="icon-div p-2 mx-1 d-flex justify-content-center align-items-center">
               <IoIosNotificationsOutline size={21} color="#FF5B5B" />
             </div>
-            <div className="icon-div p-2 mx-1 d-flex justify-content-center align-items-center">
+            <div className="icon-div cursor-pointer position-relative p-2 mx-1 d-flex justify-content-center align-items-center" onClick={()=>setShowSetting(!showSetting)}>
               <IoSettingsOutline size={20} color="#FF5B5B" />
+              {
+                showSetting &&
+                <div className="position-absolute setting-popup">
+                  <span className="p-2 text-danger cursor-pointer" onClick={logOutHendler}>Logout</span>
+                </div>
+              }
             </div>
           </div>
           <div
@@ -41,14 +58,14 @@ const ResHeader = ({ navOpenClose = () => {} }) => {
             <span className="me-2 border-start ps-2 border-1 border-secondary text-capitalize">
             {resOwnerName}
             </span>
-            <div style={{ display: "contents" }}>
+            <NavLink to={'/res/profile'} style={{ display: "contents" }}>
               <img
                 src="https://res.cloudinary.com/dbirutg8t/image/upload/v1703695278/avatars/nngtjttismr9mlly0uvk.jpg"
                 alt=""
                 width="34px"
                 className="rounded-circle"
               />
-            </div>
+            </NavLink>
           </div>
         </div>
       </div>

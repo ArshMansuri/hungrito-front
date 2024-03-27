@@ -47,18 +47,6 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
                 </button>
             </NavLink>
             </div>
-            {/* <div className="w-100 d-flex justify-content-center w-100 my-3">
-            <NavLink to={'/res/order/list'} className='w-75' >
-                <button className={`${tab === '/res/order/list' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
-                    <span className="nav-icon">
-                        <CiCircleList size={18} />
-                    </span>
-                    <span className="mt-1 ps-2">
-                        Order List
-                    </span>
-                </button>
-            </NavLink>
-            </div> */}
             <div className="w-100 d-flex justify-content-center w-100 my-3">
             <NavLink to={'/res/neworder'} className='w-75' onClick={()=>setTab('/res/neworder')}>
                 <button className={`${tab === '/res/neworder' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
@@ -67,6 +55,18 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
                     </span>
                     <span className="mt-1 ps-2">
                         New Order 
+                    </span>
+                </button>
+            </NavLink>
+            </div>
+            <div className="w-100 d-flex justify-content-center w-100 my-3">
+            <NavLink to={'/res/order/list'} className='w-75' >
+                <button className={`${tab === '/res/order/list' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
+                    <span className="nav-icon">
+                        <CiCircleList size={18} />
+                    </span>
+                    <span className="mt-1 ps-2">
+                        Order List
                     </span>
                 </button>
             </NavLink>

@@ -1,167 +1,97 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./orderList.css";
 import Table from "../../../Components/Table/Table";
 import Loader from "../../../Components/Loaders/Loader";
+import axios from "axios";
+import { NavLink } from "react-router-dom";
 
-const data = [
-  {
-    Name: "Tiger Nixon",
-    Position: "System Architec",
-    Office: "Edinburgh",
-    Age: "60",
-    Start_date: "2011/04/25",
-    Salary: "$320,800",
-  },
-  {
-    Name: "Xyz Nixon",
-    Position: "System Architec",
-    Office: "Edinburgh",
-    Age: "61",
-    Start_date: "2011/04/25",
-    Salary: "$20,800",
-  },
-  {
-    Name: "Arsh Nixon",
-    Position: "System Architec",
-    Office: "Edinburgh",
-    Age: "61",
-    Start_date: "2011/04/25",
-    Salary: "$120,800",
-  },
-  {
-    Name: "Pqr Nixon",
-    Position: "Kuchbhi Architec",
-    Office: "Edinburgh",
-    Age: "98",
-    Start_date: "2011/04/25",
-    Salary: "$30,800",
-  },
-  {
-    Name: "Tiger Nixon",
-    Position: "System Good",
-    Office: "Edinburgh",
-    Age: "18",
-    Start_date: "2011/04/25",
-    Salary: "$620,800",
-  },
-  {
-    Name: "Tiger Nixon",
-    Position: "System Architec",
-    Office: "Edinburgh",
-    Age: "60",
-    Start_date: "2011/04/25",
-    Salary: "$320,800",
-  },
-  {
-    Name: "Tiger Nixon",
-    Position: "System Architec",
-    Office: "Edinburgh",
-    Age: "61",
-    Start_date: "2011/04/25",
-    Salary: "$20,800",
-  },
-  {
-    Name: "Tiger Nixon",
-    Position: "System Architec",
-    Office: "Edinburgh",
-    Age: "61",
-    Start_date: "2011/04/25",
-    Salary: "$120,800",
-  },
-  {
-    Name: "Tiger Nixon",
-    Position: "System Architec",
-    Office: "Edinburgh",
-    Age: "98",
-    Start_date: "2011/04/25",
-    Salary: "$30,800",
-  },
-  {
-    Name: "Tiger Nixon",
-    Position: "System Architec",
-    Office: "Edinburgh",
-    Age: "18",
-    Start_date: "2011/04/25",
-    Salary: "$620,800",
-  },
-  {
-    Name: "Tiger Nixon",
-    Position: "System Architec",
-    Office: "Edinburgh",
-    Age: "60",
-    Start_date: "2011/04/25",
-    Salary: "$320,800",
-  },
-  {
-    Name: "Tiger Nixon",
-    Position: "System Architec",
-    Office: "Edinburgh",
-    Age: "61",
-    Start_date: "2011/04/25",
-    Salary: "$20,800",
-  },
-  {
-    Name: "Tiger Nixon",
-    Position: "System Architec",
-    Office: "Edinburgh",
-    Age: "61",
-    Start_date: "2011/04/25",
-    Salary: "$120,800",
-  },
-  {
-    Name: "AA Nixon",
-    Position: "System Architec",
-    Office: "Edinburgh",
-    Age: "98",
-    Start_date: "2011/04/25",
-    Salary: "$30,800",
-  },
-  {
-    Name: "Konho Nixon",
-    Position: "System Architec",
-    Office: "Edinburgh",
-    Age: "18",
-    Start_date: "2011/04/25",
-    Salary: "$620,800",
-  },
-];
+
 
 const columns = [
   {
-    Headers: "Name",
-    accessor: "Name",
+    Headers: "Username",
+    accessor: "username",
   },
   {
-    Headers: "Position",
-    accessor: "Position",
+    Headers: "Token No",
+    accessor: "orderTokne",
   },
   {
-    Headers: "Office",
-    accessor: "Office",
+    Headers: "Ammount",
+    accessor: "resSubTotal",
   },
   {
-    Headers: "Age",
-    accessor: "Age",
+    Headers: "Payment Mod",
+    accessor: "payMode",
   },
   {
-    Headers: "Start_date",
-    accessor: "Start_date",
-  },
-  {
-    Headers: "Salary",
-    accessor: "Salary",
-  },
+    Headers: "Manage",
+    accessor: "manage",
+  }
 ];
 
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 const OrderList = ({isRestuAuther, isResLoading}) => {
+
+  const [isOrderLoading, setIsOrderLoading] = useState(true)
+  const [isError, setIsError] = useState(false)
+  const [orders, setOrders] = useState(undefined)
+  const [row, setRow] = useState([]);
+
+  useEffect(()=>{
+    async function fetchData(){
+      try {
+        const {data} = await axios.get(`${BASE_URL}/api/v1/restaurant/order/list`, {withCredentials: true})
+
+        if(data !== undefined && data?.success === true && data?.orders !== undefined){
+          setOrders(data?.orders)
+        } else{
+          setIsError(true)
+        }
+        setIsOrderLoading(false)
+      } catch (error) {
+        console.log(error)
+        setIsError(true)
+        setIsOrderLoading(false)
+      }
+    }
+    fetchData()
+  }, [])
+
+  useEffect(()=>{
+    if(orders !== undefined && orders !== null){
+      setRow(
+        orders?.map((o,i)=>({
+          username: o?.username || "",
+          orderTokne: o?.orderTokne || 0,
+          resSubTotal: o?.resSubTotal || 0,
+          payMode: o?.payMode || "",
+          manage: (
+              o.isView === true ?
+              "Pennding"
+            // <NavLink
+            //   className="text-dark action-nav"
+            //   to={`/res/active/order/${o?._id}`}
+            // >
+            //   <button>View</button>
+            // </NavLink> 
+            : "Delivered"
+          )
+        }))
+      )
+    }
+  }, [orders])
  
   return (
     <>
     {
       isResLoading ? <Loader  /> :
     <div className="order-list-table">
-      <Table data={data} columns={columns} />
+      <Table data={row} columns={columns} />
     </div>
+    }
+    {
+      isError && orders === undefined ? <h2>Somthing Went Wrong! Please Refres Page</h2> : <></>
     }
     </>
   );

@@ -179,6 +179,43 @@ export const dbLogin = createAsyncThunk(
   }
 );
 
+export const dbLogout = createAsyncThunk(
+  "dbLogout",
+  async ({_}, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(
+        `${BASE_URL}/api/v1/delboy/logout`,
+        { withCredentials: true }
+      );
+      toast.success("Logout Successfully", {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      })
+      localStorage.removeItem("isDelBoy")
+      return data;
+    } catch (error) {
+      toast.error(`${error?.response?.data?.message || "fail to login"}`, {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      console.log("catch error", error);
+      return rejectWithValue(error.response?.data || "fail to login");
+    }
+  }
+);
+
 export const dbLoad = createAsyncThunk(
   "dbLoad",
   async (_, { rejectWithValue }) => {

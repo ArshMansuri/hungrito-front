@@ -3,8 +3,9 @@ import './userProfile.css'
 import UserHistoryOrder from '../../../Components/UserHistoryOrder/UserHistoryOrder';
 import UserActiveOrder from '../../../Components/UserActiveOrder/UserActiveOrder';
 import { useSelector } from 'react-redux';
+import FoodFooterNav from '../../../Components/FoodFooterNav/FoodFooterNav';
 
-const UserProfile = ({socket}) => {
+const UserProfile = ({socket, isAuther, isLoading=true}) => {
 
   const user = useSelector((state)=> state?.user?.user)
 
@@ -49,6 +50,9 @@ const UserProfile = ({socket}) => {
             </div>
         </div>
     </div>
+    <div className="food-footer-page d-xl-none d-lg-none d-md-none d-sm-block d-block position-fixed bottom-0 start-0 end-0 bg-white shadow-lg">
+        <FoodFooterNav isAuther={isAuther} isLoading={isLoading} />
+      </div>
     </div>
   )
 }

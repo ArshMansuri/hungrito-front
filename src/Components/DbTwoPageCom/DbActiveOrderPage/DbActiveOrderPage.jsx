@@ -9,7 +9,18 @@ import "leaflet-routing-machine";
 import icon from "leaflet/dist/images/marker-icon.png";
 import { useDispatch } from "react-redux";
 import { addActiveOrdUserId, removeActiveOrdUserId } from "../../../redux/slice/delBoy";
+import { toast } from "react-toastify";
 
+const tostOpstion = {
+  position: "bottom-center",
+  autoClose: 3000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "dark",
+};
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const DbActiveOrderPage = ({ dbLocation, temp, changeActiveScreenFun =() =>{}, socket }) => {
@@ -274,9 +285,11 @@ const DbActiveOrderPage = ({ dbLocation, temp, changeActiveScreenFun =() =>{}, s
         setOrder(undefined)
         setEndLocation(undefined)
         dispatch(removeActiveOrdUserId())
+        toast.success("Order Delivered Succeccfully", tostOpstion)
         changeActiveScreenFun("newOrder")
       }
     } catch (error) {
+      toast.error("Somthing Went Wrong", tostOpstion)
       console.log(error)
     }
   }

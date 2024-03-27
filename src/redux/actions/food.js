@@ -37,12 +37,14 @@ export const createFood = createAsyncThunk(
           withCredentials: true,
         }
       );
+      toast.success("Food Added Successfully", tostOpstion)
       return data;
     } catch (error) {
       toast.error(
         `${error?.response?.data?.message || "fail to create food"}`,
         tostOpstion
       );
+      toast.error("Somthing Went Wrong", tostOpstion)
       console.log("catch error", error);
       return rejectWithValue(error.response?.data || "fail to create food");
     }
@@ -121,7 +123,7 @@ export const updateResFoodIsAvailable = createAsyncThunk(
           isAvailable: food?.isAvailable
         },
         {withCredentials: true})
-        toast.success(data.message, tostOpstion)
+        toast.success("Food Detail Updated", tostOpstion)
         return data
     } catch (error) {
       toast.error(
@@ -133,6 +135,7 @@ export const updateResFoodIsAvailable = createAsyncThunk(
     }
   }
 );
+
 export const deleteResFood = createAsyncThunk(
   "deleteResFood",
   async ({foodId}, { rejectWithValue }) => {

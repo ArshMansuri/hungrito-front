@@ -50,6 +50,7 @@ const NewOrder = ({ socket }) => {
         }
       }
     } catch (error) {
+      toast.error(error?.response?.data?.message || "Somthing Went Wrong");
       console.log(error);
     }
   };
@@ -63,7 +64,7 @@ const NewOrder = ({ socket }) => {
         );
         if (data.success === true) {
           dispatch(resRemoveOrder(ordId));
-          toast.success(data?.message);
+          toast.success("Order Rejected");
         } else {
           toast.error(data?.message || "Somthing Went Wrong");
         }
