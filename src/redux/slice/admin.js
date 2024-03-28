@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { adminLoad, adminLogin } from "../actions/admin";
+import { adminLoad, adminLogin, adminLogout } from "../actions/admin";
 
 const initialState = {
     isAdminAuther: false,
@@ -35,6 +35,21 @@ export const adminReduser = createSlice({
         state.admin = action.payload?.admin;
       });
       builder.addCase(adminLoad.rejected, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload?.message || action.payload;
+        state.success = false;
+      });
+
+      // ================ Restaurant Load   ================
+      builder.addCase(adminLogout.pending, (state) => {
+        state.isLoading = true;
+      });
+      builder.addCase(adminLogout.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isAdminAuther = false;
+        state.admin = action.payload?.admin;
+      });
+      builder.addCase(adminLogout.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload?.message || action.payload;
         state.success = false;

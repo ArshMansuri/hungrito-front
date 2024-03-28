@@ -22,6 +22,7 @@ const AdminOnly = ({ isAdminAuther = undefined, isAdminLoading = true }) => {
         return <Loader />
     }
 
+
   if (!isAdminLoading && isAdminAuther) {
     return (
       <div className="w-100 admin-only">

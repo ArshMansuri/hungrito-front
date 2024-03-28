@@ -7,7 +7,7 @@ const AuthAdminProtected = ({
     isAdminAuther = undefined,
     isAdminLoading = true
 }) => {
-
+    console.log("admin authhhhh")
     if(isAdminAuther === undefined){
         return <Loader />
     }

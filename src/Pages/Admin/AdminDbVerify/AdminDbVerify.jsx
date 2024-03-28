@@ -96,16 +96,16 @@ const AdminDbVerify = () => {
             <div>
               <strong>Delivery Boy Address:</strong> {delBoy?.dbAddress || ""}
             </div>
-            <div>
+            <div >
               <strong>Delivery Boy City:</strong>  {delBoy?.dbCompletAddress?.city || ""}
             </div>
-            <div>
+            <div className='img-div'>
               <strong>Delivery Boy Image:</strong>  <img src={delBoy?.dbImage?.publicUrl} width="120px" alt="" srcset="" />
             </div>
-            <div>
+            <div className='img-div'>
               <strong>Delivery Boy Image:</strong>  <img src={delBoy?.dbVihicalImage?.publicUrl} width="450px" alt="" srcset="" />
             </div>
-            <div>
+            <div className='img-div'>
               <strong>Delivery Boy Image:</strong>  <img src={delBoy?.dbLicenseImage?.publicUrl} width="450px" alt="" srcset="" />
             </div>
           </div>

@@ -1,17 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import "./adminHeader.css";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { IoSettingsOutline } from "react-icons/io5";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { useSelector } from "react-redux";
-import { NavLink} from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { adminLogout } from "../../redux/actions/admin";
 
 const AdminHeader = ({ navOpenClose = () => {} }) => {
+  const dispatch = useDispatch();
 
-    const adminName = useSelector((state)=> state?.admin?.admin?.username || "")
+  const adminName = useSelector((state) => state?.admin?.admin?.username || "");
 
+  const [showSetting, setShowSetting] = useState(false);
   const OnClickHamBurger = () => {
     navOpenClose();
+  };
+
+  const logOutHendler = async () => {
+    console.log("clickkkkk");
+    dispatch(adminLogout({}))
   };
 
   return (
@@ -31,8 +39,18 @@ const AdminHeader = ({ navOpenClose = () => {} }) => {
             <div className="icon-div p-2 mx-1 d-flex justify-content-center align-items-center">
               <IoIosNotificationsOutline size={21} color="#FF5B5B" />
             </div>
-            <div className="icon-div p-2 mx-1 d-flex justify-content-center align-items-center">
+            <div className="icon-div cursor-pointer p-2 mx-1 d-flex justify-content-center align-items-center" onClick={()=>setShowSetting(!showSetting)}>
               <IoSettingsOutline size={20} color="#FF5B5B" />
+              {showSetting && (
+                <div className="position-absolute setting-popup">
+                  <span
+                    className="p-2 text-danger cursor-pointer"
+                    onClick={logOutHendler}
+                  >
+                    Logout
+                  </span>
+                </div>
+              )}
             </div>
           </div>
           <NavLink
