@@ -12,7 +12,6 @@ import socketIO from "socket.io-client";
 import AuthAdminProtected from "./Components/ProtectedRoute/AdminProtected/AuthAdminProtected";
 import AdminOnly from "./Components/ProtectedRoute/AdminProtected/AdminOnly";
 import { adminLoad } from "./redux/actions/admin";
-import AdminResVerify from "./Pages/Admin/AdminResVerify/AdminResVerify";
 
 const Home = lazy(() => import("./Pages/USER/Home/Home"));
 const Search = lazy(() => import("./Pages/USER/Search/Search"));
@@ -85,8 +84,12 @@ const AdminNewResList = lazy(() => import("./Pages/Admin/AdminNewResList/AdminNe
 const AdminNewDbList = lazy(() => import("./Pages/Admin/AdminNewDbList/AdminNewDbList"));
 const AdminDbVerify = lazy(() => import("./Pages/Admin/AdminDbVerify/AdminDbVerify"));
 const AdminResManage = lazy(() => import("./Pages/Admin/AdminResManage/AdminResManage"));
+const AdminResVerify = lazy(() => import("./Pages/Admin/AdminResVerify/AdminResVerify"));
 const AdminDbManage = lazy(() => import("./Pages/Admin/AdminDbManage/AdminDbManage"));
 const AdminProfile = lazy(() => import("./Pages/Admin/AdminProfile/AdminProfile"));
+const AdminUserList = lazy(() => import("./Pages/Admin/AdminUserList/AdminUserList"));
+const AdminReturnOrderPayment = lazy(() => import("./Pages/Admin/AdminReturnOrderPayment/AdminReturnOrderPayment"));
+const SendNotification = lazy(() => import("./Pages/Admin/SendNotification/SendNotification"));
 const Temp = lazy(() => import("./temp/Temp"));
 
 const socket = socketIO(process.env.REACT_APP_BASE_URL, {
@@ -483,6 +486,9 @@ function App() {
             <Route path="/admin/res/manage/:resId" element={<AdminResManage isAdminAuther={isAdminAuther}  isAdminLoading={isAdminLoading} />} />
             <Route path="/admin/db/manage/:dbId" element={<AdminDbManage isAdminAuther={isAdminAuther}  isAdminLoading={isAdminLoading} />} />
             <Route path="/admin/profile" element={<AdminProfile isAdminAuther={isAdminAuther}  isAdminLoading={isAdminLoading} />} />
+            <Route path="/admin/user/list" element={<AdminUserList isAdminAuther={isAdminAuther}  isAdminLoading={isAdminLoading} />} />
+            <Route path="/admin/return/payment/list" element={<AdminReturnOrderPayment isAdminAuther={isAdminAuther}  isAdminLoading={isAdminLoading} />} />
+            <Route path="/admin/send/notification" element={<SendNotification isAdminAuther={isAdminAuther}  isAdminLoading={isAdminLoading} />} />
           </Route>
           <Route
             element={

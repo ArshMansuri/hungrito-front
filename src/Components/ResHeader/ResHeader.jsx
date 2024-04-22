@@ -21,7 +21,6 @@ const ResHeader = ({ navOpenClose = () => {} }) => {
   };
 
   const logOutHendler = async()=>{
-    console.log("clickkkkk")
     dispatch(resLogout({}))
   }
   return (

@@ -1,4 +1,10 @@
 .admin-db-verify-page .img-div{
-    width: 200px;
-    height: 200px;
+    /* width: 200px;
+    height: 200px; */
+    flex: 1;
+}
+
+.admin-db-verify-page .db-img{
+    width: 63%;
+    height: 250px;
 }

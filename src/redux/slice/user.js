@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addToCart, decreaseQutInCart, getMyCartDetail, getMySaveFoods, getNearestRestus, getSearchDishNearestRestus, getSearchNearestRestus, getUserResFoods, increaseQutInCart, placeCodOrder, placeOnlineOrder, removeFromCart, userLoad, userLogin, userPhoneOtpVerify, userSignUp } from "../actions/user";
+import { addToCart, decreaseQutInCart, getMyCartDetail, getMySaveFoods, getNearestRestus, getSearchDishNearestRestus, getSearchNearestRestus, getUserResFoods, increaseQutInCart, placeCodOrder, placeOnlineOrder, removeFromCart, userLoad, userLogin, userLogout, userPhoneOtpVerify, userSignUp } from "../actions/user";
 
 const initialState = {
   isAuther: false,
@@ -64,6 +64,20 @@ export const userReduser = createSlice({
       state.user = action.payload.user;
     });
     builder.addCase(userLoad.rejected, (state, action) => {
+      state.message = action.payload?.message || action.payload;
+      state.isLoading = false;
+    });
+
+    // ==================user logout ===============
+    builder.addCase(userLogout.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(userLogout.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isAuther = false;
+      state.user = initialState;
+    });
+    builder.addCase(userLogout.rejected, (state, action) => {
       state.message = action.payload?.message || action.payload;
       state.isLoading = false;
     });

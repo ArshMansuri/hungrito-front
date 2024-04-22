@@ -86,7 +86,6 @@ const AdminResVerify = () => {
         );
         console.log(data);
         if (data !== undefined && data?.success === true) {
-          // show toast
           toast.success("Reject Restaurant Request");
           return navigate(-1);
         }

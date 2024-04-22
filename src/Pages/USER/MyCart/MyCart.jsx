@@ -77,7 +77,11 @@ const MyCart = ({ isAuther, isLoading = true, socket }) => {
       setTax(Math.round(total * 0.18));
       setDeliveryCharg(Math.round(km * 10));
       if (isApplyToken) {
-        setSubTotal(total - token + total * 0.18 + Math.round(km * 10));
+        if(token < 50){
+          setSubTotal(total - token + total * 0.18 + Math.round(km * 10));
+        } else {
+          setSubTotal(total - 50 + total * 0.18 + Math.round(km * 10));
+        }
       } else {
         setSubTotal(total - 0 + total * 0.18 + Math.round(km * 10));
       }
@@ -92,6 +96,13 @@ const MyCart = ({ isAuther, isLoading = true, socket }) => {
   }, [success, navigate, dispatch]);
 
   useEffect(() => {
+
+    if (map.current) {
+      map.current.off();
+      map.current.remove();
+      map.current = null;
+    }
+
     if (mapContainer.current && !map.current) {
       map.current = L.map(mapContainer.current).setView(
         [23.03108310471535, 72.5736169583829],
@@ -137,7 +148,7 @@ const MyCart = ({ isAuther, isLoading = true, socket }) => {
         map.current = null;
       }
     };
-  }, [mapContainer, map, marker, showLoactionPopUp, deliveryAddress.lat, deliveryAddress.lon]);
+  }, [mapContainer, map, marker, showLoactionPopUp]);
 
   const applayTokenHandler = () => {
     if (isApplyToken) {

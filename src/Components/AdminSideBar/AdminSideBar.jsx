@@ -4,7 +4,9 @@ import { AiOutlineHome } from "react-icons/ai";
 import { CiCircleList, CiFileOn, CiWallet } from "react-icons/ci";
 import { IoMdClose } from "react-icons/io";
 import {IoRestaurantOutline } from "react-icons/io5";
-import { MdOutlineDeliveryDining } from "react-icons/md";
+import { MdOutlineDeliveryDining, MdMoneyOffCsred } from "react-icons/md";
+import { PiUsersThreeDuotone } from "react-icons/pi";
+import { MdOutlineEditNotifications } from "react-icons/md";
 import "./adminSideBar.css";
 
 const AdminSideBar = () => {
@@ -108,6 +110,48 @@ const AdminSideBar = () => {
                   <MdOutlineDeliveryDining size={18} />
                 </span>
                 <span className="mt-1 ps-2">New Delivery Boy</span>
+              </button>
+            </NavLink>
+          </div>
+          <div className="w-100 d-flex justify-content-center w-100 my-3">
+            <NavLink to={'/admin/user/list'} className="w-75" onClick={()=> setTab('/admin/user/list')}>
+              <button
+                className={`${
+                  tab === '/admin/user/list' ? "nav-btn-active" : "nav-btn"
+                } w-100 py-1 px-2 border-0 d-flex align-items-center`}
+              >
+                <span className="nav-icon">
+                  <PiUsersThreeDuotone size={18} />
+                </span>
+                <span className="mt-1 ps-2">User List</span>
+              </button>
+            </NavLink>
+          </div>
+          <div className="w-100 d-flex justify-content-center w-100 my-3">
+            <NavLink to={'/admin/return/payment/list'} className="w-75" onClick={()=> setTab('/admin/return/payment/list')}>
+              <button
+                className={`${
+                  tab === '/admin/return/payment/list' ? "nav-btn-active" : "nav-btn"
+                } w-100 py-1 px-2 border-0 d-flex align-items-center`}
+              >
+                <span className="nav-icon">
+                  <MdMoneyOffCsred size={16} />
+                </span>
+                <span className="mt-1 ps-2">Return Payment</span>
+              </button>
+            </NavLink>
+          </div>
+          <div className="w-100 d-flex justify-content-center w-100 my-3">
+            <NavLink to={'/admin/send/notification'} className="w-75" onClick={()=> setTab('/admin/send/notification')}>
+              <button
+                className={`${
+                  tab === '/admin/send/notification' ? "nav-btn-active" : "nav-btn"
+                } w-100 py-1 px-2 border-0 d-flex align-items-center`}
+              >
+                <span className="nav-icon">
+                  <MdOutlineEditNotifications size={16} />
+                </span>
+                <span className="mt-1 ps-2">Send Notification</span>
               </button>
             </NavLink>
           </div>

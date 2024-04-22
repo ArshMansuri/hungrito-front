@@ -88,6 +88,40 @@ export const userPhoneOtpVerify = createAsyncThunk(
   }
 );
 
+export const userLogout = createAsyncThunk(
+  "userLogout",
+  async ({_}, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(`${BASE_URL}/api/v1/user/logout`,{ withCredentials: true });
+      toast.success("Logout Successfully", {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      })
+      localStorage.removeItem("isUser")
+      return data;
+    } catch (error) {
+      toast.error(`${error?.response?.data?.message || "fail to logout"}`, {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      console.log("catch error", error);
+      return rejectWithValue(error.response?.data || "fail to logout");
+    }
+  }
+);
+
 export const userLoad = createAsyncThunk(
   "userLoad",
   async (_, { rejectWithValue }) => {

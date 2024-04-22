@@ -1,0 +1,13 @@
+.admin-return-payment-order-list-page{
+    min-height: 93vh;
+}
+
+.admin-return-payment-order-list-page .action-nav{
+    background-color: #FF5B5B;;
+    border: 2px solid #FF5B5B;;
+    color: white;
+    font-family: "Roboto", sans-serif;
+    /* width: 100%; */
+    padding: 2px 8px;
+    border-radius: 6px;
+}
