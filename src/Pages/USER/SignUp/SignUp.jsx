@@ -14,6 +14,8 @@ import { IoArrowBack } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { userPhoneOtpVerify, userSignUp } from "../../../redux/actions/user";
 import Loader from "../../../Components/Loaders/Loader";
+import {messaging} from "../../../firebase"
+import {getToken} from 'firebase/messaging'
 
 const SignUp = ({ isAuther, isLoading = true }) => {
   const navigator = useNavigate();
@@ -37,6 +39,21 @@ const SignUp = ({ isAuther, isLoading = true }) => {
   const [username, setUsername] = useState("");
   const [phone, setPhone] = useState("");
   const [pass, setPass] = useState("");
+  const [notiToken, setNotiToken] = useState()
+
+  useEffect(()=>{
+    async function requestToGetNotificationPermisson(){
+      const permission = await Notification.requestPermission()
+      if(permission === 'granted'){
+        const token = await getToken(messaging, {vapidKey: "BIOyif2uGYJkqnoZJWghMvRQLMEhLs8AxgJ2NBHuuXlw0hfSCmgG9ZUZugRsIXJ_eo7QBbuvHqb6owqrrLrRTqA"})
+        if(token){
+          setNotiToken(token)
+          console.log(token)
+        }
+      }
+    }
+    requestToGetNotificationPermisson()
+  }, [])
 
   const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
@@ -85,7 +102,7 @@ const SignUp = ({ isAuther, isLoading = true }) => {
   const signupHendler = (e) => {
     e.preventDefault();
     if (username !== "" && phone !== "" && pass !== "") {
-      dispatch(userSignUp({ username, phone, pass, croppedImage }));
+      dispatch(userSignUp({ username, phone, pass, croppedImage, notiToken }));
     }
   };
 

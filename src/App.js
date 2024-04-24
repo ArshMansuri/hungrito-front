@@ -6,6 +6,8 @@ import { userLoad } from "./redux/actions/user";
 import { resLoad } from "./redux/actions/restaurant";
 import Loader from "./Components/Loaders/Loader";
 import axios from "axios";
+import {messaging} from './firebase'
+import {getToken} from 'firebase/messaging'
 import AuthDelBoyProtected from "./Components/ProtectedRoute/DelBoyProtected/AuthDelBoyProtected";
 import { dbLoad } from "./redux/actions/delBoy";
 import socketIO from "socket.io-client";
@@ -19,6 +21,8 @@ const UserRes = lazy(() => import("./Pages/USER/UserRes/UserRes"));
 const UserProfile = lazy(() => import("./Pages/USER/UserProfile/UserProfile"));
 const Login = lazy(() => import("./Pages/USER/Login/Login"));
 const SignUp = lazy(() => import("./Pages/USER/SignUp/SignUp"));
+const ForgotPass = lazy(() => import("./Pages/USER/ForgotPass/ForgotPass"));
+const ResetPassByLink = lazy(() => import("./Pages/USER/ResetPassByLink/ResetPassByLink"));
 const ResLogin = lazy(() => import("./Pages/RESTAURANT/ResLogin/ResLogin"));
 const ResSignUp = lazy(() =>
   import("./Pages/RESTAURANT/ResSignUp/ResSignUp1/ResSignUp")
@@ -177,6 +181,17 @@ function App() {
     }
   }, [MAP_API]);
 
+  useEffect(()=>{
+    async function requestToGetNotificationPermisson(){
+      const permission = await Notification.requestPermission()
+      if(permission === 'granted'){
+        const token = await getToken(messaging, {vapidKey: "BIOyif2uGYJkqnoZJWghMvRQLMEhLs8AxgJ2NBHuuXlw0hfSCmgG9ZUZugRsIXJ_eo7QBbuvHqb6owqrrLrRTqA"})
+        console.log(token)
+      }
+    }
+    requestToGetNotificationPermisson()
+  }, [])
+
   return (
     <Router>
       <Suspense fallback={<Loader />}>
@@ -245,6 +260,14 @@ function App() {
             <Route
               path="/signup"
               element={<SignUp isAuther={isAuther} isLoading={isLoading} />}
+            />
+             <Route
+              path="/user/forgot/password"
+              element={<ForgotPass isAuther={isAuther} isLoading={isLoading} />}
+            />
+             <Route
+              path="/user/reset/password/link/:forgotPassToken"
+              element={<ResetPassByLink isAuther={isAuther} isLoading={isLoading} />}
             />
           </Route>
 

@@ -1,0 +1,56 @@
+.admin-send-user-notification-page{
+    min-height: 93vh;
+}
+
+.admin-send-user-notification-page .notification-preview{
+    background-color: #716e6e;
+    width: 370px;
+    font-family: 'Roboto', sans-serif;
+    padding: 14px;
+    border-radius: 8px;
+}
+
+.admin-send-user-notification-page .notification-preview .chrom-name{
+    font-size: 14px;
+}
+
+.admin-send-user-notification-page .notification-body .tital{
+    line-height: 16px;
+    font-size: 15px;
+}
+.admin-send-user-notification-page .notification-body .body{
+    font-size: 16px;
+    color: #e6e1e1 !important;
+}
+
+.admin-send-user-notification-page .notification-preview .web-app-name{
+    font-size: 14px;
+}
+
+.admin-send-user-notification-page .input-group input{
+    width: 360px;
+    border: 2px solid #ff6600;
+    outline: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    letter-spacing: 1px;
+}
+
+.admin-send-user-notification-page .input-group textarea{
+    width: 360px;
+    border: 2px solid #ff6600;
+    outline: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    letter-spacing: 1px;
+}
+
+.admin-send-user-notification-page .input-group button{
+    background-color: #ff6600;
+    border: 0;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    width: 360px;
+    padding: 8px;
+    border-radius: 5px; 
+}

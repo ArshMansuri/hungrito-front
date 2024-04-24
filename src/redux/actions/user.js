@@ -20,11 +20,11 @@ const tostOpstion = {
 
 export const userLogin = createAsyncThunk(
   "userLogin",
-  async ({ phone, pass }, { rejectWithValue }) => {
+  async ({ phone, pass, notiToken }, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(
         `${BASE_URL}/api/v1/user/login`,
-        { phone, password: pass },
+        { phone, password: pass, notiToken },
         {
           headers: {
             "Content-Type": "application/json",
@@ -44,11 +44,11 @@ export const userLogin = createAsyncThunk(
 
 export const userSignUp = createAsyncThunk(
   "userSignUp",
-  async ({ username, croppedImage, phone, pass }, { rejectWithValue }) => {
+  async ({ username, croppedImage, phone, pass, notiToken }, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(
         `${BASE_URL}/api/v1/user/signUp`,
-        { username, phone, password: pass, img: croppedImage },
+        { username, phone, password: pass, img: croppedImage, notiToken },
         {
           headers: {
             "Content-Type": "application/json",

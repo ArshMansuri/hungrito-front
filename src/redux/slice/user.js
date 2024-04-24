@@ -28,6 +28,7 @@ export const userReduser = createSlice({
     // ==================user SignUp ===============
     builder.addCase(userSignUp.pending, (state) => {
       state.isLoading = true;
+      state.success = false
     });
     builder.addCase(userSignUp.fulfilled, (state, action) => {
       state.user = action.payload.user;
@@ -37,6 +38,7 @@ export const userReduser = createSlice({
     builder.addCase(userSignUp.rejected, (state, action) => {
       state.message = action.payload?.message || action.payload;
       state.isLoading = false;
+      state.success = false
     });
 
     // ==================user Phone OTP Verify ===============

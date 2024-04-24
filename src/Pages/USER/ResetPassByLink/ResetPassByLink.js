@@ -1,44 +1,83 @@
 import React, { useEffect, useState } from "react";
-import "./login.css";
-import { NavLink, useNavigate } from "react-router-dom";
+import "../Login/login.css";
+import "./resetPassByLink.css";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
-import { BiHide, BiShow } from "react-icons/bi";
 import { FcGoogle } from "react-icons/fc";
 import { BsGithub } from "react-icons/bs";
 import { SiFacebook } from "react-icons/si";
-import { useDispatch } from "react-redux";
-import { userLogin } from "../../../redux/actions/user";
 import Loader from "../../../Components/Loaders/Loader";
-import {messaging} from "../../../firebase"
-import {getToken} from 'firebase/messaging'
+import { toast } from "react-toastify";
+import axios from "axios";
 
-const Login = ({ isAuther, isLoading = true }) => {
+const tostOpstion = {
+  position: "bottom-center",
+  autoClose: 3000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "dark",
+};
+
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+const ResetPassByLink = ({ isAuther, isLoading = true }) => {
   const navigator = useNavigate();
-  const dispatch = useDispatch();
+  const { forgotPassToken } = useParams();
 
-  const [showPass, setShowPass] = useState(false);
-  const [phone, setPhone] = useState("");
-  const [pass, setPass] = useState("");
-  const [notiToken, setNotiToken] = useState()
+  const [pass, setPass] = useState();
 
-  useEffect(()=>{
-    async function requestToGetNotificationPermisson(){
-      const permission = await Notification.requestPermission()
-      if(permission === 'granted'){
-        const token = await getToken(messaging, {vapidKey: "BIOyif2uGYJkqnoZJWghMvRQLMEhLs8AxgJ2NBHuuXlw0hfSCmgG9ZUZugRsIXJ_eo7QBbuvHqb6owqrrLrRTqA"})
-        if(token){
-          setNotiToken(token)
-          console.log(token)
-        }
+  useEffect(() => {
+    if (!forgotPassToken) {
+      return navigator("/");
+    }
+
+    async function fetchData() {
+      try {
+        const { data } = await axios.post(
+          `${BASE_URL}/api/v1/user/reset/pass/link/verify`,
+          { forgotPassToken: forgotPassToken, },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            withCredentials: true,
+          }
+        );
+      } catch (error) {
+        toast.error("Somthing Went Wrong");
+        console.log(error);
+        navigator("/")
       }
     }
-    requestToGetNotificationPermisson()
-  }, [])
+    fetchData()
+  }, []);
 
-  const loginHandler = (e) => {
-    e.preventDefault();
-    if (phone !== "" && pass !== "") {
-      dispatch(userLogin({ phone, pass, notiToken }));
+  const changePassHendler = async () => {
+    if (pass !== undefined && pass.length >= 6) {
+      try {
+        const { data } = await axios.post(
+          `${BASE_URL}/api/v1/user/reset/pass/bylink`,
+          { forgotPassToken: forgotPassToken, password: pass },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            withCredentials: true,
+          }
+        );
+
+        if (data !== undefined && data.success === true) {
+          toast.success(`Linh Successfully Send`);
+          navigator("/");
+        }
+      } catch (error) {
+        toast.error("Somthing Went Wrong");
+        console.log(error);
+      }
+    } else {
+      toast.error("Enter Minimum 8 Letter Password");
     }
   };
 
@@ -83,50 +122,34 @@ const Login = ({ isAuther, isLoading = true }) => {
                             onClick={() => navigator(-1)}
                           />
                         </div>
-                        <h2 className="text-white">Login</h2>
+                        <h2 className="text-white">Forgot Password</h2>
                       </div>
-                      <form
-                        action="#"
-                        className="text-white"
-                        onSubmit={loginHandler}
-                      >
+                      <form action="#" className="text-white">
                         <div className="email-controle d-flex flex-column mt-3">
                           <label htmlFor="email" className="pb-1">
-                            Phone
-                          </label>
-                          <input
-                            type="tel"
-                            id="email"
-                            placeholder="0123456789"
-                            className="text-secondary"
-                            value={phone}
-                            onChange={(e) => setPhone(e.target.value)}
-                          />
-                        </div>
-                        <div className="password-controle d-flex flex-column mt-3 position-relative">
-                          <label htmlFor="password" className="pb-1">
                             Password
                           </label>
                           <input
-                            type={`${showPass === true ? "text" : "password"}`}
-                            id="password"
-                            placeholder="Password"
+                            type="text"
+                            id="email"
+                            placeholder="0123456789"
                             className="text-secondary"
                             value={pass}
                             onChange={(e) => setPass(e.target.value)}
                           />
-                          <div
-                            className="position-absolute pass-icon end-0 bottom-0"
-                            onClick={() => setShowPass(!showPass)}
-                          >
-                            {showPass ? <BiShow /> : <BiHide />}
-                          </div>
                         </div>
-                        <NavLink to={"/user/forgot/password"} className="forgate-pass d-flex justify-content-end">
-                          <span>Forgoat Password?</span>
+                        <NavLink
+                          to={"/login"}
+                          className="forgate-pass d-flex justify-content-end"
+                        >
+                          <span>Back to login</span>
                         </NavLink>
-                        <button type="submit" className="mt-3">
-                          Sign In
+                        <button
+                          type="button"
+                          onClick={changePassHendler}
+                          className="mt-3"
+                        >
+                          Chnage Password
                         </button>
                       </form>
                       <div className="w-100 d-flex flex-column align-items-center mt-3">
@@ -163,4 +186,4 @@ const Login = ({ isAuther, isLoading = true }) => {
   );
 };
 
-export default Login;
+export default ResetPassByLink;
