@@ -117,7 +117,7 @@ const DbLogin = ({ isDbLoading = false }) => {
                             {showPass ? <BiShow /> : <BiHide />}
                           </div>
                         </div>
-                        <NavLink className="forgate-pass d-flex justify-content-end">
+                        <NavLink to={"db/forgot/password"} className="forgate-pass d-flex justify-content-end">
                           <span>Forgoat Password?</span>
                         </NavLink>
                         <button type="submit" className="mt-3">

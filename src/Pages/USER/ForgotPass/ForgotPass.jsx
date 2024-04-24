@@ -42,7 +42,7 @@ const ForgotPass = ({ isAuther, isLoading = true }) => {
         );
 
         if(data !== undefined && data.success === true){
-            toast.success(`Linh Successfully Send`)
+            toast.success(`Link Successfully Send`)
             navigator("/")
         }
 

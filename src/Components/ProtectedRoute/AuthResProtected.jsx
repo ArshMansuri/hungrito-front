@@ -19,6 +19,12 @@ const AuthResProtected = ({isRestuAuther=undefined, isResLoading=true}) => {
     if(!isResLoading && !isRestuAuther && window.location.pathname === '/res/login'){
         return <Outlet />
     }
+    if(!isResLoading && !isRestuAuther && window.location.pathname === '/res/forgot/password'){
+        return <Outlet />
+    }
+    if(!isResLoading && !isRestuAuther && window.location.pathname.includes("/res/reset/password/link/")){
+        return <Outlet />
+    }
 
     if(!isResLoading && !isRestuAuther && (resEmail === undefined || resEmail !== params?.email) && (resEmailVerify === false || resEmailVerify === undefined)){
         return <Navigate to={"/res/verify"} />

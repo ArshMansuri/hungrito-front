@@ -27,6 +27,14 @@ const AuthDelBoyProtected = ({
     return <Outlet />;
   }
 
+  if (!isDbLoading && !isDbAuther && window.location.pathname === "/db/forgot/password") {
+    return <Outlet />;
+  }
+
+  if (!isDbLoading && !isDbAuther && window.location.pathname.includes("/db/reset/password/link/")) {
+    return <Outlet />;
+  }
+
   if (
     !isDbLoading &&
     !isDbAuther &&

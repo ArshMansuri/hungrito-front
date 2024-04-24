@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "../Login/login.css";
-import "./resetPassByLink.css";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
+import "../../RESTAURANT/ResLogin/resLogin.css";
+import { NavLink, useNavigate } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
 import { FcGoogle } from "react-icons/fc";
 import { BsGithub } from "react-icons/bs";
@@ -22,44 +21,17 @@ const tostOpstion = {
 };
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
-const ResetPassByLink = ({ isAuther, isLoading = true }) => {
+const ResFogotPass = ({ isRestuAuther, isResLoading = true }) => {
   const navigator = useNavigate();
-  const { forgotPassToken } = useParams();
 
-  const [pass, setPass] = useState();
+  const [email, setEmail] = useState("");
 
-  useEffect(() => {
-    if (!forgotPassToken) {
-      return navigator("/");
-    }
-
-    async function fetchData() {
+  const getForgotLinkHendeler = async () => {
+    if (email !== "" && email.includes("@")) {
       try {
         const { data } = await axios.post(
-          `${BASE_URL}/api/v1/user/reset/pass/link/verify`,
-          { forgotPassToken: forgotPassToken, },
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-            withCredentials: true,
-          }
-        );
-      } catch (error) {
-        toast.error("Somthing Went Wrong");
-        console.log(error);
-        navigator("/")
-      }
-    }
-    fetchData()
-  }, []);
-
-  const changePassHendler = async () => {
-    if (pass !== undefined && pass.length >= 6) {
-      try {
-        const { data } = await axios.post(
-          `${BASE_URL}/api/v1/user/reset/pass/bylink`,
-          { forgotPassToken: forgotPassToken, password: pass },
+          `${BASE_URL}/api/v1/restaurant/forgot/pass/token`,
+          { email },
           {
             headers: {
               "Content-Type": "application/json",
@@ -68,22 +40,23 @@ const ResetPassByLink = ({ isAuther, isLoading = true }) => {
           }
         );
 
-        if (data !== undefined && data.success === true) {
-          toast.success(`Password Change Successfully`);
-          navigator("/");
+        if(data !== undefined && data.success === true){
+            toast.success(`Link Successfully Send`)
+            navigator("/")
         }
+
       } catch (error) {
         toast.error("Somthing Went Wrong");
         console.log(error);
       }
     } else {
-      toast.error("Enter Minimum 8 Letter Password");
+      toast.error("Enter Valide Phone Number");
     }
   };
 
   return (
     <>
-      {isLoading ? (
+      {isResLoading ? (
         <Loader />
       ) : (
         <div className="login-page">
@@ -127,29 +100,29 @@ const ResetPassByLink = ({ isAuther, isLoading = true }) => {
                       <form action="#" className="text-white">
                         <div className="email-controle d-flex flex-column mt-3">
                           <label htmlFor="email" className="pb-1">
-                            Password
+                            Email
                           </label>
                           <input
-                            type="text"
+                            type="email"
                             id="email"
                             placeholder="0123456789"
                             className="text-secondary"
-                            value={pass}
-                            onChange={(e) => setPass(e.target.value)}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                           />
                         </div>
                         <NavLink
-                          to={"/login"}
+                          to={"/res/login"}
                           className="forgate-pass d-flex justify-content-end"
                         >
                           <span>Back to login</span>
                         </NavLink>
                         <button
                           type="button"
-                          onClick={changePassHendler}
+                          onClick={getForgotLinkHendeler}
                           className="mt-3"
                         >
-                          Chnage Password
+                          Send Link
                         </button>
                       </form>
                       <div className="w-100 d-flex flex-column align-items-center mt-3">
@@ -186,4 +159,4 @@ const ResetPassByLink = ({ isAuther, isLoading = true }) => {
   );
 };
 
-export default ResetPassByLink;
+export default ResFogotPass;

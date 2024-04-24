@@ -36,6 +36,12 @@ const ResSignUp3 = lazy(() =>
 const ResFirstVerify = lazy(() =>
   import("./Pages/RESTAURANT/ResSignUp/ResFirstVerify/ResFirstVerify")
 );
+const ResFogotPass = lazy(() =>
+  import("./Pages/RESTAURANT/ResFogotPass/ResFogotPass")
+);
+const ResResetPassByLink = lazy(() =>
+  import("./Pages/RESTAURANT/ResResetPassByLink/ResResetPassByLink")
+);
 const AuthProtected = lazy(() =>
   import("./Components/ProtectedRoute/AuthProtected")
 );
@@ -76,6 +82,8 @@ const DbSignUp2 = lazy(() =>
   import("./Pages/DeliveryBoy/DbSignUp/DbSignUp2/DbSignUp2")
 );
 const DbLogin = lazy(() => import("./Pages/DeliveryBoy/DbLogin/DbLogin"));
+const DbForgotPass = lazy(() => import("./Pages/DeliveryBoy/DbForgotPass/DbForgotPass"));
+const DbResetPassByLink = lazy(() => import("./Pages/DeliveryBoy/DbResetPassByLink/DbResetPassByLink"));
 const DbHome = lazy(() => import("./Pages/DeliveryBoy/DbHome/DbHome"));
 const DbOrder = lazy(() => import("./Pages/DeliveryBoy/DbOrder/DbOrder"));
 const DbProfile = lazy(() => import("./Pages/DeliveryBoy/DbProfile/DbProfile"));
@@ -410,6 +418,25 @@ function App() {
                 />
               }
             />
+             <Route
+              path="/res/forgot/password"
+              element={
+                <ResFogotPass
+                  isRestuAuther={isRestuAuther}
+                  isResLoading={isResLoading}
+                />
+              }
+            />
+            <Route
+              path="/res/reset/password/link/:forgotPassToken"
+              element={
+                <ResResetPassByLink
+                  isRestuAuther={isRestuAuther}
+                  isResLoading={isResLoading}
+                />
+              }
+            />
+           
           </Route>
 
           <Route
@@ -482,6 +509,18 @@ function App() {
               path="/db/login"
               element={
                 <DbLogin isDbAuther={isDbAuther} isDbLoading={isDbLoading} />
+              }
+            />
+            <Route
+              path="/db/forgot/password"
+              element={
+                <DbForgotPass isDbAuther={isDbAuther} isDbLoading={isDbLoading} />
+              }
+            />
+            <Route
+              path="/db/reset/password/link/:forgotPassToken"
+              element={
+                <DbResetPassByLink isDbAuther={isDbAuther} isDbLoading={isDbLoading} />
               }
             />
           </Route>

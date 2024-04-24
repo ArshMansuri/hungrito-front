@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../Login/login.css";
-import "./resetPassByLink.css";
+import "../../RESTAURANT/ResLogin/resLogin.css";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
 import { FcGoogle } from "react-icons/fc";
@@ -22,7 +21,7 @@ const tostOpstion = {
 };
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
-const ResetPassByLink = ({ isAuther, isLoading = true }) => {
+const ResResetPassByLink = ({ isRestuAuther, isResLoading = true }) => {
   const navigator = useNavigate();
   const { forgotPassToken } = useParams();
 
@@ -36,7 +35,7 @@ const ResetPassByLink = ({ isAuther, isLoading = true }) => {
     async function fetchData() {
       try {
         const { data } = await axios.post(
-          `${BASE_URL}/api/v1/user/reset/pass/link/verify`,
+          `${BASE_URL}/api/v1/restaurant/reset/pass/link/verify`,
           { forgotPassToken: forgotPassToken, },
           {
             headers: {
@@ -58,7 +57,7 @@ const ResetPassByLink = ({ isAuther, isLoading = true }) => {
     if (pass !== undefined && pass.length >= 6) {
       try {
         const { data } = await axios.post(
-          `${BASE_URL}/api/v1/user/reset/pass/bylink`,
+          `${BASE_URL}/api/v1/restaurant/reset/pass/bylink`,
           { forgotPassToken: forgotPassToken, password: pass },
           {
             headers: {
@@ -70,7 +69,7 @@ const ResetPassByLink = ({ isAuther, isLoading = true }) => {
 
         if (data !== undefined && data.success === true) {
           toast.success(`Password Change Successfully`);
-          navigator("/");
+          navigator("/res/login");
         }
       } catch (error) {
         toast.error("Somthing Went Wrong");
@@ -83,7 +82,7 @@ const ResetPassByLink = ({ isAuther, isLoading = true }) => {
 
   return (
     <>
-      {isLoading ? (
+      {isResLoading ? (
         <Loader />
       ) : (
         <div className="login-page">
@@ -139,7 +138,7 @@ const ResetPassByLink = ({ isAuther, isLoading = true }) => {
                           />
                         </div>
                         <NavLink
-                          to={"/login"}
+                          to={"/res/login"}
                           className="forgate-pass d-flex justify-content-end"
                         >
                           <span>Back to login</span>
@@ -186,4 +185,4 @@ const ResetPassByLink = ({ isAuther, isLoading = true }) => {
   );
 };
 
-export default ResetPassByLink;
+export default ResResetPassByLink;
