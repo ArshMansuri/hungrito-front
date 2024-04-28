@@ -67,7 +67,7 @@ const ResFogotPass = ({ isRestuAuther, isResLoading = true }) => {
                   <div className="container d-xl-block d-lg-block d-md-block d-sm-none d-none d-block  ">
                     <div className="logo  position-absolute">
                       <img
-                        src="../img/logo2.png"
+                        src="../../img/logo2.png"
                         alt=""
                         height="70px"
                         width="60px"
@@ -76,7 +76,7 @@ const ResFogotPass = ({ isRestuAuther, isResLoading = true }) => {
                     </div>
                     <div className="login-img mt-5">
                       <img
-                        src="../img/login.png"
+                        src="../../img/login.png"
                         className="mt-4 ms-4"
                         alt=""
                         width="100%"
@@ -105,7 +105,7 @@ const ResFogotPass = ({ isRestuAuther, isResLoading = true }) => {
                           <input
                             type="email"
                             id="email"
-                            placeholder="0123456789"
+                            placeholder="abcd@gmail.com"
                             className="text-secondary"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -142,7 +142,7 @@ const ResFogotPass = ({ isRestuAuther, isResLoading = true }) => {
                         </div>
                         <div className="text-white dont-have-account-text mt-3">
                           Don't hvae an account yet?{" "}
-                          <NavLink to="/signup" className="fw-bold">
+                          <NavLink to="/res/verify" className="fw-bold">
                             Register for free
                           </NavLink>{" "}
                         </div>
