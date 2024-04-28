@@ -38,7 +38,8 @@ const AdminSideBar = () => {
       <div className="d-flex flex-column align-items-center">
         <div className="app-logo d-flex align-items-center my-2">
           <div className="logo-div mx-1">
-            <img src="../img/logo2.png" height="60px" width="50px" alt="" />
+            {/* <img src="../img/logo2.png" height="60px" width="50px" alt="" /> */}
+            <img src="https://res.cloudinary.com/dbirutg8t/image/upload/v1714284973/hungriTo/public/logo2_jnkg5p.png" height="60px" width="50px" alt="" />
           </div>
           <h4 className="app-name">HUNGRITO</h4>
         </div>
@@ -155,7 +156,7 @@ const AdminSideBar = () => {
               </button>
             </NavLink>
           </div>
-          <div className="w-100 d-flex justify-content-center w-100 my-3">
+          {/* <div className="w-100 d-flex justify-content-center w-100 my-3">
             <NavLink to={"/res/wallet"} className="w-75">
               <button
                 className={`${
@@ -168,7 +169,7 @@ const AdminSideBar = () => {
                 <span className="mt-1 ps-2">Wallet</span>
               </button>
             </NavLink>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

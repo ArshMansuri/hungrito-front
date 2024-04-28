@@ -77,6 +77,9 @@ const FoodCart = ({
   }
 
   const saveUnsaveHendler = async() =>{
+    if(!isAuther && !isRestu){
+      return navigator("/login")
+    }
     if(isSavePage){
       dispatch(removeFromSave(foodId))
     }

@@ -34,10 +34,10 @@ const columns = [
     Headers: "Token",
     accessor: "token",
   },
-  {
-    Headers: "City",
-    accessor: "city",
-  },
+  // {
+  //   Headers: "City",
+  //   accessor: "city",
+  // },
   {
     Headers: "Action",
     accessor: "manage",
@@ -85,8 +85,8 @@ const AdminUserList = () => {
               ),
               username: r?.username,
               phone: r?.phone?.phone,
-              email: r?.email?.email,
-              city: r?.address?.city,
+              email: r?.email,
+              // city: r?.address?.city,
               token: r?.token,
               isVerify: (
                 <div className="form-check d-flex justify-content-center">
@@ -105,7 +105,7 @@ const AdminUserList = () => {
               manage: (
                 <NavLink
                   className="text-dark action-nav"
-                  to={`/admin/db/manage/${r?._id}`}
+                  to={`/admin/user/manage/${r?._id}`}
                 >
                   <button>Manage</button>
                 </NavLink>
@@ -114,6 +114,8 @@ const AdminUserList = () => {
           );
         }
       }, [users]);
+
+      console.log(users)
 
       async function bannedUnBannedHendler(dbId) {
       }

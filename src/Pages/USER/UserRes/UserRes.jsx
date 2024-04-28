@@ -48,11 +48,11 @@ const UserRes = ({ isAuther, isLoading = true }) => {
       >
         <FoodHeader isAuther={isAuther} isLoading={isLoading} isGifImgShow={isAddCardImgShow} />
       </div>
-      <div className="w-100" style={{ marginTop: "85px" }}>
+      <div style={{ marginTop: "85px" }}>
         {foods === undefined || isFoodsLoading ? (
           <Loader />
         ) : (
-          <div className="row w-100 position-relative">
+          <div className="row position-relative">
             <div className=" position-fixed start-0 col-xl-6 col-lg-6 col-md-6 col-sm-0 col-sm-0 d-xl-block d-lg-block d-md-block d-sm-none d-none">
               {foods !== undefined && foods.length > 0 ? (
                   <UserFoodBigCard
@@ -74,7 +74,7 @@ const UserRes = ({ isAuther, isLoading = true }) => {
                 <></>
               )}
             </div>
-            <div className="position-absolute end-0 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-sm-12 d-flex flex-wrap justify-content-xl-around justify-content-lg-around justify-content-md-center justify-content-sm-center justify-content-center">
+            <div className="position-absolute bottom-margin end-0 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-sm-12 d-flex flex-wrap justify-content-xl-around justify-content-lg-around justify-content-md-center justify-content-sm-center justify-content-center" >
               <div className="dis-xl-non d-lg-none d-md-none d-sm-block d-block">
                 {foods !== undefined && foods?.length > 0 ? (
                   <FoodCart

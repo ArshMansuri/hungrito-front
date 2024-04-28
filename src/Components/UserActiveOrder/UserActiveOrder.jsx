@@ -259,11 +259,11 @@ const UserActiveOrder = ({socket}) => {
                         )}
                       </span>
                     </div>
-                    <div>
+                    <div className="d-xl-block d-lg-block d-md-block d-sm-flex d-flex flex-sm-column flex-column">
                       {
                         order.status === "new" ?
                       <button
-                        className="accept-order-btn new-order-btn mx-1 bg-danger"
+                        className="accept-order-btn new-order-btn mx-1 bg-danger my-sm-2 my-2"
                         onClick={cancelOrderHendelr}
                       >
                         Cancel Order

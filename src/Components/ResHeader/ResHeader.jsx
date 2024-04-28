@@ -59,7 +59,7 @@ const ResHeader = ({ navOpenClose = () => {} }) => {
             </span>
             <NavLink to={'/res/profile'} style={{ display: "contents" }}>
               <img
-                src="https://res.cloudinary.com/dbirutg8t/image/upload/v1703695278/avatars/nngtjttismr9mlly0uvk.jpg"
+                src="https://res.cloudinary.com/dbirutg8t/image/upload/v1705764347/hungriTo/userAvatar/m0ozb0onaxl2lca6vcri.jpg"
                 alt=""
                 width="34px"
                 className="rounded-circle"

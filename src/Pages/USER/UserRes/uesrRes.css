@@ -1,6 +1,13 @@
 .user-res-page{
     background-color: white;
     min-height: 200vh;
+    overflow-x: hidden;
 }
 
 
+@media (max-width: 770px) {
+    .user-res-page .bottom-margin{
+      position: relative !important;
+      margin-bottom: 100px;
+    }
+  }

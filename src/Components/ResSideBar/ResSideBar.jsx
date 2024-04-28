@@ -28,7 +28,8 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
       <div className="d-flex flex-column align-items-center">
         <div className="app-logo d-flex align-items-center my-2">
           <div className="logo-div mx-1">
-            <img src="../img/logo2.png" height="60px" width="50px" alt="" />
+            {/* <img src="../img/logo2.png" height="60px" width="50px" alt="" /> */}
+            <img src="https://res.cloudinary.com/dbirutg8t/image/upload/v1714284973/hungriTo/public/logo2_jnkg5p.png" height="60px" width="50px" alt="" />
           </div>
           <h4 className="app-name">
             HUNGRITO
@@ -132,7 +133,7 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
                 </button>
             </NavLink>
             </div>
-            <div className="w-100 d-flex justify-content-center w-100 my-3">
+            {/* <div className="w-100 d-flex justify-content-center w-100 my-3">
             <NavLink to={"/res/wallet"} className='w-75' onClick={()=>setTab('/res/wallet')}>
                 <button className={`${tab === '/res/wallet' ? 'nav-btn-active': 'nav-btn'} w-100 py-1 px-2 border-0 d-flex align-items-center`}>
                     <span className="nav-icon">
@@ -143,7 +144,7 @@ const ResSideBar = ({closeSideBar=()=>{}}) => {
                     </span>
                 </button>
             </NavLink>
-            </div>
+            </div> */}
 
         </div>
       </div>

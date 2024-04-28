@@ -73,7 +73,7 @@ const Food = ({ isAuther, isLoading = true }) => {
           </div>
         </div>
       </div>
-      <div className="container d-flex justify-content-xl-start justify-content-lg-start justify-content-md-start justify-content-sm-center justify-content-center flex-wrap">
+      <div className="container d-flex justify-content-xl-start justify-content-lg-start justify-content-md-start justify-content-sm-center justify-content-center flex-wrap " style={{marginBottom: "100px"}}>
 
     {
       isNearestFoodLoading && <Loader/>

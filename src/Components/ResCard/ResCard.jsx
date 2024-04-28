@@ -14,7 +14,7 @@ const ResCart = ({
 
   return (
     <>
-      <div className="cart-main mt-3 mx-4" style={{cursor: 'pointer'}} onClick={()=>navigator(`/user/res/${resId}`)}>
+      <div className="cart-main mt-3 mx-4 my-3" style={{cursor: 'pointer'}} onClick={()=>navigator(`/user/res/${resId}`)}>
         <div className="cart-img ">
           <img className="shadow-sm" src={foodImg} alt="" srcSet="" />
         </div>

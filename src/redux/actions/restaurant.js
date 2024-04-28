@@ -7,6 +7,18 @@ import { toast } from "react-toastify";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
+
+const tostOpstion = {
+  position: "bottom-center",
+  autoClose: 3000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "dark",
+}
+
 export const restuSignUpVerify = createAsyncThunk(
   "restuSignUpVerify",
   async ({ email }, { rejectWithValue }) => {
@@ -196,7 +208,9 @@ export const resSignUpThirdPage = createAsyncThunk(
         },
         { withCredentials: true }
       );
-      console.log(data);
+      // console.log(data);
+      localStorage.removeItem("isRestu")
+      toast.success(data?.message, tostOpstion)
       return data;
     } catch (error) {
       console.log("catch error", error);

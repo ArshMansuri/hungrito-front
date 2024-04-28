@@ -142,7 +142,9 @@ const ResSignUp = ({ isRestuAuther, isResLoading = true }) => {
     if (
       restu !== undefined &&
       restu.resName === "" &&
-      restu.resName !== undefined
+      restu.resName !== undefined &&
+      restu?.resPhone?.isVerify === true &&
+      restu?.resOwnerPhone?.isVerify === true 
     ) {
       if (restu?.resCompletAddress?.latitude !== null) {
         setResComplateAddress({
