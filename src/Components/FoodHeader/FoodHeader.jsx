@@ -67,6 +67,44 @@ const FoodHeader = ({
     setFun(citys[index]);
   };
 
+  const onClickCurrentLocation = async()=>{
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        async (p) => {
+          const { latitude, longitude } = p?.coords;
+          try {
+            const apiUrl = `https://api.tomtom.com/search/2/reverseGeocode/${latitude},${longitude}.json?key=${MAP_API}`;
+            const res = await axios.get(apiUrl);
+            const data = res.data;
+            if (data && data.addresses && data.addresses.length > 0) {
+              const address = data.addresses[0].address;
+              const city = {
+                address: address?.freeformAddress || "",
+                subText:
+                  address?.countrySubdivisionName + " " + address?.country,
+                lat: latitude,
+                lan: longitude,
+              };
+              localStorage.setItem("city", JSON.stringify(city));
+              setLocInput(city?.address)
+            } else {
+              console.error("No address information found.");
+            }
+          } catch (error) {
+            console.log(error);
+            console.error(
+              "Error fetching data from TomTom API:",
+              error.message
+            );
+          }
+        },
+        (err) => {
+          console.log(err.message);
+        }
+      );
+    }
+  }
+
   return (
     <header className="bg-white food-header-com">
       <div className="row w-100">
@@ -117,7 +155,7 @@ const FoodHeader = ({
                 {/* =============== Location Pop Up =============== */}
                 {locatioShow ? (
                   <div className="w-100 position-absolute start-0 bg-white shadow-lg location-popup">
-                    <div className="gps-location d-flex align-items-start ms-2 mt-2">
+                    <div className="gps-location d-flex align-items-start ms-2 mt-2" onClick={onClickCurrentLocation}>
                       <MdGpsFixed className="mt-1" color="#ff6600" />
                       <div className="ms-2">
                         <div className="gps-direct-text">

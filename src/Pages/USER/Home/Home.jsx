@@ -17,6 +17,14 @@ const Home = ({ isAuther, isLoading = true }) => {
 
   const MAP_API = process.env.REACT_APP_TOM_TOM_API_KEY;
 
+  useEffect(() => {
+    let city = localStorage.getItem("city");
+    if (city) {
+      city = JSON.parse(city);
+      setLocInput(city.address);
+    }
+  }, []);
+
   // {/* =============== Suggest Location in popup =============== */}
   const userLaoctionHendler = async (e) => {
     try {
@@ -54,6 +62,44 @@ const Home = ({ isAuther, isLoading = true }) => {
     if (citys[index].lat !== 0 && citys[index].lan !== undefined)
       localStorage.setItem("city", JSON.stringify(citys[index]));
   };
+
+  const onClickCurrentLocation = async()=>{
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        async (p) => {
+          const { latitude, longitude } = p?.coords;
+          try {
+            const apiUrl = `https://api.tomtom.com/search/2/reverseGeocode/${latitude},${longitude}.json?key=${MAP_API}`;
+            const res = await axios.get(apiUrl);
+            const data = res.data;
+            if (data && data.addresses && data.addresses.length > 0) {
+              const address = data.addresses[0].address;
+              const city = {
+                address: address?.freeformAddress || "",
+                subText:
+                  address?.countrySubdivisionName + " " + address?.country,
+                lat: latitude,
+                lan: longitude,
+              };
+              localStorage.setItem("city", JSON.stringify(city));
+              setLocInput(city?.address)
+            } else {
+              console.error("No address information found.");
+            }
+          } catch (error) {
+            console.log(error);
+            console.error(
+              "Error fetching data from TomTom API:",
+              error.message
+            );
+          }
+        },
+        (err) => {
+          console.log(err.message);
+        }
+      );
+    }
+  }
 
 
   return (
@@ -184,7 +230,7 @@ const Home = ({ isAuther, isLoading = true }) => {
                         {/* =============== Location Pop Up =============== */}
                         {locatioShow ? (
                           <div className="w-100 position-absolute bg-white location-popup">
-                            <div className="gps-location d-flex align-items-start ms-2 mt-2">
+                            <div className="gps-location d-flex align-items-start ms-2 mt-2" onClick={onClickCurrentLocation}>
                               <MdGpsFixed className="mt-1" color="#ff6600" />
                               <div className="ms-2">
                                 <div className="gps-direct-text">
@@ -225,9 +271,9 @@ const Home = ({ isAuther, isLoading = true }) => {
                       </div>
                       <div className="mt-4">
                         <NavLink to="/food" className="">
-                          <button className="ms-2 me-2 mb-3">Oreder Now</button>
+                          <button className="ms-2 me-2 mb-3">Order Now</button>
                         </NavLink>
-                        <NavLink to="#" className="">
+                        <NavLink to={`${isAuther ? "/my/cart" : "/login"}`} className="">
                           <button className="ms-2 ms-2 se-btn">
                             Goto Cart
                           </button>
