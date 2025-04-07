@@ -54,7 +54,7 @@ const ResSignUp2 = ({ isRestuAuther, isResLoading = true }) => {
       } catch (error) {
         console.log(error);
       }
-    }
+    } 
     fetchData();
   }, []);
 

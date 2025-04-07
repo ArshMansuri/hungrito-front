@@ -6,12 +6,13 @@ import { FcGoogle } from "react-icons/fc";
 import { BsGithub } from "react-icons/bs";
 import { SiFacebook } from "react-icons/si";
 import { toast } from "react-toastify";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "../../RESTAURANT/ResLogin/resLogin.css";
 import { dbLogin } from "../../../redux/actions/delBoy";
 import { useDispatch } from "react-redux";
 
 const DbLogin = ({ isDbLoading = false }) => {
+  const navigator = useNavigate();
   const dispatch = useDispatch();
 
   const [phone, setPhone] = useState("");

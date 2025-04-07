@@ -15,7 +15,7 @@ const tostOpstion = {
   pauseOnHover: true,
   draggable: true,
   progress: undefined,
-  theme: "dark",
+  theme: "dark", 
 }
 
 export const userLogin = createAsyncThunk(
@@ -56,6 +56,7 @@ export const userSignUp = createAsyncThunk(
           withCredentials: true,
         }
       );
+      
       return data;
     } catch (error) {
       console.log("catch error", error);

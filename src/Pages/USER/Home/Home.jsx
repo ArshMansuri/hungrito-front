@@ -16,6 +16,7 @@ const Home = ({ isAuther, isLoading = true }) => {
   const [mobileNavShow, setMobileNavShow] = useState(false);
 
   const MAP_API = process.env.REACT_APP_TOM_TOM_API_KEY;
+ 
 
   useEffect(() => {
     let city = localStorage.getItem("city");

@@ -253,24 +253,26 @@ export const restuReduser = createSlice({
 export const getResNewOrdersReduser = createSlice({
   name: "createFood",
   initialState: {
-    isLoading: false
+    isLoading: false,
   },
   reducers: {
     // makeCreateFoodSuccessFalse(state) {
     //   state.success = false;
     // },
-    resRemoveOrder(state, action){
-      const ordIndex = state.orders.findIndex(obj=> obj._id.toString() === action.payload.toString())
-      if(ordIndex !== -1){
-        state.orders.splice(ordIndex,1)
+    resRemoveOrder(state, action) {
+      const ordIndex = state.orders.findIndex(
+        (obj) => obj._id.toString() === action.payload.toString()
+      );
+      if (ordIndex !== -1) {
+        state.orders.splice(ordIndex, 1);
       }
     },
-    addResNewOrder(state,action){
-      if(action.payload !== undefined){
-        console.log(action.payload)
-        state.orders.unshift(action.payload)
+    addResNewOrder(state, action) {
+      if (action.payload !== undefined) {
+        console.log(action.payload);
+        state.orders.unshift(action.payload);
       }
-    }
+    },
   },
   extraReducers: (builder) => {
     // ================ Restaurant get new orders   ================
@@ -290,4 +292,5 @@ export const getResNewOrdersReduser = createSlice({
 });
 
 export const { removeResName, removeResType } = restuReduser.actions;
-export const { resRemoveOrder, addResNewOrder } = getResNewOrdersReduser.actions;
+export const { resRemoveOrder, addResNewOrder } =
+  getResNewOrdersReduser.actions;
